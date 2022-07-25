@@ -1,0 +1,94 @@
+package apps.robot.sindarin_dictionary_en.dictionary.base.data
+
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.map
+import apps.robot.sindarin_dictionary_en.base.coroutines.AppDispatchers
+import apps.robot.sindarin_dictionary_en.dictionary.base.data.local.EngToElfDao
+import apps.robot.sindarin_dictionary_en.dictionary.base.data.local.model.EngToElfWordEntity
+import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordDomainMapper
+import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordEngToElfEntityMapper
+import apps.robot.sindarin_dictionary_en.dictionary.base.domain.DictionaryRepository
+import apps.robot.sindarin_dictionary_en.dictionary.base.domain.Word
+import apps.robot.sindarin_dictionary_en.dictionary.list.data.paging.DictionaryPagingSource
+import apps.robot.sindarin_dictionary_en.dictionary.list.data.paging.DictionaryPagingSource.Companion.DICTIONARY_PAGE_SIZE
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
+
+class EngToElfDictionaryRepositoryImpl(
+    private val db: FirebaseFirestore,
+    private val dispatchers: AppDispatchers,
+    private val dao: EngToElfDao,
+    private val mapper: WordDomainMapper,
+    private val engToElfEntityMapper: WordEngToElfEntityMapper,
+    private val dictionaryPagingSource: DictionaryPagingSource<EngToElfWordEntity>
+) : DictionaryRepository {
+
+    override suspend fun loadWords() {
+        val words = withContext(dispatchers.network) {
+            suspendCoroutine<List<EngToElfWordEntity?>> { emitter ->
+                db.collection(ENG_TO_ELF_WORDS)
+                    .get()
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            emitter.resume(
+                                task.result.documents.map {
+                                    val word = it.toObject(EngToElfWordEntity::class.java)
+                                    word?.id = it.id
+                                    word
+                                }
+                            )
+                        } else {
+                            emitter.resumeWithException(
+                                task.exception ?: java.lang.Exception()
+                            )
+                        }
+                    }
+            }
+        }
+        val favorites = dao.getFavoriteWords()
+        favorites.forEach { favoriteWord ->
+            val remoteWord = words.find { it?.id == favoriteWord.id }
+            remoteWord?.isFavorite = favoriteWord.isFavorite
+        }
+
+        dao.insertAll(words.filterNotNull().sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.word }))
+    }
+
+    override fun getPagedWordsAsFlow(): Flow<PagingData<Word>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = DICTIONARY_PAGE_SIZE
+            ),
+            pagingSourceFactory = {
+                dictionaryPagingSource
+            }
+        ).flow.map {
+            it.map {
+                mapper.map(it)
+            }
+        }
+    }
+
+    override suspend fun getAllWords(): List<Word> {
+        return dao.getAllWords().map(mapper::map)
+    }
+
+    override suspend fun getWordById(id: String): Word {
+        return mapper.map(dao.getWordById(id))
+    }
+
+    override suspend fun updateWord(word: Word) {
+        dao.update(engToElfEntityMapper.map(word))
+    }
+
+    private companion object {
+        const val ENG_TO_ELF_WORDS = "eng_to_elf_words"
+    }
+}

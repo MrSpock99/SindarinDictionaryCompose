@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">SindarinDictionaryCompose</string>
+    <string name="dictionary_list_toolbar_title">Dictionary</string>
+    <string name="dictionary_mode_eng_to_elv">Eng/Elv</string>
+    <string name="dictionary_mode_elv_to_eng">Elv/Eng</string>
+    <string name="dictionary_content_description_menu">Menu</string>
+    <string name="details_add_favorites">Added to favorites</string>
+    <string name="details_remove_favorites">Removed from favorites</string>
+    <string name="details_copy_clipboard">Copied to clipboard</string>
+    <string name="top_bar_dictionary_title">Dictionary</string>
+    <string name="bottom_tab_dictionary">Dictionary</string>
+    <string name="bottom_tab_phrasebook">Phrasebook</string>
+    <string name="bottom_tab_grammar">Grammar</string>
+    <string name="bottom_tab_favorites">Favorites</string>
+</resources>

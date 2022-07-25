@@ -1,0 +1,66 @@
+import app.robot.sindarin_dictionary_en.Libraries
+
+def Group(Closure closure) {
+    closure.delegate = dependencies
+    return closure
+}
+
+ext {
+    koin = Group {
+        implementation Libraries.Koin.koin
+        implementation Libraries.Koin.compose
+        /* implementation Libraries.Koin.scope
+         implementation Libraries.Koin.viewModel
+         implementation Libraries.Koin.ext*/
+    }
+
+    kotlinLib = Group {
+        implementation Libraries.Kotlin.stdLib
+        implementation Libraries.Kotlin.coroutinesCore
+        implementation Libraries.Kotlin.coroutinesAndroid
+        implementation Libraries.Kotlin.coroutinesGms
+    }
+
+    firebase = Group {
+        implementation Libraries.Firebase.firestore
+    }
+
+    composeCore = Group {
+        implementation Libraries.Compose.ui
+        implementation Libraries.Compose.preview
+        implementation Libraries.Compose.material
+        implementation Libraries.Compose.activityCompose
+    }
+
+    navigationCompose = Group {
+        implementation Libraries.NavigationCompose.navigationCompose
+        implementation Libraries.NavigationCompose.navigationRuntime
+    }
+
+    support = Group {
+        implementation Libraries.Support.core
+        implementation Libraries.Support.lifeCycle
+        implementation Libraries.Support.material
+    }
+
+    networkCore = Group {
+        implementation Libraries.Json.gson
+    }
+
+    composeDestinations = Group {
+        implementation Libraries.ComposeDestinations.destinations
+        ksp Libraries.ComposeDestinations.ksp
+    }
+
+    database = Group {
+        implementation Libraries.Database.runtime
+        implementation Libraries.Database.ktx
+        implementation Libraries.Database.paging
+        kapt Libraries.Database.compile
+    }
+
+    paging = Group {
+        implementation Libraries.Paging.runtime
+        implementation Libraries.Paging.compose
+    }
+}
