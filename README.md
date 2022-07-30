@@ -11,3 +11,4 @@ https://play.google.com/store/apps/details?id=apps.robot.sindarin_dictionary_en
 - Room
 - Firebase Firestore
 - Paging 3
+- Multi module
