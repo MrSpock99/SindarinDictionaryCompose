@@ -1,7 +1,6 @@
 package apps.robot.sindarin_dictionary_en.dictionary.list.presentation.composable
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
@@ -105,9 +104,6 @@ fun DictionaryList(viewModel: DictionaryListViewModel = getViewModel(), navigato
                     key = { index ->
                         words[index]?.id ?: ""
                     }) { index ->
-                    if (oldItemCount != words.itemCount) {
-                        Log.d("DictList", "new words arrived ${words.itemCount}")
-                    }
                     oldItemCount = words.itemCount
                     words[index]?.let { word ->
                         WordItem(
@@ -133,7 +129,6 @@ fun DictionaryList(viewModel: DictionaryListViewModel = getViewModel(), navigato
                     .entries
                     .minByOrNull { it.value }
                     ?.key ?: return false
-                if (selectedHeaderIndex == index) return false
                 selectedHeaderIndex = index
 
                 val selectedItemIndex = words.itemSnapshotList.indexOfFirst {
@@ -144,7 +139,6 @@ fun DictionaryList(viewModel: DictionaryListViewModel = getViewModel(), navigato
                     if (selectedItemIndex != -1) {
                         listState.scrollToItem(selectedItemIndex)
                     } else if (words.itemCount > 0) {
-                        Log.d("DictList", "scroll to ${words.itemCount}")
                         listState.scrollToItem(words.itemCount - 1)
                     }
                 }.invokeOnCompletion {

@@ -1,6 +1,5 @@
 package apps.robot.sindarin_dictionary_en.dictionary.list.presentation
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import androidx.paging.map
@@ -43,14 +42,6 @@ class DictionaryListViewModel(
     }
 
     fun onModeChange(dictionaryMode: DictionaryMode) {
-       /* launchJob {
-            state.emit(
-                state.value.copy(
-                    dictionaryMode = dictionaryMode,
-                    headers = getHeaders(dictionaryMode).map { UiText.DynamicString(it) }
-                )
-            )
-        }*/
         state.value = state.value.copy(
             dictionaryMode = dictionaryMode
         )
