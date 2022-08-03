@@ -30,6 +30,7 @@ ext {
         implementation Libraries.Compose.preview
         implementation Libraries.Compose.material
         implementation Libraries.Compose.activityCompose
+        implementation Libraries.Compose.constraintLayout
     }
 
     navigationCompose = Group {

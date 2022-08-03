@@ -23,6 +23,8 @@ object Libraries {
         const val material = "androidx.compose.material:material:${Versions.compose}"
         const val preview = "androidx.compose.ui:ui-tooling-preview:${Versions.compose}"
         const val activityCompose = "androidx.activity:activity-compose:${Versions.activityCompose}"
+        const val constraintLayout =
+            "androidx.constraintlayout:constraintlayout-compose:${Versions.composeConstraintLayout}"
     }
 
     object NavigationCompose {
