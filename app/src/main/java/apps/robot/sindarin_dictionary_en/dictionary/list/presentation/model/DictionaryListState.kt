@@ -11,5 +11,7 @@ data class DictionaryListState(
     val words: Flow<PagingData<WordUiModel>> = emptyFlow(),
     val headers: List<UiText> = emptyList(),
     val uiState: UiState,
-    val dictionaryMode: DictionaryMode = DictionaryMode.ENGLISH_TO_ELVISH
+    val dictionaryMode: DictionaryMode = DictionaryMode.ENGLISH_TO_ELVISH,
+    val searchWidgetState: SearchWidgetState = SearchWidgetState.CLOSED,
+    val searchText: String = ""
 )

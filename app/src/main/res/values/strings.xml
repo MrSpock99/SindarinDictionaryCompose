@@ -4,6 +4,7 @@
     <string name="dictionary_mode_eng_to_elv">Eng/Elv</string>
     <string name="dictionary_mode_elv_to_eng">Elv/Eng</string>
     <string name="dictionary_content_description_menu">Menu</string>
+    <string name="dictionary_searchbar_hint">Search here…</string>
     <string name="details_add_favorites">Added to favorites</string>
     <string name="details_remove_favorites">Removed from favorites</string>
     <string name="details_copy_clipboard">Copied to clipboard</string>

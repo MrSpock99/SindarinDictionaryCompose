@@ -13,6 +13,7 @@ import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetPag
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryLoadWordListUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryMode
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.DictionaryListState
+import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.WordUiModel
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -47,6 +48,22 @@ class DictionaryListViewModel(
         )
         subscribeToWords(dictionaryMode)
         setHeaders(dictionaryMode)
+    }
+
+    fun onSearchToggle() {
+        state.value = state.value.copy(
+            searchWidgetState = if (state.value.searchWidgetState == SearchWidgetState.OPENED) {
+                SearchWidgetState.CLOSED
+            } else {
+                SearchWidgetState.OPENED
+            }
+        )
+    }
+
+    fun onSearchTextChange(searchText: String) {
+        state.value = state.value.copy(
+            searchText = searchText
+        )
     }
 
     private fun subscribeToWords(dictionaryMode: DictionaryMode) {

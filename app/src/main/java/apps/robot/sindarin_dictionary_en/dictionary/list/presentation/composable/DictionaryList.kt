@@ -1,19 +1,14 @@
 package apps.robot.sindarin_dictionary_en.dictionary.list.presentation.composable
 
-import android.annotation.SuppressLint
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -23,7 +18,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
@@ -42,12 +36,9 @@ import androidx.compose.ui.layout.boundsInParent
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -56,14 +47,12 @@ import apps.robot.sindarin_dictionary_en.appCurrentDestinationAsState
 import apps.robot.sindarin_dictionary_en.destinations.WordDetailsDestination
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.DictionaryListViewModel
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.DictionaryListState
-import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.WordUiModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 import java.lang.Math.abs
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Destination(start = true)
 @Composable
 fun DictionaryList(viewModel: DictionaryListViewModel = getViewModel(), navigator: DestinationsNavigator) {
@@ -83,11 +72,16 @@ fun DictionaryList(viewModel: DictionaryListViewModel = getViewModel(), navigato
         topBar = {
             DictionaryListTopAppBar(
                 isTopBarVisible = isTopBarVisible,
-                viewModelStoreOwner = viewModelStoreOwner
+                viewModelStoreOwner = viewModelStoreOwner,
+                searchWidgetState = state.searchWidgetState,
+                onSearchToggle = viewModel::onSearchToggle,
+                onTextChange = viewModel::onSearchTextChange,
+                searchTextState = state.searchText
             )
         }
-    ) {
+    ) { paddingValues ->
         Surface(
+            modifier = Modifier.padding(paddingValues),
             color = if (isUserDragging.value) {
                 colorResource(id = R.color.black).copy(alpha = 0.5F)
             } else {
@@ -99,46 +93,6 @@ fun DictionaryList(viewModel: DictionaryListViewModel = getViewModel(), navigato
                 isUserDragging = isUserDragging,
                 navigator = navigator
             )
-        }
-    }
-}
-
-@Composable
-fun WordItem(wordUiModel: WordUiModel, onClick: (WordUiModel) -> Unit) {
-    Text(
-        text = wordUiModel.word.asString(),
-        color = MaterialTheme.colors.onBackground,
-        fontSize = 32.sp,
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable {
-                onClick(wordUiModel)
-            },
-        overflow = TextOverflow.Ellipsis,
-        maxLines = 1
-    )
-}
-
-@Composable
-fun DictionaryListTopAppBar(isTopBarVisible: Boolean, viewModelStoreOwner: ViewModelStoreOwner) {
-    AnimatedVisibility(visible = isTopBarVisible) {
-        TopAppBar(
-            backgroundColor = MaterialTheme.colors.surface
-        ) {
-            Text(
-                modifier = Modifier.padding(start = 16.dp),
-                text = stringResource(id = R.string.top_bar_dictionary_title),
-                fontSize = 22.sp,
-                color = MaterialTheme.colors.onSurface
-            )
-            Spacer(
-                modifier = Modifier.weight(
-                    weight = 1f,
-                    fill = true
-                )
-            )
-            DictionaryModeToggle(owner = viewModelStoreOwner)
-            Spacer(modifier = Modifier.width(16.dp))
         }
     }
 }
@@ -185,7 +139,7 @@ fun DictionaryListContent(
             contentPadding = PaddingValues(
                 top = 16.dp,
                 start = 40.dp,
-                bottom = 24.dp
+                bottom = 16.dp
             )
         ) {
             items(
