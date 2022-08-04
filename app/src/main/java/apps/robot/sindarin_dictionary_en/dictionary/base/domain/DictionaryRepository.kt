@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface DictionaryRepository {
     suspend fun loadWords()
-    fun getPagedWordsAsFlow(): Flow<PagingData<Word>>
+    fun getPagedWordsAsFlow(keyword: String? = null): Flow<PagingData<Word>>
     suspend fun getAllWords(): List<Word>
     suspend fun getWordById(id: String): Word
     suspend fun updateWord(word: Word)

@@ -12,18 +12,25 @@ import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetHea
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetPagedWordListAsFlowUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryLoadWordListUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryMode
+import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionarySearchWordsUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.DictionaryListState
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.WordUiModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.plus
 
 class DictionaryListViewModel(
     private val getPagedWordListAsFlow: DictionaryGetPagedWordListAsFlowUseCase,
     private val loadWordList: DictionaryLoadWordListUseCase,
     private val getHeaders: DictionaryGetHeadersUseCase,
+    private val searchWords: DictionarySearchWordsUseCase,
     private val dispatchers: AppDispatchers
 ) : BaseViewModel() {
 
@@ -39,6 +46,7 @@ class DictionaryListViewModel(
             state.value = state.value.copy(uiState = Content)
         }
         subscribeToWords(state.value.dictionaryMode)
+        subscribeToSearch()
         setHeaders(state.value.dictionaryMode)
     }
 
@@ -61,9 +69,7 @@ class DictionaryListViewModel(
     }
 
     fun onSearchTextChange(searchText: String) {
-        state.value = state.value.copy(
-            searchText = searchText
-        )
+        state.value.searchText.tryEmit(searchText)
     }
 
     private fun subscribeToWords(dictionaryMode: DictionaryMode) {
@@ -89,5 +95,29 @@ class DictionaryListViewModel(
                 )
             )
         }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
+    private fun subscribeToSearch() {
+        state.value.searchText.debounce(SEARCH_DEBOUNCE)
+            .mapLatest {
+                state.value = state.value.copy(
+                    words = searchWords(dictionaryMode = state.value.dictionaryMode, keyword = it)
+                        .map { pagingData ->
+                            pagingData.map {
+                                WordUiModel(
+                                    id = it.id,
+                                    word = UiText.DynamicString(it.word),
+                                    translation = UiText.DynamicString(it.translation),
+                                    isFavorite = it.isFavorite
+                                )
+                            }
+                        }.cachedIn(viewModelScope + dispatchers.computing)
+                )
+            }.launchIn(viewModelScope + dispatchers.computing)
+    }
+
+    private companion object {
+        const val SEARCH_DEBOUNCE = 300L
     }
 }

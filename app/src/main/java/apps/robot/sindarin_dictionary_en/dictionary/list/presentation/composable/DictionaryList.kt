@@ -76,7 +76,7 @@ fun DictionaryList(viewModel: DictionaryListViewModel = getViewModel(), navigato
                 searchWidgetState = state.searchWidgetState,
                 onSearchToggle = viewModel::onSearchToggle,
                 onTextChange = viewModel::onSearchTextChange,
-                searchTextState = state.searchText
+                searchTextState = state.searchText.collectAsState().value
             )
         }
     ) { paddingValues ->

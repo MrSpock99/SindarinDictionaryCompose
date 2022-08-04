@@ -3,6 +3,7 @@ package apps.robot.sindarin_dictionary_en.dictionary.base.data
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.filter
 import androidx.paging.map
 import apps.robot.sindarin_dictionary_en.base.coroutines.AppDispatchers
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.local.EngToElfDao
@@ -61,7 +62,7 @@ class EngToElfDictionaryRepositoryImpl(
         dao.insertAll(words.filterNotNull().sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.word }))
     }
 
-    override fun getPagedWordsAsFlow(): Flow<PagingData<Word>> {
+    override fun getPagedWordsAsFlow(keyword: String?): Flow<PagingData<Word>> {
         return Pager(
             config = PagingConfig(
                 pageSize = DICTIONARY_PAGE_SIZE
@@ -69,9 +70,15 @@ class EngToElfDictionaryRepositoryImpl(
             pagingSourceFactory = {
                 dictionaryPagingSource
             }
-        ).flow.map {
-            it.map {
-                mapper.map(it)
+        ).flow.map { pagingData ->
+            if (keyword != null) {
+                pagingData.filter { it.word.startsWith(keyword) }.map {
+                    mapper.map(it)
+                }
+            } else {
+                pagingData.map {
+                    mapper.map(it)
+                }
             }
         }
     }
