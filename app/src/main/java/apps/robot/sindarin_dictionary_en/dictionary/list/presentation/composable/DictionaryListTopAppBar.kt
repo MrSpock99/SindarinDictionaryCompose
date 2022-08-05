@@ -22,9 +22,13 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -103,6 +107,7 @@ fun DictionaryModeAppBar(
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun SearchAppBar(
     text: String,
@@ -116,65 +121,74 @@ fun SearchAppBar(
         elevation = AppBarDefaults.TopAppBarElevation,
         color = MaterialTheme.colors.surface
     ) {
-        TextField(modifier = Modifier
-            .fillMaxWidth(),
-                  value = text,
-                  onValueChange = {
-                      onTextChange(it)
-                  },
-                  placeholder = {
-                      Text(
-                          modifier = Modifier
-                              .alpha(ContentAlpha.medium),
-                          text = stringResource(id = R.string.dictionary_searchbar_hint),
-                          color = MaterialTheme.colors.onSurface
-                      )
-                  },
-                  textStyle = TextStyle(
-                      fontSize = MaterialTheme.typography.subtitle1.fontSize
-                  ),
-                  singleLine = true,
-                  leadingIcon = {
-                      IconButton(
-                          modifier = Modifier
-                              .alpha(ContentAlpha.medium),
-                          onClick = {
-                              onCloseClicked()
-                          }
-                      ) {
-                          Icon(
-                              imageVector = Icons.Default.ArrowBack,
-                              contentDescription = "Back Icon",
-                              tint = MaterialTheme.colors.onSurface
-                          )
-                      }
-                  },
-                  trailingIcon = {
-                      IconButton(
-                          onClick = {
-                              if (text.isNotEmpty()) {
-                                  onTextChange("")
-                              } else {
-                                  onCloseClicked()
-                              }
-                          }
-                      ) {
-                          Icon(
-                              imageVector = Icons.Default.Close,
-                              contentDescription = "Close Icon",
-                              tint = MaterialTheme.colors.onSurface
-                          )
-                      }
-                  },
-                  keyboardOptions = KeyboardOptions(
-                      imeAction = ImeAction.Search
-                  ),
-                  colors = TextFieldDefaults.textFieldColors(
-                      backgroundColor = Color.Transparent,
-                      cursorColor = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.medium),
-                      focusedLabelColor = Color.Transparent,
-                      focusedIndicatorColor = Color.Transparent,
-                      unfocusedIndicatorColor = Color.Transparent
-                  ))
+        val focusRequester = remember { FocusRequester() }
+
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .focusRequester(focusRequester),
+            value = text,
+            onValueChange = {
+                onTextChange(it)
+            },
+            placeholder = {
+                Text(
+                    modifier = Modifier
+                        .alpha(ContentAlpha.medium),
+                    text = stringResource(id = R.string.dictionary_searchbar_hint),
+                    color = MaterialTheme.colors.onSurface
+                )
+            },
+            textStyle = TextStyle(
+                fontSize = MaterialTheme.typography.subtitle1.fontSize
+            ),
+            singleLine = true,
+            leadingIcon = {
+                IconButton(
+                    modifier = Modifier
+                        .alpha(ContentAlpha.medium),
+                    onClick = {
+                        onCloseClicked()
+                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Back Icon",
+                        tint = MaterialTheme.colors.onSurface
+                    )
+                }
+            },
+            trailingIcon = {
+                IconButton(
+                    onClick = {
+                        if (text.isNotEmpty()) {
+                            onTextChange("")
+                        } else {
+                            onCloseClicked()
+                        }
+                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Close,
+                        contentDescription = "Close Icon",
+                        tint = MaterialTheme.colors.onSurface
+                    )
+                }
+            },
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Search
+            ),
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = Color.Transparent,
+                cursorColor = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.medium),
+                focusedLabelColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent
+            )
+        )
+        LaunchedEffect(Unit) {
+            focusRequester.requestFocus()
+        }
     }
+
 }
