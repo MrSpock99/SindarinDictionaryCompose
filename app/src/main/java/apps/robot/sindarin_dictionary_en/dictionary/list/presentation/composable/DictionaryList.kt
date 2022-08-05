@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.ContentAlpha
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -36,6 +37,7 @@ import androidx.compose.ui.layout.boundsInParent
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -47,6 +49,7 @@ import apps.robot.sindarin_dictionary_en.appCurrentDestinationAsState
 import apps.robot.sindarin_dictionary_en.destinations.WordDetailsDestination
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.DictionaryListViewModel
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.DictionaryListState
+import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.SearchWidgetState
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
@@ -83,7 +86,7 @@ fun DictionaryList(viewModel: DictionaryListViewModel = getViewModel(), navigato
         Surface(
             modifier = Modifier.padding(paddingValues),
             color = if (isUserDragging.value) {
-                colorResource(id = R.color.black).copy(alpha = 0.5F)
+                colorResource(id = R.color.black).copy(alpha = ContentAlpha.medium)
             } else {
                 Color.Transparent
             },
@@ -105,7 +108,7 @@ fun DictionaryListContent(
         modifier = Modifier
             .fillMaxSize()
     ) {
-        val (wordList, selectedHeader, headerList) = createRefs()
+        val (wordList, selectedHeader, headerList, nothingFound) = createRefs()
         val listState = rememberLazyListState()
         var selectedHeaderIndex by remember { mutableStateOf(-1) }
         val words = state.words.collectAsLazyPagingItems()
@@ -123,6 +126,19 @@ fun DictionaryListContent(
                     )
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
+                }
+            )
+        }
+
+        if (words.itemCount == 0 && state.searchWidgetState == SearchWidgetState.OPENED) {
+            Text(
+                text = stringResource(id = R.string.dictionary_list_nothing_found),
+                fontSize = 16.sp,
+                color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
+                modifier = Modifier.constrainAs(nothingFound) {
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    top.linkTo(parent.top)
                 }
             )
         }
@@ -229,7 +245,7 @@ fun DictionaryListContent(
                             .padding(end = 8.dp)
                             .alpha(
                                 if (isHeaderSelected) {
-                                    1F
+                                    ContentAlpha.high
                                 } else {
                                     0F
                                 }
@@ -243,7 +259,7 @@ fun DictionaryListContent(
                         color = if (isHeaderSelected) {
                             colorResource(id = R.color.white)
                         } else {
-                            MaterialTheme.colors.onBackground.copy(alpha = 0.5F)
+                            MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium)
                         }
                     )
                 }
