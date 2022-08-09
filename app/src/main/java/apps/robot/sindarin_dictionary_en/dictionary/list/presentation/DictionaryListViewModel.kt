@@ -24,6 +24,7 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.plus
 
 class DictionaryListViewModel(
@@ -38,34 +39,37 @@ class DictionaryListViewModel(
 
     init {
         launchJob {
-            state.value = state.value.copy(uiState = Loading)
             listOf(
                 asyncCatching { loadWordList(DictionaryMode.ELVISH_TO_ENGLISH) },
                 asyncCatching { loadWordList(DictionaryMode.ENGLISH_TO_ELVISH) }
             ).awaitAll()
-            state.value = state.value.copy(uiState = Content)
+            state.update { it.copy(uiState = Content) }
         }
         subscribeToWords(state.value.dictionaryMode)
         subscribeToSearch()
-        setHeaders(state.value.dictionaryMode)
+        // setHeaders(state.value.dictionaryMode)
     }
 
     fun onModeChange(dictionaryMode: DictionaryMode) {
-        state.value = state.value.copy(
-            dictionaryMode = dictionaryMode
-        )
+        state.update {
+            it.copy(
+                dictionaryMode = dictionaryMode
+            )
+        }
         subscribeToWords(dictionaryMode)
-        setHeaders(dictionaryMode)
+        // setHeaders(dictionaryMode)
     }
 
     fun onSearchToggle() {
-        state.value = state.value.copy(
-            searchWidgetState = if (state.value.searchWidgetState == SearchWidgetState.OPENED) {
-                SearchWidgetState.CLOSED
-            } else {
-                SearchWidgetState.OPENED
-            }
-        )
+        state.update {
+            it.copy(
+                searchWidgetState = if (state.value.searchWidgetState == SearchWidgetState.OPENED) {
+                    SearchWidgetState.CLOSED
+                } else {
+                    SearchWidgetState.OPENED
+                }
+            )
+        }
     }
 
     fun onSearchTextChange(searchText: String) {
@@ -89,11 +93,11 @@ class DictionaryListViewModel(
 
     private fun setHeaders(dictionaryMode: DictionaryMode) {
         launchJob {
-            state.emit(
-                state.value.copy(
+            state.update {
+                it.copy(
                     headers = getHeaders(dictionaryMode).map { UiText.DynamicString(it) }
                 )
-            )
+            }
         }
     }
 

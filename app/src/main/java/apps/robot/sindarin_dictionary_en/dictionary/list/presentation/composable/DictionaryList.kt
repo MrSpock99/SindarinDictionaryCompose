@@ -73,6 +73,9 @@ fun DictionaryList(viewModel: DictionaryListViewModel = getViewModel(), navigato
     val isUserDragging = remember {
         mutableStateOf(false)
     }
+    val shouldShowSelectedHeader = remember {
+        isUserDragging.value && state.headers.isNotEmpty()
+    }
     Scaffold(
         topBar = {
             DictionaryListTopAppBar(
@@ -87,7 +90,7 @@ fun DictionaryList(viewModel: DictionaryListViewModel = getViewModel(), navigato
     ) { paddingValues ->
         Surface(
             modifier = Modifier.padding(paddingValues),
-            color = if (isUserDragging.value) {
+            color = if (shouldShowSelectedHeader) {
                 colorResource(id = R.color.black).copy(alpha = ContentAlpha.medium)
             } else {
                 Color.Transparent
@@ -96,6 +99,7 @@ fun DictionaryList(viewModel: DictionaryListViewModel = getViewModel(), navigato
             DictionaryListContent(
                 state = state,
                 isUserDragging = isUserDragging,
+                shouldShowSelectedHeader = shouldShowSelectedHeader,
                 navigator = navigator
             )
         }
@@ -105,7 +109,10 @@ fun DictionaryList(viewModel: DictionaryListViewModel = getViewModel(), navigato
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun DictionaryListContent(
-    state: DictionaryListState, isUserDragging: MutableState<Boolean>, navigator: DestinationsNavigator
+    state: DictionaryListState,
+    isUserDragging: MutableState<Boolean>,
+    shouldShowSelectedHeader: Boolean,
+    navigator: DestinationsNavigator
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -122,7 +129,7 @@ fun DictionaryListContent(
         if (listState.isScrollInProgress) {
             keyboardController?.hide()
         }
-        if (isUserDragging.value) {
+        if (shouldShowSelectedHeader) {
             Text(
                 text = state.headers.getOrNull(selectedHeaderIndex)?.asString() ?: "",
                 fontSize = 100.sp,
@@ -163,7 +170,7 @@ fun DictionaryListContent(
                 .padding(end = 16.dp),
             contentPadding = PaddingValues(
                 top = 16.dp,
-                start = 40.dp,
+                start = 16.dp,
                 bottom = 16.dp
             )
         ) {
@@ -182,95 +189,98 @@ fun DictionaryListContent(
                 }
             }
         }
-        val offsets = remember { mutableStateMapOf<Int, Float>() }
-        val scope = rememberCoroutineScope()
-        val context = LocalContext.current
 
-        fun updateSelectedIndexIfNeeded(offset: Float): Boolean {
-            val index = offsets
-                .mapValues { abs(it.value - offset) }
-                .entries
-                .minByOrNull { it.value }
-                ?.key ?: return false
-            selectedHeaderIndex = index
+        if (state.headers.isNotEmpty()) {
+            val offsets = remember { mutableStateMapOf<Int, Float>() }
+            val scope = rememberCoroutineScope()
+            val context = LocalContext.current
 
-            val selectedItemIndex = words.itemSnapshotList.indexOfFirst {
-                it?.word?.asString(context)?.first()?.uppercase() ==
-                    state.headers.getOrNull(selectedHeaderIndex)?.asString(context)
-            }
-            scope.launch {
-                if (selectedItemIndex != -1) {
-                    listState.scrollToItem(selectedItemIndex)
-                } else if (words.itemCount > 0) {
-                    listState.scrollToItem(words.itemCount - 1)
-                }
-            }.invokeOnCompletion {
-                if (isUserDragging.value.not()) {
-                    selectedHeaderIndex = -1
-                }
-            }
-            return true
-        }
+            fun updateSelectedIndexIfNeeded(offset: Float): Boolean {
+                val index = offsets
+                    .mapValues { abs(it.value - offset) }
+                    .entries
+                    .minByOrNull { it.value }
+                    ?.key ?: return false
+                selectedHeaderIndex = index
 
-        Column(
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier
-                .fillMaxHeight()
-                .width(50.dp)
-                .padding(bottom = 16.dp)
-                .constrainAs(headerList) {
-                    top.linkTo(parent.top)
-                    end.linkTo(parent.end)
+                val selectedItemIndex = words.itemSnapshotList.indexOfFirst {
+                    it?.word?.asString(context)?.first()?.uppercase() ==
+                        state.headers.getOrNull(selectedHeaderIndex)?.asString(context)
                 }
-                .pointerInput(Unit) {
-                    detectTapGestures {
-                        updateSelectedIndexIfNeeded(it.y)
+                scope.launch {
+                    if (selectedItemIndex != -1) {
+                        listState.scrollToItem(selectedItemIndex)
+                    } else if (words.itemCount > 0) {
+                        listState.scrollToItem(words.itemCount - 1)
+                    }
+                }.invokeOnCompletion {
+                    if (isUserDragging.value.not()) {
+                        selectedHeaderIndex = -1
                     }
                 }
-                .pointerInput(Unit) {
-                    detectVerticalDragGestures(
-                        onVerticalDrag = { change, _ ->
-                            updateSelectedIndexIfNeeded(change.position.y)
-                        }, onDragStart = {
-                            isUserDragging.value = true
-                        }, onDragEnd = {
-                            selectedHeaderIndex = -1
-                            isUserDragging.value = false
-                        })
-                }
-        ) {
-            state.headers.forEachIndexed { i, header ->
-                val isHeaderSelected = isUserDragging.value && i == selectedHeaderIndex
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .onGloballyPositioned {
-                            offsets[i] = it.boundsInParent().center.y
+                return true
+            }
+
+            Column(
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .width(50.dp)
+                    .padding(bottom = 16.dp)
+                    .constrainAs(headerList) {
+                        top.linkTo(parent.top)
+                        end.linkTo(parent.end)
+                    }
+                    .pointerInput(Unit) {
+                        detectTapGestures {
+                            updateSelectedIndexIfNeeded(it.y)
                         }
-                ) {
-                    Canvas(
+                    }
+                    .pointerInput(Unit) {
+                        detectVerticalDragGestures(
+                            onVerticalDrag = { change, _ ->
+                                updateSelectedIndexIfNeeded(change.position.y)
+                            }, onDragStart = {
+                                isUserDragging.value = true
+                            }, onDragEnd = {
+                                selectedHeaderIndex = -1
+                                isUserDragging.value = false
+                            })
+                    }
+            ) {
+                state.headers.forEachIndexed { i, header ->
+                    val isHeaderSelected = isUserDragging.value && i == selectedHeaderIndex
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier
-                            .size(16.dp)
-                            .padding(end = 8.dp)
-                            .alpha(
-                                if (isHeaderSelected) {
-                                    ContentAlpha.high
-                                } else {
-                                    0F
-                                }
-                            ),
-                        onDraw = {
-                            drawCircle(color = Color.White)
-                        })
-                    Text(
-                        text = header.asString(),
-                        fontSize = 12.sp,
-                        color = if (isHeaderSelected) {
-                            colorResource(id = R.color.white)
-                        } else {
-                            MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium)
-                        }
-                    )
+                            .onGloballyPositioned {
+                                offsets[i] = it.boundsInParent().center.y
+                            }
+                    ) {
+                        Canvas(
+                            modifier = Modifier
+                                .size(16.dp)
+                                .padding(end = 8.dp)
+                                .alpha(
+                                    if (isHeaderSelected) {
+                                        ContentAlpha.high
+                                    } else {
+                                        0F
+                                    }
+                                ),
+                            onDraw = {
+                                drawCircle(color = Color.White)
+                            })
+                        Text(
+                            text = header.asString(),
+                            fontSize = 12.sp,
+                            color = if (isHeaderSelected) {
+                                colorResource(id = R.color.white)
+                            } else {
+                                MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium)
+                            }
+                        )
+                    }
                 }
             }
         }
