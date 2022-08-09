@@ -69,3 +69,5 @@ sonar-project.properties
 
 # Crashlytics
 app/fabric.properties
+
+/buildSrc/build/
