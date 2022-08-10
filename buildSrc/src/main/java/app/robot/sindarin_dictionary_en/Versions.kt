@@ -1,6 +1,8 @@
 package app.robot.sindarin_dictionary_en
 
 object Versions {
+    const val googleServices = "4.3.13"
+    const val gradle = "7.1.3"
     const val minSdk = 21
     const val compileSdk = 32
     const val targetSdk = compileSdk

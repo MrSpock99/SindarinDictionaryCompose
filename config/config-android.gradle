@@ -1,0 +1,105 @@
+import app.robot.sindarin_dictionary_en.Versions
+import app.robot.sindarin_dictionary_en.Plugins
+
+apply plugin: Plugins.kotlinAndroid
+apply plugin: Plugins.kotlinKapt
+
+// apply plugin: Plugins.detekt
+// apply plugin: Plugins.moduleName
+
+// apply from: "$rootDir/config/quality/ktlint.gradle"
+// apply from: "$rootDir/config/quality/checkstyle.gradle"
+
+android {
+    compileSdkVersion Versions.targetSdk
+
+    defaultConfig {
+        minSdkVersion Versions.minSdk
+        targetSdkVersion Versions.targetSdk
+
+        multiDexEnabled = true
+        vectorDrawables.useSupportLibrary = true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = Versions.composeCompiler
+    }
+
+/*    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }*/
+
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    packagingOptions {
+        exclude("META-INF/*.kotlin_module")
+    }
+}
+
+/*detekt {
+    toolVersion = Versions.detekt
+    input = files("src/main/kotlin")
+    config = files("$rootDir/config/quality/detekt.yml")
+    reports {
+        xml {
+            enabled = true
+            destination = file("$projectDir/build/reports/detekt/detekt-report.xml")
+        }
+        html {
+            enabled = true
+            destination = file("$projectDir/build/reports/detekt/detekt-report.html")
+        }
+    }
+}*/
+
+/*
+task checkBeforePush(
+    group: 'verification',
+    description: 'Inspect your code before push'
+) {
+    dependsOn 'checkstyle', 'detekt', 'ktlint', 'lintDebug'
+}
+
+task checkBeforePushFast(
+    group: 'verification',
+    description: 'Inspect your code before push'
+) {
+    dependsOn 'checkstyle', 'detekt', 'ktlint'
+}*/

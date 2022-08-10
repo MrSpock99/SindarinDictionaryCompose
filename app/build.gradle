@@ -1,64 +1,26 @@
 import app.robot.sindarin_dictionary_en.AppModules
-import app.robot.sindarin_dictionary_en.Versions
 import app.robot.sindarin_dictionary_en.Plugins
+import app.robot.sindarin_dictionary_en.Versions
+
+buildscript {
+    ext {
+        kspVersion = "${Versions.ksp}"
+        ksp = "${Plugins.ksp}"
+    }
+}
 
 plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-    id 'com.google.gms.google-services'
-    id 'com.google.devtools.ksp' version '1.6.21-1.0.6' // Depends on your kotlin version
+    id 'com.google.devtools.ksp' version "${kspVersion}" // TODO don't use hardcoded strings
 }
-apply plugin: 'com.google.devtools.ksp'
-
+apply plugin: Plugins.application
+apply plugin: Plugins.kotlinAndroid
+apply plugin: Plugins.googleServices
 apply plugin: Plugins.kotlinKapt
 
 apply from: "$rootDir/config/dependencies-groups.gradle"
+apply from: "$rootDir/config/config-android.gradle"
 
 android {
-    compileSdk Versions.compileSdk
-
-    defaultConfig {
-        applicationId "apps.robot.sindarin_dictionary_en"
-        minSdk Versions.minSdk
-        targetSdk Versions.targetSdk
-        versionCode 1
-        versionName "1.0"
-        multiDexEnabled true
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary true
-        }
-    }
-
-    buildTypes {
-        debug {
-            minifyEnabled false
-        }
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-        useIR = true
-    }
-    buildFeatures {
-        compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = Versions.composeCompiler
-    }
-    packagingOptions {
-        resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
-        }
-    }
     applicationVariants.all { variant ->
         kotlin.sourceSets {
             getByName(variant.name) {
