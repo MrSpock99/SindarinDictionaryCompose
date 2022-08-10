@@ -3,11 +3,11 @@ package apps.robot.sindarin_dictionary_en.dictionary.list.presentation
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import androidx.paging.map
-import apps.robot.base_ui.presentation.UiText
 import apps.robot.sindarin_dictionary_en.base.BaseViewModel
 import apps.robot.sindarin_dictionary_en.base.Content
 import apps.robot.sindarin_dictionary_en.base.Loading
 import apps.robot.sindarin_dictionary_en.base.coroutines.AppDispatchers
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.UiText
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetHeadersUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetPagedWordListAsFlowUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryLoadWordListUseCase

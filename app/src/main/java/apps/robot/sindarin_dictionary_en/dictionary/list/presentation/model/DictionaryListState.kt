@@ -1,8 +1,8 @@
 package apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model
 
 import androidx.paging.PagingData
-import apps.robot.base_ui.presentation.UiText
 import apps.robot.sindarin_dictionary_en.base.UiState
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.UiText
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryMode
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

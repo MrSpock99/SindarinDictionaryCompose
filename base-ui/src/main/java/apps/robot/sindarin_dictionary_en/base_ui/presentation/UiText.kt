@@ -1,4 +1,4 @@
-package apps.robot.base_ui.presentation
+package apps.robot.sindarin_dictionary_en.base_ui.presentation
 
 import android.content.Context
 import androidx.annotation.StringRes
