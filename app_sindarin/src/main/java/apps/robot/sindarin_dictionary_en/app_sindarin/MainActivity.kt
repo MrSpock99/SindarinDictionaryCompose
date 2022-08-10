@@ -1,10 +1,8 @@
-package apps.robot.sindarin_dictionary_en.main
+package apps.robot.sindarin_dictionary_en.app_sindarin
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import apps.robot.sindarin_dictionary_en.main.navigation.MainFlow
 import apps.robot.sindarin_dictionary_en.ui.theme.SindarinDictionaryComposeTheme
 
@@ -18,12 +16,5 @@ class MainActivity : ComponentActivity() {
                 MainFlow()
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    SindarinDictionaryComposeTheme {
     }
 }

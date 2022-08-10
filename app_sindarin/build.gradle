@@ -1,0 +1,16 @@
+import app.robot.sindarin_dictionary_en.AppModules
+import app.robot.sindarin_dictionary_en.Plugins
+
+apply plugin: Plugins.kotlinAndroid
+apply plugin: Plugins.application
+apply plugin: Plugins.googleServices
+
+apply from: "$rootDir/config/dependencies-groups.gradle"
+apply from: "$rootDir/config/config-android.gradle"
+
+dependencies {
+    implementation project(AppModules.app)
+    koin()
+    support()
+    composeCore()
+}

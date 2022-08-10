@@ -1,7 +1,9 @@
-package apps.robot.sindarin_dictionary_en.base
+package apps.robot.sindarin_dictionary_en.app_sindarin
 
 import android.app.Application
 import android.content.Context
+import apps.robot.sindarin_dictionary_en.base.appModule
+import apps.robot.sindarin_dictionary_en.base.coroutines.coroutinesModule
 import apps.robot.sindarin_dictionary_en.clipboard.clipboardModule
 import apps.robot.sindarin_dictionary_en.dictionary.dictionaryModules
 import apps.robot.sindarin_dictionary_en.main.databaseModule

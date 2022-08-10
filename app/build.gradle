@@ -12,19 +12,18 @@ buildscript {
 plugins {
     id 'com.google.devtools.ksp' version "${kspVersion}" // TODO don't use hardcoded strings
 }
-apply plugin: Plugins.application
+apply plugin: Plugins.library
 apply plugin: Plugins.kotlinAndroid
-apply plugin: Plugins.googleServices
 apply plugin: Plugins.kotlinKapt
 
 apply from: "$rootDir/config/dependencies-groups.gradle"
 apply from: "$rootDir/config/config-android.gradle"
 
 android {
-    applicationVariants.all { variant ->
+    libraryVariants.all { variant ->
         kotlin.sourceSets {
             getByName(variant.name) {
-                kotlin.srcDir("build/generated/ksp/${variant.name}/kotlin")
+                kotlin.srcDir("build/generated/ksp/${variant.name}/java")
             }
         }
     }

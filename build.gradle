@@ -11,6 +11,14 @@ buildscript {
         classpath Plugins.ClassPaths.kotlin
     }
 }
+allprojects {
+    repositories {
+        repositories {
+            google()
+            mavenCentral()
+        }
+    }
+}
 
 task clean(type: Delete) {
     delete rootProject.buildDir
