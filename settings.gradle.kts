@@ -11,3 +11,6 @@ fun includeModuleFromDir(dirPath: String, vararg modules: String) {
         project(":${name}").projectDir = File(rootDir, "$dirPath/${name}")
     }
 }
+
+val dictionaryDirPath = "/feature/dictionary"
+includeModuleFromDir(dictionaryDirPath, "dictionary_api", "dictionary_impl")

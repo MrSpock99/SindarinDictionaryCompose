@@ -10,6 +10,9 @@ apply from: "$rootDir/config/config-android.gradle"
 
 dependencies {
     implementation project(AppModules.app)
+    implementation project(AppModules.baseUi)
+    implementation project(AppModules.Dictionary.api)
+    implementation project(AppModules.Dictionary.impl)
     koin()
     support()
     composeCore()

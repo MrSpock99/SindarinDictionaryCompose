@@ -24,7 +24,7 @@ object Versions {
 
     const val gson = "2.9.0"
     const val material = "1.4.0"
-    const val composeDestinations = "1.6.13-beta"
+    const val composeDestinations = "1.6.25-beta"
 
     const val room = "2.4.2"
     const val paging = "3.1.1"

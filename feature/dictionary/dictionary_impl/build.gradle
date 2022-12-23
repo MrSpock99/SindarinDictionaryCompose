@@ -12,9 +12,9 @@ buildscript {
 plugins {
     id 'com.google.devtools.ksp' version "${kspVersion}" // TODO don't use hardcoded strings
 }
+
 apply plugin: Plugins.library
 apply plugin: Plugins.kotlinAndroid
-apply plugin: Plugins.kotlinKapt
 
 apply from: "$rootDir/config/dependencies-groups.gradle"
 apply from: "$rootDir/config/config-android.gradle"
@@ -29,9 +29,14 @@ android {
     }
 }
 
+ksp {
+    arg("compose-destinations.mode", "[GENERATION_MODE_FOR_MODULE]")
+    arg("compose-destinations.moduleName", "[YOUR_MODULE_NAME")
+}
+
 dependencies {
     implementation project(AppModules.baseUi)
-    //implementation project(AppModules.Dictionary.impl)
+    implementation project(AppModules.app) // todo убрать зависимость
     kotlinLib()
     koin()
     firebase()
