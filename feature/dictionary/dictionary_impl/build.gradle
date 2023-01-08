@@ -27,6 +27,11 @@ android {
             }
         }
     }
+
+    ksp {
+        arg("compose-destinations.mode", "destinations")
+        arg("compose-destinations.moduleName", "dictionary_impl")
+    }
 }
 
 ksp {
@@ -36,7 +41,8 @@ ksp {
 
 dependencies {
     implementation project(AppModules.baseUi)
-    implementation project(AppModules.app) // todo убрать зависимость
+    implementation project(AppModules.Dictionary.api)
+    //implementation project(AppModules.app) // todo убрать зависимость
     kotlinLib()
     koin()
     firebase()
@@ -44,7 +50,6 @@ dependencies {
     navigationCompose()
     support()
     networkCore()
-    composeDestinations()
     database()
     paging()
 }

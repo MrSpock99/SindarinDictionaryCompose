@@ -23,23 +23,21 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import apps.robot.sindarin_dictionary_en.R
 import apps.robot.sindarin_dictionary_en.dictionary.details.presentation.DetailsAction
 import apps.robot.sindarin_dictionary_en.dictionary.details.presentation.DetailsViewModel
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryMode
-import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@Destination
 @Composable
 fun WordDetails(
     viewModel: DetailsViewModel = getViewModel(),
     wordId: String,
     dictionaryMode: DictionaryMode,
-    navigator: DestinationsNavigator
+    navigator: NavHostController
 ) {
     val state = viewModel.state.collectAsState().value
     LaunchedEffect(key1 = Unit) {

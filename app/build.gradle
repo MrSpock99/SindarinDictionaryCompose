@@ -31,7 +31,8 @@ android {
 
 dependencies {
     implementation project(AppModules.baseUi)
-    //implementation project(AppModules.Dictionary.impl)
+    implementation project(AppModules.Dictionary.api)
+    implementation project(AppModules.Dictionary.impl)
     kotlinLib()
     koin()
     firebase()
@@ -39,7 +40,6 @@ dependencies {
     navigationCompose()
     support()
     networkCore()
-    composeDestinations()
     database()
     paging()
 }

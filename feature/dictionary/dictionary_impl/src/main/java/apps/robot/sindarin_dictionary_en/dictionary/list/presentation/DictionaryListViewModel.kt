@@ -1,12 +1,14 @@
 package apps.robot.sindarin_dictionary_en.dictionary.list.presentation
 
-import androidx.compose.ui.text.style.TextDirection.Companion.Content
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LoadState
 import androidx.paging.cachedIn
 import androidx.paging.map
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.UiText
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.BaseViewModel
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.Content
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.Loading
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.UiState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetHeadersUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetPagedWordListAsFlowUseCase
@@ -35,7 +37,7 @@ class DictionaryListViewModel(
     private val dispatchers: AppDispatchers
 ) : BaseViewModel() {
 
-    val state = MutableStateFlow(DictionaryListState(uiState = LoadState.Loading))
+    val state = MutableStateFlow(DictionaryListState(uiState = Loading))
 
     init {
         launchJob {

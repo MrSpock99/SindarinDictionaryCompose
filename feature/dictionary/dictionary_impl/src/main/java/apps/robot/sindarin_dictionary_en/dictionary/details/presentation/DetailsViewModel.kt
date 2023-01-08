@@ -3,7 +3,7 @@ package apps.robot.sindarin_dictionary_en.dictionary.details.presentation
 import apps.robot.sindarin_dictionary_en.R
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.UiText
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.BaseViewModel
-import apps.robot.sindarin_dictionary_en.clipboard.domain.ClipboardSetTextUseCase
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.clipboard.domain.ClipboardSetTextUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.base.domain.Word
 import apps.robot.sindarin_dictionary_en.dictionary.details.domain.DictionaryGetWordByIdUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.details.domain.DictionaryUpdateWordUseCase

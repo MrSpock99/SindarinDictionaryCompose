@@ -44,31 +44,37 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
-import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.DictionaryListViewModel
-import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.DictionaryListState
-import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.SearchWidgetState
-import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.annotation.RootNavGraph
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
+import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.DictionaryListViewModel
+import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.composable.DictionaryListTopAppBar
+import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.composable.WordItem
+import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.DictionaryListState
+import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.SearchWidgetState
+import apps.robot.sindarin_dictionary_en.dictionary.navigation.DictionaryInternalFeature
+import org.koin.androidx.compose.get
 import java.lang.Math.abs
 
-@RootNavGraph(start = true) // sets this as the start destination of the default nav graph
-@Destination()
 @Composable
-fun DictionaryList(viewModel: DictionaryListViewModel = getViewModel(), navigator: DestinationsNavigator) {
+fun DictionaryList(
+    viewModel: DictionaryListViewModel = getViewModel(),
+    navigator: NavHostController
+) {
     val state by viewModel.state.collectAsState()
     val viewModelStoreOwner = checkNotNull(LocalViewModelStoreOwner.current) {
         "No ViewModelStoreOwner was provided via LocalViewModelStoreOwner"
     }
     val navController = rememberNavController()
-    val isTopBarVisible = when (navController.appCurrentDestinationAsState().value) {
-        WordDetailsDestination -> false
-        else -> true
-    }
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+    val isTopBarVisible =
+        (currentDestination?.hierarchy?.any { it.route == DictionaryInternalFeature.detailsScreenRoute }) ?: false
+
     val isUserDragging = remember {
         mutableStateOf(false)
     }
@@ -111,7 +117,8 @@ fun DictionaryListContent(
     state: DictionaryListState,
     isUserDragging: MutableState<Boolean>,
     shouldShowSelectedHeader: Boolean,
-    navigator: DestinationsNavigator
+    navigator: NavHostController,
+    dictionaryInternalFeature: DictionaryInternalFeature = get()
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -182,7 +189,11 @@ fun DictionaryListContent(
                     WordItem(
                         wordUiModel = word,
                         onClick = {
-                            navigator.navigate(WordDetailsDestination(it.id, state.dictionaryMode))
+                            val screen = dictionaryInternalFeature.detailsScreen(
+                                it.id,
+                                state.dictionaryMode.name
+                            )
+                            navigator.navigate(screen)
                         }
                     )
                 }

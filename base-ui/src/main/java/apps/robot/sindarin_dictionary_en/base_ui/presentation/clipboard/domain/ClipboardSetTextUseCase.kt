@@ -1,4 +1,4 @@
-package apps.robot.sindarin_dictionary_en.clipboard.domain
+package apps.robot.sindarin_dictionary_en.base_ui.presentation.clipboard.domain
 
 class ClipboardSetTextUseCase(
     private val repository: ClipboardRepository

@@ -1,8 +1,8 @@
-package apps.robot.sindarin_dictionary_en.clipboard.data
+package apps.robot.sindarin_dictionary_en.base_ui.presentation.clipboard.data
 
 import android.content.ClipData
 import android.content.ClipboardManager
-import apps.robot.sindarin_dictionary_en.clipboard.domain.ClipboardRepository
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.clipboard.domain.ClipboardRepository
 
 class ClipboardRepositoryImpl(
     private val clipboardManager: ClipboardManager
