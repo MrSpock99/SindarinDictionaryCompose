@@ -11,7 +11,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import apps.robot.sindarin_dictionary_en.dictionary.navigation.DictionaryInternalFeature
@@ -29,9 +28,8 @@ fun SindarinBottomBar(
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
-    val isBottomBarVisible =
-        (currentDestination?.hierarchy?.any { it.route != DictionaryInternalFeature.detailsScreenRoute })
-            ?: false
+
+    val isBottomBarVisible = currentDestination?.route?.startsWith(DictionaryInternalFeature.detailsScreenRoute)?.not() ?: false
 
     AnimatedVisibility(
         visible = isBottomBarVisible

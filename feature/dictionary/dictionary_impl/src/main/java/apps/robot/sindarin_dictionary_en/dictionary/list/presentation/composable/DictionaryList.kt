@@ -1,4 +1,4 @@
-package apps.robot.sindarin_dictionary_en
+package apps.robot.sindarin_dictionary_en.dictionary.list.presentation.composable
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -49,15 +49,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
-import kotlinx.coroutines.launch
-import org.koin.androidx.compose.getViewModel
+import apps.robot.dictionary.impl.R
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.DictionaryListViewModel
-import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.composable.DictionaryListTopAppBar
-import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.composable.WordItem
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.DictionaryListState
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.dictionary.navigation.DictionaryInternalFeature
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.get
+import org.koin.androidx.compose.getViewModel
 import java.lang.Math.abs
 
 @Composable

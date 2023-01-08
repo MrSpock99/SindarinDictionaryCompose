@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="apps.robot.sindarin_dictionary_en">
+    package="apps.robot.dictionary.impl">
 
 </manifest>

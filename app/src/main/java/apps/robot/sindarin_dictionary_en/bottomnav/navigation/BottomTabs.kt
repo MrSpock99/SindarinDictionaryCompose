@@ -1,6 +1,6 @@
 package apps.robot.sindarin_dictionary_en.bottomnav.navigation
 
-import apps.robot.sindarin_dictionary_en.R
+import apps.robot.monolith.R
 
 sealed class BottomUiTab(
     val direction: String,

@@ -4,8 +4,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import apps.robot.sindarin_dictionary_en.DictionaryList
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
+import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.composable.DictionaryList
 
 internal class DictionaryFeatureApiImpl(
     private val homeInternalFeature: DictionaryInternalFeature

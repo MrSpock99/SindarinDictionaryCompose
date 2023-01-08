@@ -34,7 +34,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelStoreOwner
-import apps.robot.sindarin_dictionary_en.R
+import apps.robot.dictionary.impl.R
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.SearchWidgetState
 
 @Composable

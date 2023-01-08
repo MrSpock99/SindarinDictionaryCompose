@@ -10,8 +10,4 @@
     <string name="details_remove_favorites">Removed from favorites</string>
     <string name="details_copy_clipboard">Copied to clipboard</string>
     <string name="top_bar_dictionary_title">Dictionary</string>
-    <string name="bottom_tab_dictionary">Dictionary</string>
-    <string name="bottom_tab_phrasebook">Phrasebook</string>
-    <string name="bottom_tab_grammar">Grammar</string>
-    <string name="bottom_tab_favorites">Favorites</string>
 </resources>

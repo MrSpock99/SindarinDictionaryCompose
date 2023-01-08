@@ -24,7 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import apps.robot.sindarin_dictionary_en.R
+import apps.robot.dictionary.impl.R
 import apps.robot.sindarin_dictionary_en.dictionary.details.presentation.DetailsAction
 import apps.robot.sindarin_dictionary_en.dictionary.details.presentation.DetailsViewModel
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryMode
