@@ -2,8 +2,8 @@ package apps.robot.sindarin_dictionary_en.dictionary.base
 
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.ElfToEngDictionaryRepositoryImpl
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.EngToElfDictionaryRepositoryImpl
-import apps.robot.sindarin_dictionary_en.dictionary.base.data.local.ElfToEngDao
-import apps.robot.sindarin_dictionary_en.dictionary.base.data.local.EngToElfDao
+import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.ElfToEngDao
+import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.EngToElfDao
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordDomainMapper
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordDomainMapperImpl
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordElfToEngEntityMapper

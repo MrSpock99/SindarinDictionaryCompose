@@ -2,7 +2,7 @@ package apps.robot.sindarin_dictionary_en.dictionary.list.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import apps.robot.sindarin_dictionary_en.dictionary.base.data.local.DictionaryDao
+import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.DictionaryDao
 
 class DictionaryPagingSource<V : Any>(
     private val dictionaryDao: DictionaryDao<V>

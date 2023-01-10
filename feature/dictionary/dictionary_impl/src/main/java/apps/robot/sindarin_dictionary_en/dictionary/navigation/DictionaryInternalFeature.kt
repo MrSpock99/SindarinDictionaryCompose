@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.navigation.FeatureApi
+import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi.Companion.DETAILS_ROUTE
 import apps.robot.sindarin_dictionary_en.dictionary.details.presentation.composable.WordDetails
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryMode
 
@@ -15,7 +16,7 @@ class DictionaryInternalFeature : FeatureApi {
     private val wordId = "word_id"
     private val dictionaryMode = "dictionary_mode"
 
-    fun detailsScreen(wordId: String, dictionaryMode: String) = "$detailsScreenRoute/${wordId}/${dictionaryMode}"
+    fun detailsScreen(wordId: String, dictionaryMode: String) = "$DETAILS_ROUTE/${wordId}/${dictionaryMode}"
 
     override fun registerGraph(
         navGraphBuilder: NavGraphBuilder,
@@ -23,11 +24,11 @@ class DictionaryInternalFeature : FeatureApi {
         modifier: Modifier
     ) {
         navGraphBuilder.navigation(
-            route = scenarioDetailsRoute,
-            startDestination = detailsScreenRoute
+            route = SCENARIO_DETAILS_ROUTE,
+            startDestination = DETAILS_ROUTE
         ) {
             composable(
-                route = "$detailsScreenRoute/{$wordId}/{$dictionaryMode}",
+                route = "$DETAILS_ROUTE/{$wordId}/{$dictionaryMode}",
                 arguments = listOf(
                     navArgument(wordId) { type = NavType.StringType },
                     navArgument(dictionaryMode) { type = NavType.StringType }
@@ -47,7 +48,6 @@ class DictionaryInternalFeature : FeatureApi {
     }
 
     companion object {
-        private const val scenarioDetailsRoute = "dictionary/scenario_details"
-        const val detailsScreenRoute = "dictionary/details"
+        private const val SCENARIO_DETAILS_ROUTE = "dictionary/scenario_details"
     }
 }

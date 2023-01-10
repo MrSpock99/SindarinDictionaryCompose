@@ -1,4 +1,4 @@
-package apps.robot.sindarin_dictionary_en.dictionary.base.data.local
+package apps.robot.sindarin_dictionary_en.dictionary.api.data.local
 
 import androidx.room.Dao
 import androidx.room.Insert

@@ -2,10 +2,10 @@ package apps.robot.sindarin_dictionary_en.main.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import apps.robot.sindarin_dictionary_en.dictionary.base.data.local.ElfToEngDao
-import apps.robot.sindarin_dictionary_en.dictionary.base.data.local.EngToElfDao
-import apps.robot.sindarin_dictionary_en.dictionary.base.data.local.model.ElfToEngWordEntity
-import apps.robot.sindarin_dictionary_en.dictionary.base.data.local.model.EngToElfWordEntity
+import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.ElfToEngDao
+import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.EngToElfDao
+import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.model.ElfToEngWordEntity
+import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.model.EngToElfWordEntity
 import apps.robot.sindarin_dictionary_en.main.data.AppDatabase.Companion.VERSION
 
 @Database(

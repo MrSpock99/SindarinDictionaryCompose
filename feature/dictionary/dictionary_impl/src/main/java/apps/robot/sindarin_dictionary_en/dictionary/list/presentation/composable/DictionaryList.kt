@@ -50,6 +50,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import apps.robot.dictionary.impl.R
+import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.DictionaryListViewModel
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.DictionaryListState
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.SearchWidgetState
@@ -72,7 +73,7 @@ fun DictionaryList(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     val isTopBarVisible =
-        (currentDestination?.hierarchy?.any { it.route == DictionaryInternalFeature.detailsScreenRoute }) ?: false
+        (currentDestination?.hierarchy?.any { it.route == DictionaryFeatureApi.DETAILS_ROUTE }) ?: false
 
     val isUserDragging = remember {
         mutableStateOf(false)

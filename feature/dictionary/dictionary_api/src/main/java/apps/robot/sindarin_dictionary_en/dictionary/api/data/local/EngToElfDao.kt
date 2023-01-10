@@ -1,8 +1,8 @@
-package apps.robot.sindarin_dictionary_en.dictionary.base.data.local
+package apps.robot.sindarin_dictionary_en.dictionary.api.data.local
 
 import androidx.room.Dao
 import androidx.room.Query
-import apps.robot.sindarin_dictionary_en.dictionary.base.data.local.model.EngToElfWordEntity
+import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.model.EngToElfWordEntity
 
 @Dao
 abstract class EngToElfDao : DictionaryDao<EngToElfWordEntity> {

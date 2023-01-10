@@ -6,8 +6,8 @@ import androidx.paging.PagingData
 import androidx.paging.filter
 import androidx.paging.map
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
-import apps.robot.sindarin_dictionary_en.dictionary.base.data.local.ElfToEngDao
-import apps.robot.sindarin_dictionary_en.dictionary.base.data.local.model.ElfToEngWordEntity
+import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.ElfToEngDao
+import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.model.ElfToEngWordEntity
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordDomainMapper
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordElfToEngEntityMapper
 import apps.robot.sindarin_dictionary_en.dictionary.base.domain.DictionaryRepository
