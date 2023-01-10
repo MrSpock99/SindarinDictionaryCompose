@@ -6,7 +6,7 @@ import apps.robot.sindarin_dictionary_en.dictionary.base.data.EngToElfDictionary
 import apps.robot.sindarin_dictionary_en.dictionary.base.domain.Word
 import kotlinx.coroutines.flow.Flow
 
-class DictionaryGetPagedWordListAsFlowUseCase(
+internal class DictionaryGetPagedWordListAsFlowUseCase(
     private val engToElfDictionaryRepository: EngToElfDictionaryRepositoryImpl,
     private val elfToEngDictionaryRepository: ElfToEngDictionaryRepositoryImpl
 ) {

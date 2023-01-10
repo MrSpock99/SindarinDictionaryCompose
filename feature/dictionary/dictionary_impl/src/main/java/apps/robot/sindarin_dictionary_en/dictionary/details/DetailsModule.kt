@@ -8,7 +8,7 @@ import apps.robot.sindarin_dictionary_en.dictionary.details.presentation.Details
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-fun detailsModule() = module {
+internal fun detailsModule() = module {
     factory {
         DictionaryGetWordByIdUseCase(
             engToElfDictionaryRepository = get<EngToElfDictionaryRepositoryImpl>(),

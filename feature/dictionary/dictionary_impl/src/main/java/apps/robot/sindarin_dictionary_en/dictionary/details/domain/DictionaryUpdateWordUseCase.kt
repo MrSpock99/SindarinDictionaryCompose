@@ -4,7 +4,7 @@ import apps.robot.sindarin_dictionary_en.dictionary.base.domain.DictionaryReposi
 import apps.robot.sindarin_dictionary_en.dictionary.base.domain.Word
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryMode
 
-class DictionaryUpdateWordUseCase(
+internal class DictionaryUpdateWordUseCase(
     private val elfToEngDictionaryRepository: DictionaryRepository,
     private val engToElfDictionaryRepository: DictionaryRepository
 ) {

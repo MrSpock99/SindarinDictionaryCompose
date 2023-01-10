@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.emptyFlow
 
-data class DictionaryListState(
+internal data class DictionaryListState(
     val words: Flow<PagingData<WordUiModel>> = emptyFlow(),
     val headers: List<UiText> = emptyList(),
     val uiState: UiState,

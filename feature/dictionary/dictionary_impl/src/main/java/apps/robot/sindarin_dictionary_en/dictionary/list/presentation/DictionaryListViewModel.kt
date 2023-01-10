@@ -1,14 +1,12 @@
 package apps.robot.sindarin_dictionary_en.dictionary.list.presentation
 
 import androidx.lifecycle.viewModelScope
-import androidx.paging.LoadState
 import androidx.paging.cachedIn
 import androidx.paging.map
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.UiText
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.BaseViewModel
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.Content
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.Loading
-import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.UiState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetHeadersUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetPagedWordListAsFlowUseCase
@@ -29,7 +27,7 @@ import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.plus
 
-class DictionaryListViewModel(
+internal class DictionaryListViewModel(
     private val getPagedWordListAsFlow: DictionaryGetPagedWordListAsFlowUseCase,
     private val loadWordList: DictionaryLoadWordListUseCase,
     private val getHeaders: DictionaryGetHeadersUseCase,

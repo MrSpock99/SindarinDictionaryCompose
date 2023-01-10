@@ -25,7 +25,7 @@ import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.Dictionary
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun DictionaryModeToggle(
+internal fun DictionaryModeToggle(
     owner: ViewModelStoreOwner,
     viewModel: DictionaryListViewModel = getViewModel(owner = owner)
 ) {

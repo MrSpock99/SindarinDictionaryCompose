@@ -61,7 +61,7 @@ import org.koin.androidx.compose.getViewModel
 import java.lang.Math.abs
 
 @Composable
-fun DictionaryList(
+internal fun DictionaryList(
     viewModel: DictionaryListViewModel = getViewModel(),
     navigator: NavHostController
 ) {
@@ -113,7 +113,7 @@ fun DictionaryList(
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun DictionaryListContent(
+internal fun DictionaryListContent(
     state: DictionaryListState,
     isUserDragging: MutableState<Boolean>,
     shouldShowSelectedHeader: Boolean,

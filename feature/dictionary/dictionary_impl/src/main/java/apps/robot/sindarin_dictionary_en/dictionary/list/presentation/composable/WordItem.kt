@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.sp
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.WordUiModel
 
 @Composable
-fun WordItem(wordUiModel: WordUiModel, onClick: (WordUiModel) -> Unit) {
+internal fun WordItem(wordUiModel: WordUiModel, onClick: (WordUiModel) -> Unit) {
     Text(
         text = wordUiModel.word.asString(),
         color = MaterialTheme.colors.onBackground,

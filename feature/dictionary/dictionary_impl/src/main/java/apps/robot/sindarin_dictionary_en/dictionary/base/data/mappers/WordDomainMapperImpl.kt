@@ -4,7 +4,7 @@ import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.model.ElfToEn
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.model.EngToElfWordEntity
 import apps.robot.sindarin_dictionary_en.dictionary.base.domain.Word
 
-class WordDomainMapperImpl : WordDomainMapper {
+internal class WordDomainMapperImpl : WordDomainMapper {
     override fun map(elfToEngWordEntity: ElfToEngWordEntity): Word {
         return Word(
             id = elfToEngWordEntity.id,

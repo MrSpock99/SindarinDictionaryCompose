@@ -12,7 +12,7 @@ import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi.Com
 import apps.robot.sindarin_dictionary_en.dictionary.details.presentation.composable.WordDetails
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryMode
 
-class DictionaryInternalFeature : FeatureApi {
+internal class DictionaryInternalFeature : FeatureApi {
     private val wordId = "word_id"
     private val dictionaryMode = "dictionary_mode"
 

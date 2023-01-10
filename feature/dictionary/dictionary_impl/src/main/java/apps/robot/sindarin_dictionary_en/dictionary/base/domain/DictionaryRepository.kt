@@ -3,7 +3,7 @@ package apps.robot.sindarin_dictionary_en.dictionary.base.domain
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 
-interface DictionaryRepository {
+internal interface DictionaryRepository {
     suspend fun loadWords()
     fun getPagedWordsAsFlow(keyword: String? = null): Flow<PagingData<Word>>
     suspend fun getAllWords(): List<Word>

@@ -39,7 +39,7 @@ import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.Sear
 
 @Composable
 @OptIn(ExperimentalComposeUiApi::class)
-fun DictionaryListTopAppBar(
+internal fun DictionaryListTopAppBar(
     isTopBarVisible: Boolean,
     viewModelStoreOwner: ViewModelStoreOwner,
     searchWidgetState: SearchWidgetState,

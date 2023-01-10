@@ -2,7 +2,7 @@ package apps.robot.sindarin_dictionary_en.dictionary.list.domain
 
 import apps.robot.sindarin_dictionary_en.dictionary.base.domain.DictionaryRepository
 
-class DictionaryGetHeadersUseCase(
+internal class DictionaryGetHeadersUseCase(
     private val elfToEngRepository: DictionaryRepository,
     private val engToElfRepository: DictionaryRepository
 ) {

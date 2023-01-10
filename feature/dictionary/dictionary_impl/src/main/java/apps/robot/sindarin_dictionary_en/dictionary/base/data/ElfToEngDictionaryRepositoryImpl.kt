@@ -21,7 +21,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-class ElfToEngDictionaryRepositoryImpl(
+internal class ElfToEngDictionaryRepositoryImpl(
     private val db: FirebaseFirestore,
     private val dispatchers: AppDispatchers,
     private val dao: ElfToEngDao,

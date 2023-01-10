@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import java.util.UUID
 
-class DetailsViewModel(
+internal class DetailsViewModel(
     private val getWordById: DictionaryGetWordByIdUseCase,
     private val setTextToClipboard: ClipboardSetTextUseCase,
     private val updateWord: DictionaryUpdateWordUseCase

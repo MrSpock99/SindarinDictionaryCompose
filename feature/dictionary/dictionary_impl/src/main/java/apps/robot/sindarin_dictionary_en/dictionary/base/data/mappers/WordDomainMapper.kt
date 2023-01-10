@@ -4,7 +4,7 @@ import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.model.ElfToEn
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.model.EngToElfWordEntity
 import apps.robot.sindarin_dictionary_en.dictionary.base.domain.Word
 
-interface WordDomainMapper {
+internal interface WordDomainMapper {
     fun map(elfToEngWordEntity: ElfToEngWordEntity): Word
     fun map(engToElfWordEntity: EngToElfWordEntity): Word
 }
