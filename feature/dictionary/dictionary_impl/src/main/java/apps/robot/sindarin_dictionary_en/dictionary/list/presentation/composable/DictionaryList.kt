@@ -4,11 +4,12 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -29,7 +30,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
@@ -37,13 +37,11 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.boundsInParent
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -105,7 +103,7 @@ internal fun DictionaryList(
                 Color.Transparent
             },
         ) {
-            DictionaryListContent(
+            DictionaryListContentRow(
                 state = state,
                 isUserDragging = isUserDragging,
                 shouldShowSelectedHeader = shouldShowSelectedHeader,
@@ -115,69 +113,50 @@ internal fun DictionaryList(
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
-internal fun DictionaryListContent(
+internal fun DictionaryListContentRow(
     state: DictionaryListState,
     isUserDragging: MutableState<Boolean>,
     shouldShowSelectedHeader: Boolean,
     navigator: NavHostController,
     dictionaryInternalFeature: DictionaryInternalFeature = get()
 ) {
-    ConstraintLayout(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        val (wordList, selectedHeader, headerList, nothingFound) = createRefs()
+    var selectedHeaderIndex by remember { mutableStateOf(-1) }
+    val words = state.words.collectAsLazyPagingItems()
+    val listState = rememberLazyListState()
 
-        val listState = rememberLazyListState()
-        val keyboardController = LocalSoftwareKeyboardController.current
-
-        var selectedHeaderIndex by remember { mutableStateOf(-1) }
-        val words = state.words.collectAsLazyPagingItems()
-
-        if (listState.isScrollInProgress) {
-            keyboardController?.hide()
-        }
-        if (shouldShowSelectedHeader) {
+    if (isUserDragging.value) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(),
+            contentAlignment = Alignment.Center
+        ) {
             Text(
+                modifier = Modifier
+                    .padding(bottom = 100.dp),
                 text = state.headers.getOrNull(selectedHeaderIndex)?.asString() ?: "",
                 fontSize = 100.sp,
                 color = colorResource(id = R.color.white),
-                modifier = Modifier.constrainAs(selectedHeader) {
-                    linkTo(
-                        top = parent.top,
-                        bottom = parent.bottom,
-                        bias = 0.3F
-                    )
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                }
             )
         }
-
-        if (words.itemCount == 0 && state.searchWidgetState == SearchWidgetState.OPENED) {
-            Text(
-                text = stringResource(id = R.string.dictionary_list_nothing_found),
-                fontSize = 16.sp,
-                color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
-                modifier = Modifier.constrainAs(nothingFound) {
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    top.linkTo(parent.top)
-                }
-            )
-        }
-
+    }
+    if (words.itemCount == 0 && state.searchWidgetState == SearchWidgetState.OPENED) {
+        Text(
+            text = stringResource(id = R.string.dictionary_list_nothing_found),
+            fontSize = 16.sp,
+            color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
+        )
+    }
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
         LazyColumn(
             state = listState,
             modifier = Modifier
-                .constrainAs(wordList) {
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
-                    end.linkTo(headerList.start)
-                }
-                .padding(end = 16.dp),
+                .padding(end = 16.dp)
+                .weight(0.9f),
             contentPadding = PaddingValues(
                 top = 16.dp,
                 start = 16.dp,
@@ -203,7 +182,6 @@ internal fun DictionaryListContent(
                 }
             }
         }
-
         if (state.headers.isNotEmpty()) {
             val offsets = remember { mutableStateMapOf<Int, Float>() }
             val scope = rememberCoroutineScope()
@@ -241,10 +219,7 @@ internal fun DictionaryListContent(
                     .fillMaxHeight()
                     .width(50.dp)
                     .padding(bottom = 16.dp)
-                    .constrainAs(headerList) {
-                        top.linkTo(parent.top)
-                        end.linkTo(parent.end)
-                    }
+                    .weight(0.15f)
                     .pointerInput(Unit) {
                         detectTapGestures {
                             updateSelectedIndexIfNeeded(it.y)
@@ -298,6 +273,7 @@ internal fun DictionaryListContent(
                 }
             }
         }
+
     }
 }
 
@@ -305,7 +281,7 @@ internal fun DictionaryListContent(
 @Composable
 fun DictionaryListPreview() {
     flowOf<PagingData<WordUiModel>>()
-    DictionaryListContent(
+    DictionaryListContentRow(
         state = DictionaryListState(
             words = flowOf<PagingData<WordUiModel>>(
                 PagingData.from(

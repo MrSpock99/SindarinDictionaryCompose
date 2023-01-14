@@ -47,7 +47,7 @@ internal class DictionaryListViewModel(
         }
         subscribeToWords(state.value.dictionaryMode)
         subscribeToSearch()
-        // setHeaders(state.value.dictionaryMode)
+        setHeaders(state.value.dictionaryMode)
     }
 
     fun onModeChange(dictionaryMode: DictionaryMode) {
@@ -57,7 +57,7 @@ internal class DictionaryListViewModel(
             )
         }
         subscribeToWords(dictionaryMode)
-        // setHeaders(dictionaryMode)
+        setHeaders(dictionaryMode)
     }
 
     fun onSearchToggle() {
