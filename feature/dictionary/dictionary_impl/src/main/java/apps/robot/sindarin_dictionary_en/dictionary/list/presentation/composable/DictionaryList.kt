@@ -40,21 +40,26 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
-import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import apps.robot.dictionary.impl.R
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.UiText
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.Content
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.DictionaryListViewModel
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.DictionaryListState
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.SearchWidgetState
+import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.WordUiModel
 import apps.robot.sindarin_dictionary_en.dictionary.navigation.DictionaryInternalFeature
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
@@ -72,8 +77,7 @@ internal fun DictionaryList(
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
-    val isTopBarVisible =
-        (currentDestination?.hierarchy?.any { it.route == DictionaryFeatureApi.DETAILS_ROUTE }) ?: false
+    val isTopBarVisible = currentDestination?.route != DictionaryFeatureApi.DETAILS_ROUTE
 
     val isUserDragging = remember {
         mutableStateOf(false)
@@ -295,4 +299,31 @@ internal fun DictionaryListContent(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun DictionaryListPreview() {
+    flowOf<PagingData<WordUiModel>>()
+    DictionaryListContent(
+        state = DictionaryListState(
+            words = flowOf<PagingData<WordUiModel>>(
+                PagingData.from(
+                    listOf(
+                        WordUiModel("", UiText.DynamicString("aasdasd"), UiText.DynamicString(""), false),
+                        WordUiModel("", UiText.DynamicString("basdasd"), UiText.DynamicString(""), false),
+                        WordUiModel("", UiText.DynamicString("asdasd"), UiText.DynamicString(""), false),
+                        WordUiModel("", UiText.DynamicString("adasd"), UiText.DynamicString(""), false),
+                        WordUiModel("", UiText.DynamicString("asdasdsa"), UiText.DynamicString(""), false),
+                    )
+                )
+            ),
+            uiState = Content
+        ),
+        isUserDragging = remember {
+            mutableStateOf(false)
+        },
+        shouldShowSelectedHeader = false,
+        navigator = rememberNavController()
+    )
 }
