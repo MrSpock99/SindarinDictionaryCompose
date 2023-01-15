@@ -15,7 +15,7 @@ object Versions {
     const val koin = "3.2.0-beta-1"
 
     const val compose = "1.2.0-rc03"
-    const val composeConstraintLayout = "1.0.0-beta02"
+    const val composeConstraintLayout = "1.0.1"
     const val composeCompiler = "1.2.0-rc02"
     const val activityCompose = "1.5.0"
     const val navigationCompose = "2.5.0"
