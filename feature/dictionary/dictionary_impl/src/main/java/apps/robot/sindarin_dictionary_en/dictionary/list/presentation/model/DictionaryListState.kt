@@ -10,9 +10,16 @@ import kotlinx.coroutines.flow.emptyFlow
 
 internal data class DictionaryListState(
     val words: Flow<PagingData<WordUiModel>> = emptyFlow(),
-    val headers: List<UiText> = emptyList(),
     val uiState: UiState,
     val dictionaryMode: DictionaryMode = DictionaryMode.ENGLISH_TO_ELVISH,
+    val headersState: DictionaryHeadersState = DictionaryHeadersState(),
     val searchWidgetState: SearchWidgetState = SearchWidgetState.CLOSED,
-    val searchText: MutableStateFlow<String> = MutableStateFlow("")
+    val searchText: MutableStateFlow<String> = MutableStateFlow(""),
+)
+
+data class DictionaryHeadersState(
+    val headers: List<UiText> = emptyList(),
+    val isUserDragging: MutableStateFlow<Boolean> = MutableStateFlow(false),
+    val shouldShowSelectedHeader: MutableStateFlow<Boolean> = MutableStateFlow(false),
+    val selectedHeaderIndex: MutableStateFlow<Int> = MutableStateFlow(-1)
 )

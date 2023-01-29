@@ -21,14 +21,11 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -39,25 +36,20 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import apps.robot.dictionary.impl.R
-import apps.robot.sindarin_dictionary_en.base_ui.presentation.UiText
-import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.Content
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.DictionaryListViewModel
+import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.DictionaryHeadersState
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.DictionaryListState
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.SearchWidgetState
-import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.WordUiModel
 import apps.robot.sindarin_dictionary_en.dictionary.navigation.DictionaryInternalFeature
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
@@ -77,12 +69,6 @@ internal fun DictionaryList(
     val currentDestination = navBackStackEntry?.destination
     val isTopBarVisible = currentDestination?.route != DictionaryFeatureApi.DETAILS_ROUTE
 
-    val isUserDragging = remember {
-        mutableStateOf(false)
-    }
-    val shouldShowSelectedHeader = remember {
-        isUserDragging.value && state.headers.isNotEmpty()
-    }
     Scaffold(
         topBar = {
             DictionaryListTopAppBar(
@@ -97,7 +83,7 @@ internal fun DictionaryList(
     ) { paddingValues ->
         Surface(
             modifier = Modifier.padding(paddingValues),
-            color = if (shouldShowSelectedHeader) {
+            color = if (state.headersState.shouldShowSelectedHeader.collectAsState().value) {
                 colorResource(id = R.color.black).copy(alpha = ContentAlpha.medium)
             } else {
                 Color.Transparent
@@ -105,8 +91,9 @@ internal fun DictionaryList(
         ) {
             DictionaryListContentRow(
                 state = state,
-                isUserDragging = isUserDragging,
-                shouldShowSelectedHeader = shouldShowSelectedHeader,
+                headersState = state.headersState,
+                onDragChange = viewModel::onDragChange,
+                onSelectedHeaderIndexChange = viewModel::onSelectedHeaderIndexChange,
                 navigator = navigator
             )
         }
@@ -116,16 +103,16 @@ internal fun DictionaryList(
 @Composable
 internal fun DictionaryListContentRow(
     state: DictionaryListState,
-    isUserDragging: MutableState<Boolean>,
-    shouldShowSelectedHeader: Boolean,
+    headersState: DictionaryHeadersState,
+    onDragChange: (Boolean) -> Unit,
+    onSelectedHeaderIndexChange: (Int) -> Unit,
     navigator: NavHostController,
     dictionaryInternalFeature: DictionaryInternalFeature = get()
 ) {
-    var selectedHeaderIndex by remember { mutableStateOf(-1) }
     val words = state.words.collectAsLazyPagingItems()
     val listState = rememberLazyListState()
 
-    if (isUserDragging.value) {
+    if (headersState.shouldShowSelectedHeader.collectAsState().value) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -135,7 +122,7 @@ internal fun DictionaryListContentRow(
             Text(
                 modifier = Modifier
                     .padding(bottom = 100.dp),
-                text = state.headers.getOrNull(selectedHeaderIndex)?.asString() ?: "",
+                text = headersState.headers.getOrNull(headersState.selectedHeaderIndex.value)?.asString() ?: "",
                 fontSize = 100.sp,
                 color = colorResource(id = R.color.white),
             )
@@ -182,7 +169,7 @@ internal fun DictionaryListContentRow(
                 }
             }
         }
-        if (state.headers.isNotEmpty()) {
+        if (headersState.headers.isNotEmpty()) {
             val offsets = remember { mutableStateMapOf<Int, Float>() }
             val scope = rememberCoroutineScope()
             val context = LocalContext.current
@@ -193,11 +180,11 @@ internal fun DictionaryListContentRow(
                     .entries
                     .minByOrNull { it.value }
                     ?.key ?: return false
-                selectedHeaderIndex = index
+                onSelectedHeaderIndexChange(index)
 
                 val selectedItemIndex = words.itemSnapshotList.indexOfFirst {
                     it?.word?.asString(context)?.first()?.uppercase() ==
-                        state.headers.getOrNull(selectedHeaderIndex)?.asString(context)
+                        headersState.headers.getOrNull(headersState.selectedHeaderIndex.value)?.asString(context)
                 }
                 scope.launch {
                     if (selectedItemIndex != -1) {
@@ -206,8 +193,8 @@ internal fun DictionaryListContentRow(
                         listState.scrollToItem(words.itemCount - 1)
                     }
                 }.invokeOnCompletion {
-                    if (isUserDragging.value.not()) {
-                        selectedHeaderIndex = -1
+                    if (headersState.isUserDragging.value.not()) {
+                        onSelectedHeaderIndexChange(-1)
                     }
                 }
                 return true
@@ -230,15 +217,16 @@ internal fun DictionaryListContentRow(
                             onVerticalDrag = { change, _ ->
                                 updateSelectedIndexIfNeeded(change.position.y)
                             }, onDragStart = {
-                                isUserDragging.value = true
+                                onDragChange(true)
                             }, onDragEnd = {
-                                selectedHeaderIndex = -1
-                                isUserDragging.value = false
+                                onSelectedHeaderIndexChange(-1)
+                                onDragChange(false)
                             })
                     }
             ) {
-                state.headers.forEachIndexed { i, header ->
-                    val isHeaderSelected = isUserDragging.value && i == selectedHeaderIndex
+                headersState.headers.forEachIndexed { i, header ->
+                    val isHeaderSelected = headersState.isUserDragging.value &&
+                        i == headersState.selectedHeaderIndex.collectAsState().value
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier
@@ -273,33 +261,5 @@ internal fun DictionaryListContentRow(
                 }
             }
         }
-
     }
-}
-
-@Preview
-@Composable
-fun DictionaryListPreview() {
-    flowOf<PagingData<WordUiModel>>()
-    DictionaryListContentRow(
-        state = DictionaryListState(
-            words = flowOf<PagingData<WordUiModel>>(
-                PagingData.from(
-                    listOf(
-                        WordUiModel("", UiText.DynamicString("aasdasd"), UiText.DynamicString(""), false),
-                        WordUiModel("", UiText.DynamicString("basdasd"), UiText.DynamicString(""), false),
-                        WordUiModel("", UiText.DynamicString("asdasd"), UiText.DynamicString(""), false),
-                        WordUiModel("", UiText.DynamicString("adasd"), UiText.DynamicString(""), false),
-                        WordUiModel("", UiText.DynamicString("asdasdsa"), UiText.DynamicString(""), false),
-                    )
-                )
-            ),
-            uiState = Content
-        ),
-        isUserDragging = remember {
-            mutableStateOf(false)
-        },
-        shouldShowSelectedHeader = false,
-        navigator = rememberNavController()
-    )
 }

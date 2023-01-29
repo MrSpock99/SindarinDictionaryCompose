@@ -76,6 +76,16 @@ internal class DictionaryListViewModel(
         state.value.searchText.tryEmit(searchText)
     }
 
+    fun onDragChange(isDragging: Boolean) {
+        state.value.headersState.isUserDragging.value = isDragging
+        state.value.headersState.shouldShowSelectedHeader.value =
+            isDragging && state.value.headersState.headers.isNotEmpty()
+    }
+
+    fun onSelectedHeaderIndexChange(selectedIndex: Int) {
+        state.value.headersState.selectedHeaderIndex.value = selectedIndex
+    }
+
     private fun subscribeToWords(dictionaryMode: DictionaryMode) {
         state.value = state.value.copy(
             words = getPagedWordListAsFlow(dictionaryMode).map { pagingData ->
@@ -95,7 +105,13 @@ internal class DictionaryListViewModel(
         launchJob {
             state.update {
                 it.copy(
-                    headers = getHeaders(dictionaryMode).map { UiText.DynamicString(it) }
+                    headersState = it.headersState.copy(
+                        headers = getHeaders(dictionaryMode).map {
+                            UiText.DynamicString(
+                                it
+                            )
+                        }
+                    )
                 )
             }
         }
