@@ -130,6 +130,7 @@ internal fun DictionaryListContentRow(
     }
     if (words.itemCount == 0 && state.searchWidgetState == SearchWidgetState.OPENED) {
         Text(
+            modifier = Modifier.padding(start = 16.dp, top = 16.dp),
             text = stringResource(id = R.string.dictionary_list_nothing_found),
             fontSize = 16.sp,
             color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
