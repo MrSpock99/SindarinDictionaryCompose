@@ -10,12 +10,18 @@ import apps.robot.sindarin_dictionary_en.main.databaseModule
 import apps.robot.sindarin_dictionary_en.phrasebook.phrasebookModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import timber.log.Timber
 
 class AppDelegate : Application() {
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
         initKoinDi()
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        Timber.plant(Timber.DebugTree())
     }
 
     private fun initKoinDi() {

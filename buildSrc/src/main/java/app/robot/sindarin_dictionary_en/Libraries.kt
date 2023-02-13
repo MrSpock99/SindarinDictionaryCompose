@@ -23,6 +23,7 @@ object Libraries {
         const val material = "androidx.compose.material:material:${Versions.compose}"
         const val preview = "androidx.compose.ui:ui-tooling-preview:${Versions.compose}"
         const val activityCompose = "androidx.activity:activity-compose:${Versions.activityCompose}"
+        const val lazyColumnScrollbar = "com.github.nanihadesuka:LazyColumnScrollbar:${Versions.lazyColumnScrollbar}"
         const val constraintLayout =
             "androidx.constraintlayout:constraintlayout-compose:${Versions.composeConstraintLayout}"
     }
@@ -61,5 +62,9 @@ object Libraries {
     object Paging {
         const val runtime = "androidx.paging:paging-runtime:${Versions.paging}"
         const val compose = "androidx.paging:paging-compose:${Versions.pagingCompose}"
+    }
+
+    object Utils {
+        const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
     }
 }

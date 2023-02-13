@@ -64,4 +64,12 @@ ext {
         implementation Libraries.Paging.runtime
         implementation Libraries.Paging.compose
     }
+
+    timber = Group {
+        implementation Libraries.Utils.timber
+    }
+
+    lazyColumnScrollbar = Group {
+        implementation Libraries.Compose.lazyColumnScrollbar
+    }
 }

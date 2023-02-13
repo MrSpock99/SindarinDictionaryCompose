@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.emptyFlow
 internal data class DictionaryListState(
     val words: Flow<PagingData<WordUiModel>> = emptyFlow(),
     val uiState: UiState,
-    val dictionaryMode: DictionaryMode = DictionaryMode.ENGLISH_TO_ELVISH,
+    val dictionaryMode: DictionaryMode = DictionaryMode.ELVISH_TO_ENGLISH,
     val headersState: DictionaryHeadersState = DictionaryHeadersState(),
     val searchWidgetState: SearchWidgetState = SearchWidgetState.CLOSED,
     val searchText: MutableStateFlow<String> = MutableStateFlow(""),

@@ -51,8 +51,11 @@ import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.Dict
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.dictionary.navigation.DictionaryInternalFeature
 import kotlinx.coroutines.launch
+import my.nanihadesuka.compose.LazyColumnScrollbar
+import my.nanihadesuka.compose.ScrollbarSelectionMode
 import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
+import timber.log.Timber
 import java.lang.Math.abs
 
 @Composable
@@ -140,127 +143,148 @@ internal fun DictionaryListContentRow(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
-        LazyColumn(
-            state = listState,
-            modifier = Modifier
-                .padding(end = 16.dp)
-                .weight(0.9f),
-            contentPadding = PaddingValues(
-                top = 16.dp,
-                start = 16.dp,
-                bottom = 16.dp
-            )
-        ) {
-            items(
-                count = words.itemCount,
-                key = { index ->
-                    words[index]?.id ?: ""
-                }) { index ->
-                words[index]?.let { word ->
-                    WordItem(
-                        wordUiModel = word,
-                        onClick = {
-                            val screen = dictionaryInternalFeature.detailsScreen(
-                                it.id,
-                                state.dictionaryMode.name
-                            )
-                            navigator.navigate(screen)
-                        }
+        LazyColumnScrollbar(
+            listState = listState,
+            selectionMode = ScrollbarSelectionMode.Full,
+            thumbColor = MaterialTheme.colors.secondary,
+            thumbSelectedColor = MaterialTheme.colors.primary,
+            content = {
+                LazyColumn(
+                    state = listState,
+                    modifier = Modifier
+                        .padding(end = 16.dp)
+                        .weight(0.9f),
+                    contentPadding = PaddingValues(
+                        top = 16.dp,
+                        start = 16.dp,
+                        bottom = 16.dp
                     )
-                }
-            }
-        }
-        if (headersState.headers.isNotEmpty()) {
-            val offsets = remember { mutableStateMapOf<Int, Float>() }
-            val scope = rememberCoroutineScope()
-            val context = LocalContext.current
-
-            fun updateSelectedIndexIfNeeded(offset: Float): Boolean {
-                val index = offsets
-                    .mapValues { abs(it.value - offset) }
-                    .entries
-                    .minByOrNull { it.value }
-                    ?.key ?: return false
-                onSelectedHeaderIndexChange(index)
-
-                val selectedItemIndex = words.itemSnapshotList.indexOfFirst {
-                    it?.word?.asString(context)?.first()?.uppercase() ==
-                        headersState.headers.getOrNull(headersState.selectedHeaderIndex.value)?.asString(context)
-                }
-                scope.launch {
-                    if (selectedItemIndex != -1) {
-                        listState.scrollToItem(selectedItemIndex)
-                    } else if (words.itemCount > 0) {
-                        listState.scrollToItem(words.itemCount - 1)
-                    }
-                }.invokeOnCompletion {
-                    if (headersState.isUserDragging.value.not()) {
-                        onSelectedHeaderIndexChange(-1)
-                    }
-                }
-                return true
-            }
-
-            Column(
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .width(50.dp)
-                    .padding(bottom = 16.dp)
-                    .weight(0.15f)
-                    .pointerInput(Unit) {
-                        detectTapGestures {
-                            updateSelectedIndexIfNeeded(it.y)
+                ) {
+                    items(
+                        count = words.itemCount,
+                        key = { index ->
+                            words[index]?.id ?: ""
+                        }) { index ->
+                        words[index]?.let { word ->
+                            WordItem(
+                                wordUiModel = word,
+                                onClick = {
+                                    val screen = dictionaryInternalFeature.detailsScreen(
+                                        it.id,
+                                        state.dictionaryMode.name
+                                    )
+                                    navigator.navigate(screen)
+                                }
+                            )
                         }
                     }
-                    .pointerInput(Unit) {
-                        detectVerticalDragGestures(
-                            onVerticalDrag = { change, _ ->
-                                updateSelectedIndexIfNeeded(change.position.y)
-                            }, onDragStart = {
-                                onDragChange(true)
-                            }, onDragEnd = {
+                }
+                if (headersState.headers.isNotEmpty()) {
+                    val offsets = remember { mutableStateMapOf<Int, Float>() }
+                    val scope = rememberCoroutineScope()
+                    val context = LocalContext.current
+
+                    fun updateSelectedIndexIfNeeded(offset: Float): Boolean {
+                        val index = offsets
+                            .mapValues { abs(it.value - offset) }
+                            .entries
+                            .minByOrNull { it.value }
+                            ?.key ?: return false
+                        onSelectedHeaderIndexChange(index)
+
+                        val selectedItemIndex = words.itemSnapshotList.indexOfFirst {
+                            it?.word?.asString(context)?.first()?.uppercase() ==
+                                headersState.headers.getOrNull(headersState.selectedHeaderIndex.value)
+                                    ?.asString(context)
+                        }
+                        scope.launch {
+                            if (selectedItemIndex != -1) {
+                                Timber.d(
+                                    "DictList: selectedHeaderIndex = ${headersState.selectedHeaderIndex.value} selectedHeader = ${
+                                        headersState.headers.getOrNull(
+                                            headersState.selectedHeaderIndex.value
+                                        )?.asString(context)
+                                    } index = ${selectedItemIndex} item = ${
+                                        words.peek(selectedItemIndex)?.word?.asString(
+                                            context
+                                        )
+                                    }"
+                                )
+                                listState.scrollToItem(selectedItemIndex)
+                            } else if (words.itemCount > 0) {
+                                Timber.d("DictList: index = ${selectedItemIndex} itemCount = ${words.itemCount}")
+                                listState.scrollToItem(words.itemCount - 1)
+                            }
+                        }.invokeOnCompletion {
+                            if (headersState.isUserDragging.value.not()) {
                                 onSelectedHeaderIndexChange(-1)
-                                onDragChange(false)
-                            })
+                            }
+                        }
+                        return true
                     }
-            ) {
-                headersState.headers.forEachIndexed { i, header ->
-                    val isHeaderSelected = headersState.isUserDragging.value &&
-                        i == headersState.selectedHeaderIndex.collectAsState().value
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
+
+                    Column(
+                        verticalArrangement = Arrangement.Center,
                         modifier = Modifier
-                            .onGloballyPositioned {
-                                offsets[i] = it.boundsInParent().center.y
+                            .fillMaxHeight()
+                            .width(50.dp)
+                            .padding(bottom = 16.dp)
+                            .weight(0.15f)
+                            .pointerInput(Unit) {
+                                detectTapGestures {
+                                    updateSelectedIndexIfNeeded(it.y)
+                                }
+                            }
+                            .pointerInput(Unit) {
+                                detectVerticalDragGestures(
+                                    onVerticalDrag = { change, _ ->
+                                        updateSelectedIndexIfNeeded(change.position.y)
+                                    }, onDragStart = {
+                                        onDragChange(true)
+                                    }, onDragEnd = {
+                                        onSelectedHeaderIndexChange(-1)
+                                        onDragChange(false)
+                                    })
                             }
                     ) {
-                        Canvas(
-                            modifier = Modifier
-                                .size(16.dp)
-                                .padding(end = 8.dp)
-                                .alpha(
-                                    if (isHeaderSelected) {
-                                        ContentAlpha.high
-                                    } else {
-                                        0F
+                        headersState.headers.forEachIndexed { i, header ->
+                            val isHeaderSelected = headersState.isUserDragging.value &&
+                                i == headersState.selectedHeaderIndex.collectAsState().value
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier
+                                    .onGloballyPositioned {
+                                        offsets[i] = it.boundsInParent().center.y
                                     }
-                                ),
-                            onDraw = {
-                                drawCircle(color = Color.White)
-                            })
-                        Text(
-                            text = header.asString(),
-                            fontSize = 12.sp,
-                            color = if (isHeaderSelected) {
-                                colorResource(id = R.color.white)
-                            } else {
-                                MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium)
+                            ) {
+                                Canvas(
+                                    modifier = Modifier
+                                        .size(16.dp)
+                                        .padding(end = 8.dp)
+                                        .alpha(
+                                            if (isHeaderSelected) {
+                                                ContentAlpha.high
+                                            } else {
+                                                0F
+                                            }
+                                        ),
+                                    onDraw = {
+                                        drawCircle(color = Color.White)
+                                    })
+                                Text(
+                                    text = header.asString(),
+                                    fontSize = 12.sp,
+                                    color = if (isHeaderSelected) {
+                                        colorResource(id = R.color.white)
+                                    } else {
+                                        MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium)
+                                    }
+                                )
                             }
-                        )
+                        }
                     }
                 }
-            }
-        }
+            },
+        )
     }
 }

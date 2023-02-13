@@ -52,4 +52,6 @@ dependencies {
     networkCore()
     database()
     paging()
+    timber()
+    lazyColumnScrollbar()
 }

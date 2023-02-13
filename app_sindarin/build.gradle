@@ -16,4 +16,5 @@ dependencies {
     koin()
     support()
     composeCore()
+    timber()
 }

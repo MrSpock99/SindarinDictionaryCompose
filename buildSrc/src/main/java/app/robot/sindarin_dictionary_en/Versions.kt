@@ -18,6 +18,7 @@ object Versions {
     const val composeConstraintLayout = "1.0.1"
     const val composeCompiler = "1.2.0-rc02"
     const val activityCompose = "1.5.0"
+    const val lazyColumnScrollbar = "1.5.1"
     const val navigationCompose = "2.5.0"
 
     const val firebaseFirestore = "24.1.1"
@@ -29,4 +30,6 @@ object Versions {
     const val room = "2.4.2"
     const val paging = "3.1.1"
     const val pagingCompose = "1.0.0-alpha15"
+
+    const val timber = "5.0.1"
 }

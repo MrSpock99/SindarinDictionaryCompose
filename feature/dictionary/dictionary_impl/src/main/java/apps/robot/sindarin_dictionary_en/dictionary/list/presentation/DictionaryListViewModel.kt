@@ -26,6 +26,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.plus
+import timber.log.Timber
 
 internal class DictionaryListViewModel(
     private val getPagedWordListAsFlow: DictionaryGetPagedWordListAsFlowUseCase,
@@ -47,7 +48,7 @@ internal class DictionaryListViewModel(
         }
         subscribeToWords(state.value.dictionaryMode)
         subscribeToSearch()
-        setHeaders(state.value.dictionaryMode)
+        //setHeaders(state.value.dictionaryMode)
     }
 
     fun onModeChange(dictionaryMode: DictionaryMode) {
@@ -57,7 +58,7 @@ internal class DictionaryListViewModel(
             )
         }
         subscribeToWords(dictionaryMode)
-        setHeaders(dictionaryMode)
+        //setHeaders(dictionaryMode)
     }
 
     fun onSearchToggle() {
@@ -90,6 +91,7 @@ internal class DictionaryListViewModel(
         state.value = state.value.copy(
             words = getPagedWordListAsFlow(dictionaryMode).map { pagingData ->
                 pagingData.map {
+                    Timber.d("DictList: ${it.word}")
                     WordUiModel(
                         id = it.id,
                         word = UiText.DynamicString(it.word),
