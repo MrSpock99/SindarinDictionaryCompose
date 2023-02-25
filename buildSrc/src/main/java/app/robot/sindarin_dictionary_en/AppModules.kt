@@ -8,4 +8,9 @@ object AppModules {
         const val api = ":dictionary_api"
         const val impl = ":dictionary_impl"
     }
+
+    object Favorites {
+        const val api = ":favorites_api"
+        const val impl = ":favorites_impl"
+    }
 }

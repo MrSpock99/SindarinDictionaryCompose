@@ -9,14 +9,21 @@ import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.navigation.FeatureApi
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi.Companion.DETAILS_ROUTE
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DetailsMode
 import apps.robot.sindarin_dictionary_en.dictionary.details.presentation.composable.WordDetails
-import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryMode
 
 internal class DictionaryInternalFeature : FeatureApi {
     private val wordId = "word_id"
-    private val dictionaryMode = "dictionary_mode"
+    private val text = "text"
+    private val translation = "translation"
+    private val detailsMode = "details_mode"
 
-    fun detailsScreen(wordId: String, dictionaryMode: String) = "$DETAILS_ROUTE/${wordId}/${dictionaryMode}"
+    fun detailsScreen(
+        wordId: String?,
+        text: String? = null,
+        translation: String? = null,
+        detailsMode: String
+    ) = "$DETAILS_ROUTE/$wordId/$text/$translation/$detailsMode"
 
     override fun registerGraph(
         navGraphBuilder: NavGraphBuilder,
@@ -28,20 +35,37 @@ internal class DictionaryInternalFeature : FeatureApi {
             startDestination = DETAILS_ROUTE
         ) {
             composable(
-                route = "$DETAILS_ROUTE/{$wordId}/{$dictionaryMode}",
+                route = "$DETAILS_ROUTE/{$wordId}/{$text}/{$translation}/{$detailsMode}",
                 arguments = listOf(
-                    navArgument(wordId) { type = NavType.StringType },
-                    navArgument(dictionaryMode) { type = NavType.StringType }
+                    navArgument(wordId) {
+                        nullable = true
+                        type = NavType.StringType
+                    },
+                    navArgument(text) {
+                        nullable = true
+                        type = NavType.StringType
+                    },
+                    navArgument(translation) {
+                        nullable = true
+                        type = NavType.StringType
+                    },
+                    navArgument(detailsMode) {
+                        type = NavType.StringType
+                    },
                 )
             ) {
                 val arguments = requireNotNull(it.arguments)
                 val wordId = arguments.getString(wordId)
-                val dictionaryMode = arguments.getString(dictionaryMode)
+                val text = arguments.getString(text)
+                val translation = arguments.getString(translation)
+                val detailsMode = arguments.getString(detailsMode)
 
                 WordDetails(
                     wordId = wordId.orEmpty(),
-                    dictionaryMode = DictionaryMode.valueOf(dictionaryMode.orEmpty()),
-                    navigator = navController
+                    text = text,
+                    translation = translation,
+                    navigator = navController,
+                    detailsMode = DetailsMode.valueOf(detailsMode.orEmpty())
                 )
             }
         }

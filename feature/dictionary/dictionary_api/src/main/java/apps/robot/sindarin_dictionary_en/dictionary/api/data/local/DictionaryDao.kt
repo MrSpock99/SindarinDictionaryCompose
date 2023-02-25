@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Update
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DictionaryDao<T> {
@@ -15,6 +16,7 @@ interface DictionaryDao<T> {
     suspend fun getAllWords(): List<@JvmSuppressWildcards T>
 
     suspend fun getFavoriteWords(): List<@JvmSuppressWildcards T>
+    fun getFavoriteWordsAsFlow(): Flow<List<@JvmSuppressWildcards T>>
 
     suspend fun getWordById(id: String): T
 

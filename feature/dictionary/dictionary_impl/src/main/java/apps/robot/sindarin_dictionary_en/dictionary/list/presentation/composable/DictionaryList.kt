@@ -45,10 +45,11 @@ import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import apps.robot.dictionary.impl.R
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DetailsMode
+import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.DictionaryListViewModel
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.DictionaryHeadersState
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.DictionaryListState
-import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.dictionary.navigation.DictionaryInternalFeature
 import kotlinx.coroutines.launch
 import my.nanihadesuka.compose.LazyColumnScrollbar
@@ -80,7 +81,10 @@ internal fun DictionaryList(
                 searchWidgetState = state.searchWidgetState,
                 onSearchToggle = viewModel::onSearchToggle,
                 onTextChange = viewModel::onSearchTextChange,
-                searchTextState = state.searchText.collectAsState().value
+                searchTextState = state.searchText.collectAsState().value,
+                title = stringResource(id = R.string.dictionary_list_toolbar_title),
+                hint = stringResource(id = R.string.dictionary_searchbar_hint),
+                optionalContent = { DictionaryModeToggle(owner = viewModelStoreOwner) }
             )
         }
     ) { paddingValues ->
@@ -114,6 +118,7 @@ internal fun DictionaryListContentRow(
 ) {
     val words = state.words.collectAsLazyPagingItems()
     val listState = rememberLazyListState()
+    val context = LocalContext.current
 
     if (headersState.shouldShowSelectedHeader.collectAsState().value) {
         Box(
@@ -170,8 +175,10 @@ internal fun DictionaryListContentRow(
                                 wordUiModel = word,
                                 onClick = {
                                     val screen = dictionaryInternalFeature.detailsScreen(
-                                        it.id,
-                                        state.dictionaryMode.name
+                                        wordId = it.id,
+                                        text = word.word.asString(context),
+                                        translation = word.translation.asString(context),
+                                        detailsMode = DetailsMode.DICTIONARY.name
                                     )
                                     navigator.navigate(screen)
                                 }

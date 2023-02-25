@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SindarinDictionaryCompose</string>
+    <string name="dictionary_list_toolbar_title">Словарь</string>
+    <string name="dictionary_mode_eng_to_elv">Англ/Эльф</string>
+    <string name="dictionary_mode_elv_to_eng">Эльф/Англ</string>
+    <string name="dictionary_content_description_menu">Меню</string>
+    <string name="dictionary_searchbar_hint">Искать…</string>
+    <string name="details_add_favorites">Добавлено в избранное</string>
+    <string name="details_remove_favorites">Удалено из избранного</string>
+    <string name="details_copy_clipboard">Скопировано</string>
+</resources>

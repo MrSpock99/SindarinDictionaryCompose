@@ -1,8 +1,8 @@
 package apps.robot.sindarin_dictionary_en.dictionary.details.domain
 
-import apps.robot.sindarin_dictionary_en.dictionary.base.domain.DictionaryRepository
-import apps.robot.sindarin_dictionary_en.dictionary.base.domain.Word
-import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryMode
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DictionaryRepository
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.Word
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DictionaryMode
 
 internal class DictionaryGetWordByIdUseCase(
     private val engToElfDictionaryRepository: DictionaryRepository,

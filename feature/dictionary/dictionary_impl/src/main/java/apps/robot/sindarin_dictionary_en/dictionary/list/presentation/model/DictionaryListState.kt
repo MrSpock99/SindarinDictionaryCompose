@@ -3,7 +3,8 @@ package apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model
 import androidx.paging.PagingData
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.UiText
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.UiState
-import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryMode
+import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.SearchWidgetState
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DictionaryMode
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.emptyFlow

@@ -1,8 +1,8 @@
-package apps.robot.sindarin_dictionary_en.dictionary.base.domain
+package apps.robot.sindarin_dictionary_en.dictionary.api.domain
 
 import com.google.gson.annotations.SerializedName
 
-internal data class Word(
+data class Word(
     var id: String,
     val word: String,
     val translation: String,

@@ -3,6 +3,7 @@ package apps.robot.sindarin_dictionary_en.dictionary.api.data.local
 import androidx.room.Dao
 import androidx.room.Query
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.model.EngToElfWordEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 abstract class EngToElfDao : DictionaryDao<EngToElfWordEntity> {
@@ -17,4 +18,7 @@ abstract class EngToElfDao : DictionaryDao<EngToElfWordEntity> {
 
     @Query("SELECT * FROM ${EngToElfWordEntity.ENG_TO_ELF_WORDS_TABLE} WHERE is_favorite=1")
     abstract override suspend fun getFavoriteWords(): List<EngToElfWordEntity>
+
+    @Query("SELECT * FROM ${EngToElfWordEntity.ENG_TO_ELF_WORDS_TABLE} WHERE is_favorite=1")
+    abstract override fun getFavoriteWordsAsFlow(): Flow<List<EngToElfWordEntity>>
 }

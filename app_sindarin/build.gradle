@@ -13,6 +13,8 @@ dependencies {
     implementation project(AppModules.baseUi)
     implementation project(AppModules.Dictionary.api)
     implementation project(AppModules.Dictionary.impl)
+    implementation project(AppModules.Favorites.api)
+    implementation project(AppModules.Favorites.impl)
     koin()
     support()
     composeCore()

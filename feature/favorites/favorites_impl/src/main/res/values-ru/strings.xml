@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="favorites_empty_list">Пока ничего нет</string>
+    <string name="favorites_appbar_title">Избранное</string>
+    <string name="favorites_appbar_hint">Искать…</string>
+</resources>

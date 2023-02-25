@@ -23,43 +23,45 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelStoreOwner
-import apps.robot.dictionary.impl.R
-import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.SearchWidgetState
+import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.SearchWidgetState
 
 @Composable
-@OptIn(ExperimentalComposeUiApi::class)
-internal fun DictionaryListTopAppBar(
+fun DictionaryListTopAppBar(
     isTopBarVisible: Boolean,
     viewModelStoreOwner: ViewModelStoreOwner,
     searchWidgetState: SearchWidgetState,
     onSearchToggle: () -> Unit,
     onTextChange: (String) -> Unit,
-    searchTextState: String
+    searchTextState: String,
+    title: String,
+    hint: String,
+    optionalContent: (@Composable () -> Unit)? = null
 ) {
     AnimatedVisibility(visible = isTopBarVisible) {
         when (searchWidgetState) {
             SearchWidgetState.CLOSED -> {
                 DictionaryModeAppBar(
                     viewModelStoreOwner = viewModelStoreOwner,
-                    onSearchToggle = onSearchToggle
+                    onSearchToggle = onSearchToggle,
+                    title = title,
+                    optionalContent = optionalContent
                 )
             }
             SearchWidgetState.OPENED -> {
                 SearchAppBar(
                     text = searchTextState,
                     onTextChange = onTextChange,
-                    onCloseClicked = { onSearchToggle() }
+                    onCloseClicked = { onSearchToggle() },
+                    hint = hint
                 )
             }
         }
@@ -69,14 +71,16 @@ internal fun DictionaryListTopAppBar(
 @Composable
 fun DictionaryModeAppBar(
     viewModelStoreOwner: ViewModelStoreOwner,
-    onSearchToggle: () -> Unit
+    onSearchToggle: () -> Unit,
+    title: String,
+    optionalContent: (@Composable () -> Unit)? = null
 ) {
     TopAppBar(
         backgroundColor = MaterialTheme.colors.surface,
     ) {
         Text(
             modifier = Modifier.padding(start = 16.dp),
-            text = stringResource(id = R.string.top_bar_dictionary_title),
+            text = title,
             fontSize = 22.sp,
             color = MaterialTheme.colors.onSurface
         )
@@ -86,7 +90,9 @@ fun DictionaryModeAppBar(
                 fill = true
             )
         )
-        DictionaryModeToggle(owner = viewModelStoreOwner)
+        if (optionalContent != null) {
+            optionalContent()
+        }
         Spacer(modifier = Modifier.width(16.dp))
         IconButton(
             modifier = Modifier
@@ -105,12 +111,12 @@ fun DictionaryModeAppBar(
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun SearchAppBar(
     text: String,
     onTextChange: (String) -> Unit,
-    onCloseClicked: () -> Unit
+    onCloseClicked: () -> Unit,
+    hint: String
 ) {
     Surface(
         modifier = Modifier
@@ -133,7 +139,7 @@ fun SearchAppBar(
                 Text(
                     modifier = Modifier
                         .alpha(ContentAlpha.medium),
-                    text = stringResource(id = R.string.dictionary_searchbar_hint),
+                    text = hint,
                     color = MaterialTheme.colors.onSurface
                 )
             },

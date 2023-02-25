@@ -9,7 +9,7 @@ sealed class BottomUiTab(
 )
 
 object DictionaryBottomUiTab : BottomUiTab(
-    "dictionary",
+    "dictionary_list",
     R.drawable.bottom_tab_dictionary_ic,
     R.string.bottom_tab_dictionary
 )
@@ -27,7 +27,7 @@ object GrammarBottomUiTab : BottomUiTab(
 )
 
 object FavoritesBottomUiTab : BottomUiTab(
-    "favorites",
+    "favorites_route",
     R.drawable.bottom_tab_favorites_ic,
     R.string.bottom_tab_favorites
 )

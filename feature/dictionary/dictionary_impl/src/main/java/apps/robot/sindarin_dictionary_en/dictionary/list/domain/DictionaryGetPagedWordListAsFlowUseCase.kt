@@ -1,14 +1,15 @@
 package apps.robot.sindarin_dictionary_en.dictionary.list.domain
 
 import androidx.paging.PagingData
-import apps.robot.sindarin_dictionary_en.dictionary.base.data.ElfToEngDictionaryRepositoryImpl
-import apps.robot.sindarin_dictionary_en.dictionary.base.data.EngToElfDictionaryRepositoryImpl
-import apps.robot.sindarin_dictionary_en.dictionary.base.domain.Word
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DictionaryMode
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.ElfToEngDictionaryRepository
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.EngToElfDictionaryRepository
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.Word
 import kotlinx.coroutines.flow.Flow
 
 internal class DictionaryGetPagedWordListAsFlowUseCase(
-    private val engToElfDictionaryRepository: EngToElfDictionaryRepositoryImpl,
-    private val elfToEngDictionaryRepository: ElfToEngDictionaryRepositoryImpl
+    private val engToElfDictionaryRepository: EngToElfDictionaryRepository,
+    private val elfToEngDictionaryRepository: ElfToEngDictionaryRepository
 ) {
 
     operator fun invoke(dictionaryMode: DictionaryMode): Flow<PagingData<Word>> {

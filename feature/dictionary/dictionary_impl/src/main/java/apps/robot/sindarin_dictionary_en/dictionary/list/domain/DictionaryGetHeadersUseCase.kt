@@ -1,6 +1,7 @@
 package apps.robot.sindarin_dictionary_en.dictionary.list.domain
 
-import apps.robot.sindarin_dictionary_en.dictionary.base.domain.DictionaryRepository
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DictionaryMode
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DictionaryRepository
 
 internal class DictionaryGetHeadersUseCase(
     private val elfToEngRepository: DictionaryRepository,

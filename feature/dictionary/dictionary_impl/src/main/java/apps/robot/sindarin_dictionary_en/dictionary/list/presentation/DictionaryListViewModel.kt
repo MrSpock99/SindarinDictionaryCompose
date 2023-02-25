@@ -8,13 +8,13 @@ import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.BaseViewModel
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.Content
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.Loading
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DictionaryMode
+import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetHeadersUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetPagedWordListAsFlowUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryLoadWordListUseCase
-import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryMode
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionarySearchWordsUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.DictionaryListState
-import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.WordUiModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview

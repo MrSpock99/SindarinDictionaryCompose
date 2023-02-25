@@ -13,4 +13,5 @@ fun databaseModule() = module {
 
     factory { get<AppDatabase>().elfToEngDao() }
     factory { get<AppDatabase>().engToElfDao() }
+    factory { get<AppDatabase>().favoritesDao() }
 }

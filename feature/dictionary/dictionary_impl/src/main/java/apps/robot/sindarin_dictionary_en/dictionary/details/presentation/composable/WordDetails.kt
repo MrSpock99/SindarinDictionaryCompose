@@ -25,28 +25,35 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import apps.robot.dictionary.impl.R
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DetailsMode
 import apps.robot.sindarin_dictionary_en.dictionary.details.presentation.DetailsAction
 import apps.robot.sindarin_dictionary_en.dictionary.details.presentation.DetailsViewModel
-import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryMode
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 internal fun WordDetails(
-    viewModel: DetailsViewModel = getViewModel(),
     wordId: String,
-    dictionaryMode: DictionaryMode,
-    navigator: NavHostController
+    text: String?,
+    translation: String?,
+    detailsMode: DetailsMode,
+    navigator: NavHostController,
+    viewModel: DetailsViewModel = getViewModel()
 ) {
     val state = viewModel.state.collectAsState().value
     LaunchedEffect(key1 = Unit) {
-        viewModel.onReceiveArgs(wordId, dictionaryMode)
+        viewModel.onReceiveArgs(
+            id = wordId,
+            text = text,
+            translation = translation,
+            detailsMode = detailsMode
+        )
     }
     val snackbarHostState = remember { SnackbarHostState() }
 
     val scope = rememberCoroutineScope()
-
+    val context = LocalContext.current
     Scaffold(
         topBar = {
             TopAppBar(
@@ -67,7 +74,7 @@ internal fun WordDetails(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    viewModel.onFavoriteBtnClick()
+                    viewModel.onFavoriteBtnClick(context)
                 }
             ) {
                 Icon(
@@ -88,25 +95,24 @@ internal fun WordDetails(
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
             Text(
-                text = state.word,
+                text = state.word.asString(),
                 fontSize = 40.sp,
                 modifier = Modifier
                     .padding(bottom = 8.dp)
                     .clickable {
-                        viewModel.onTextClick(state.word)
+                        viewModel.onTextClick(state.word.asString(context))
                     }
             )
             Text(
-                text = state.translation,
+                text = state.translation.asString(),
                 fontSize = 16.sp,
                 modifier = Modifier
                     .clickable {
-                        viewModel.onTextClick(state.translation)
+                        viewModel.onTextClick(state.translation.asString(context))
                     }
             )
         }
     }
-    val context = LocalContext.current
     state.actions.firstOrNull()?.let {
         when (it) {
             is DetailsAction.ShowSnackbar -> {

@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelStoreOwner
 import apps.robot.dictionary.impl.R
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.Content
-import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryMode
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DictionaryMode
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.DictionaryListViewModel
 import org.koin.androidx.compose.getViewModel
 

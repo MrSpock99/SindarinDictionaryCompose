@@ -8,10 +8,10 @@ import androidx.paging.map
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.ElfToEngDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.model.ElfToEngWordEntity
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.ElfToEngDictionaryRepository
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.Word
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordDomainMapper
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordElfToEngEntityMapper
-import apps.robot.sindarin_dictionary_en.dictionary.base.domain.DictionaryRepository
-import apps.robot.sindarin_dictionary_en.dictionary.base.domain.Word
 import apps.robot.sindarin_dictionary_en.dictionary.list.data.paging.DictionaryPagingSource
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
@@ -28,7 +28,7 @@ internal class ElfToEngDictionaryRepositoryImpl(
     private val mapper: WordDomainMapper,
     private val elfToEngEntityMapper: WordElfToEngEntityMapper,
     private val dictionaryPagingSource: DictionaryPagingSource<ElfToEngWordEntity>
-) : DictionaryRepository {
+) : ElfToEngDictionaryRepository {
 
     override suspend fun loadWords() {
         val words = withContext(dispatchers.network) {
@@ -91,6 +91,10 @@ internal class ElfToEngDictionaryRepositoryImpl(
 
     override suspend fun updateWord(word: Word) {
         dao.update(elfToEngEntityMapper.map(word))
+    }
+
+    override fun getFavoriteWordsAsFlow(): Flow<List<Word>> {
+        return dao.getFavoriteWordsAsFlow().map { it.map(mapper::map) }
     }
 
     private companion object {

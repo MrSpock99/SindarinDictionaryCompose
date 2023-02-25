@@ -14,3 +14,6 @@ fun includeModuleFromDir(dirPath: String, vararg modules: String) {
 
 val dictionaryDirPath = "/feature/dictionary"
 includeModuleFromDir(dictionaryDirPath, "dictionary_api", "dictionary_impl")
+
+val favoritesDirPath = "/feature/favorites"
+includeModuleFromDir(favoritesDirPath, "favorites_api", "favorites_impl")

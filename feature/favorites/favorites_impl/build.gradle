@@ -1,0 +1,24 @@
+import app.robot.sindarin_dictionary_en.AppModules
+import app.robot.sindarin_dictionary_en.Plugins
+
+apply plugin: Plugins.library
+apply plugin: Plugins.kotlinAndroid
+
+apply from: "$rootDir/config/dependencies-groups.gradle"
+apply from: "$rootDir/config/config-android.gradle"
+
+dependencies {
+    implementation project(AppModules.baseUi)
+    implementation project(AppModules.Dictionary.api)
+    implementation project(AppModules.Favorites.api)
+    kotlinLib()
+    koin()
+    firebase()
+    composeCore()
+    navigationCompose()
+    support()
+    networkCore()
+    database()
+    timber()
+    lazyColumnScrollbar()
+}

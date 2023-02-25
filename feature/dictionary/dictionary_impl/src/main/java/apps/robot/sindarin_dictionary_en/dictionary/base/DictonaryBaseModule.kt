@@ -1,9 +1,11 @@
 package apps.robot.sindarin_dictionary_en.dictionary.base
 
-import apps.robot.sindarin_dictionary_en.dictionary.base.data.ElfToEngDictionaryRepositoryImpl
-import apps.robot.sindarin_dictionary_en.dictionary.base.data.EngToElfDictionaryRepositoryImpl
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.ElfToEngDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.EngToElfDao
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.ElfToEngDictionaryRepository
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.EngToElfDictionaryRepository
+import apps.robot.sindarin_dictionary_en.dictionary.base.data.ElfToEngDictionaryRepositoryImpl
+import apps.robot.sindarin_dictionary_en.dictionary.base.data.EngToElfDictionaryRepositoryImpl
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordDomainMapper
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordDomainMapperImpl
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordElfToEngEntityMapper
@@ -17,7 +19,7 @@ import org.koin.dsl.module
 
 internal fun dictionaryBaseModule() = module {
     single { FirebaseFirestore.getInstance() }
-    factory {
+    factory<ElfToEngDictionaryRepository> {
         ElfToEngDictionaryRepositoryImpl(
             db = get(),
             dispatchers = get(),
@@ -27,7 +29,7 @@ internal fun dictionaryBaseModule() = module {
             dictionaryPagingSource = get(named("ElfToEng"))
         )
     }
-    factory {
+    factory<EngToElfDictionaryRepository> {
         EngToElfDictionaryRepositoryImpl(
             db = get(),
             dispatchers = get(),

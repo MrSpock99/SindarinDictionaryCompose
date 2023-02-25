@@ -42,7 +42,7 @@ ksp {
 dependencies {
     implementation project(AppModules.baseUi)
     implementation project(AppModules.Dictionary.api)
-    //implementation project(AppModules.app) // todo убрать зависимость
+    implementation project(AppModules.Favorites.api)
     kotlinLib()
     koin()
     firebase()

@@ -31,8 +31,6 @@ android {
 
 dependencies {
     implementation project(AppModules.baseUi)
-    //implementation project(AppModules.Dictionary.impl)
-    //implementation project(AppModules.app) // todo убрать зависимость
     kotlinLib()
     koin()
     firebase()

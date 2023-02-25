@@ -1,0 +1,3 @@
+package apps.robot.sindarin_dictionary_en.dictionary.api.domain
+
+interface ElfToEngDictionaryRepository: DictionaryRepository

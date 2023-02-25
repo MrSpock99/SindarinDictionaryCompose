@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="favorites_empty_list">There is nothing yet</string>
+    <string name="favorites_appbar_title">Favorites</string>
+    <string name="favorites_appbar_hint">Search here…</string>
+</resources>
