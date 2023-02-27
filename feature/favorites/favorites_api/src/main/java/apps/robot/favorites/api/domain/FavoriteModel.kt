@@ -1,12 +1,10 @@
 package apps.robot.favorites.api.domain
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 import apps.robot.favorites.api.domain.FavoriteModel.Companion.FAVORITES_TABLE
 
-@Entity(tableName = FAVORITES_TABLE)
+@Entity(tableName = FAVORITES_TABLE, primaryKeys = ["text", "translation"])
 class FavoriteModel(
-    @PrimaryKey
     var id: String,
     val text: String,
     val translation: String,

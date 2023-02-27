@@ -1,5 +1,6 @@
 package apps.robot.sindarin_dictionary_en.dictionary.navigation
 
+import android.net.Uri
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -23,7 +24,7 @@ internal class DictionaryInternalFeature : FeatureApi {
         text: String? = null,
         translation: String? = null,
         detailsMode: String
-    ) = "$DETAILS_ROUTE/$wordId/$text/$translation/$detailsMode"
+    ) = "$DETAILS_ROUTE/$wordId/${Uri.encode(text)}/${Uri.encode(translation)}/$detailsMode"
 
     override fun registerGraph(
         navGraphBuilder: NavGraphBuilder,
