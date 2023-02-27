@@ -5,10 +5,10 @@ import apps.robot.favorites.api.domain.FavoriteModel
 import apps.robot.favorites.api.domain.FavoritesGetFavoriteByIdUseCase
 
 class FavoritesGetFavoriteByIdUseCaseImpl(
-    private val favoritesDao: FavoritesDao
+    private val dao: FavoritesDao
 ) : FavoritesGetFavoriteByIdUseCase {
 
     override suspend fun invoke(id: String): FavoriteModel? {
-        return favoritesDao.get(id)
+        return dao.get(id)
     }
 }

@@ -22,4 +22,7 @@ abstract class FavoritesDao {
 
     @Query("SELECT * FROM $FAVORITES_TABLE where id = :id")
     abstract suspend fun get(id: String): FavoriteModel?
+
+    @Query("SELECT * FROM $FAVORITES_TABLE")
+    abstract suspend fun getAll(): List<FavoriteModel?>
 }

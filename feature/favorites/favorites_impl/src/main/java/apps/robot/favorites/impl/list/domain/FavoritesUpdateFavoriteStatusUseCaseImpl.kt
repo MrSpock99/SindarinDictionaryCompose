@@ -5,14 +5,14 @@ import apps.robot.favorites.api.domain.FavoriteModel
 import apps.robot.favorites.api.domain.FavoritesUpdateFavoriteStatusUseCase
 
 class FavoritesUpdateFavoriteStatusUseCaseImpl(
-    private val favoritesDao: FavoritesDao
+    private val dao: FavoritesDao
 ) : FavoritesUpdateFavoriteStatusUseCase {
 
     override suspend fun invoke(favoriteModel: FavoriteModel, isFavorite: Boolean) {
         if (isFavorite) {
-            favoritesDao.add(favoriteModel)
+            dao.add(favoriteModel)
         } else {
-            favoritesDao.remove(favoriteModel)
+            dao.remove(favoriteModel)
         }
     }
 }
