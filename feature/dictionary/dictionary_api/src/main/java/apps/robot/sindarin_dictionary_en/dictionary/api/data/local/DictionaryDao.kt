@@ -15,7 +15,6 @@ interface DictionaryDao<T> {
 
     suspend fun getAllWords(): List<@JvmSuppressWildcards T>
 
-    suspend fun getFavoriteWords(): List<@JvmSuppressWildcards T>
     fun getFavoriteWordsAsFlow(): Flow<List<@JvmSuppressWildcards T>>
 
     suspend fun getWordById(id: String): T

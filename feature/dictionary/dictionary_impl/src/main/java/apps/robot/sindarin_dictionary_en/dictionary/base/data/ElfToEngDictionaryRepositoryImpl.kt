@@ -52,11 +52,6 @@ internal class ElfToEngDictionaryRepositoryImpl(
                     }
             }
         }
-        val favorites = dao.getFavoriteWords()
-        favorites.forEach { favoriteWord ->
-            val remoteWord = words.find { it?.id == favoriteWord.id }
-            remoteWord?.isFavorite = favoriteWord.isFavorite
-        }
         dao.insertAll(words.filterNotNull().sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.word }))
     }
 

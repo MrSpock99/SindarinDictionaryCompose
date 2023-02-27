@@ -18,8 +18,5 @@ abstract class ElfToEngDao: DictionaryDao<ElfToEngWordEntity> {
     abstract override suspend fun getWordById(id: String): ElfToEngWordEntity
 
     @Query("SELECT * FROM $ELF_TO_ENG_WORDS_TABLE WHERE is_favorite=1")
-    abstract override suspend fun getFavoriteWords(): List<ElfToEngWordEntity>
-
-    @Query("SELECT * FROM $ELF_TO_ENG_WORDS_TABLE WHERE is_favorite=1")
     abstract override fun getFavoriteWordsAsFlow(): Flow<List<ElfToEngWordEntity>>
 }
