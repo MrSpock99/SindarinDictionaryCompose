@@ -44,10 +44,10 @@ internal class DictionaryListViewModel(
                 asyncCatching { loadWordList(DictionaryMode.ELVISH_TO_ENGLISH) },
                 asyncCatching { loadWordList(DictionaryMode.ENGLISH_TO_ELVISH) }
             ).awaitAll()
+            subscribeToWords(state.value.dictionaryMode)
+            subscribeToSearch()
             state.update { it.copy(uiState = Content) }
         }
-        subscribeToWords(state.value.dictionaryMode)
-        subscribeToSearch()
         //setHeaders(state.value.dictionaryMode)
     }
 
