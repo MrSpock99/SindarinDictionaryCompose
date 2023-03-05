@@ -10,6 +10,7 @@ object Versions {
     const val androidxCore = "1.7.0"
     const val androidxLifecycle = "2.4.1"
     const val kotlin = "1.6.21"
+    const val lifecycle = "2.4.1"
     const val ksp = "1.6.21-1.0.6"
     const val kotlinCoroutines = "1.6.2"
     const val koin = "3.2.0-beta-1"

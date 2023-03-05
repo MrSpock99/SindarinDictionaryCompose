@@ -19,6 +19,7 @@ ext {
         implementation Libraries.Kotlin.coroutinesCore
         implementation Libraries.Kotlin.coroutinesAndroid
         implementation Libraries.Kotlin.coroutinesGms
+        implementation Libraries.Kotlin.lifecycle
     }
 
     firebase = Group {

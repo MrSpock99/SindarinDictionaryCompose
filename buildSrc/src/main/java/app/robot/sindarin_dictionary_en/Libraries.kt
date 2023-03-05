@@ -7,6 +7,7 @@ object Libraries {
         const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinCoroutines}"
         const val coroutinesGms = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.kotlinCoroutines}"
         const val reflection = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
+        const val lifecycle = "androidx.lifecycle:lifecycle-process:${Versions.lifecycle}"
     }
 
     object Koin {
