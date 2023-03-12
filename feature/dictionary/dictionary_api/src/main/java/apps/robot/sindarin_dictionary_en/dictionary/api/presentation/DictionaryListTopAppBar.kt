@@ -1,4 +1,4 @@
-package apps.robot.sindarin_dictionary_en.dictionary.list.presentation.composable
+package apps.robot.sindarin_dictionary_en.dictionary.api.presentation
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Spacer
@@ -32,7 +32,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelStoreOwner
-import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.SearchWidgetState
 
 @Composable
 fun DictionaryListTopAppBar(

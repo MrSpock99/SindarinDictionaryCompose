@@ -28,8 +28,8 @@ import apps.robot.favorites.impl.R
 import apps.robot.favorites.impl.list.presentation.FavoritesViewModel
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DetailsMode
+import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.DictionaryListTopAppBar
 import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.SearchWidgetState
-import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.composable.DictionaryListTopAppBar
 import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
 

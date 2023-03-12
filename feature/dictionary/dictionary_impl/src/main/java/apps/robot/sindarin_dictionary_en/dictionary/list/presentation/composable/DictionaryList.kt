@@ -46,6 +46,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import apps.robot.dictionary.impl.R
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DetailsMode
+import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.DictionaryListTopAppBar
 import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.DictionaryListViewModel
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.DictionaryHeadersState
