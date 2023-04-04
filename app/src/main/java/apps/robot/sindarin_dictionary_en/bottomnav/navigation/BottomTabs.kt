@@ -15,7 +15,7 @@ object DictionaryBottomUiTab : BottomUiTab(
 )
 
 object PhrasebookBottomUiTab : BottomUiTab(
-    "phrasebook",
+    "phrasebook_route",
     R.drawable.bottom_tab_phrasebook_ic,
     R.string.bottom_tab_phrasebook
 )

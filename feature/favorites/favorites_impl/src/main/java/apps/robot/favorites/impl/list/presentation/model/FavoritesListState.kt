@@ -8,5 +8,5 @@ internal data class FavoritesListState(
     val favoritesList: List<FavoriteUiModel> = emptyList(),
     val uiState: UiState,
     val searchWidgetState: SearchWidgetState = SearchWidgetState.CLOSED,
-    val searchText: MutableStateFlow<String> = MutableStateFlow(""),
+    val searchText: MutableStateFlow<String> = MutableStateFlow("")
 )

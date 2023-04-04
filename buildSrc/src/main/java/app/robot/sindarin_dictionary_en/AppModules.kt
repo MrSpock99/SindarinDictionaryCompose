@@ -13,4 +13,9 @@ object AppModules {
         const val api = ":favorites_api"
         const val impl = ":favorites_impl"
     }
+
+    object Phrasebook {
+        const val api = ":phrasebook_api"
+        const val impl = ":phrasebook_impl"
+    }
 }

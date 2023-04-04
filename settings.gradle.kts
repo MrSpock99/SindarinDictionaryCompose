@@ -17,3 +17,6 @@ includeModuleFromDir(dictionaryDirPath, "dictionary_api", "dictionary_impl")
 
 val favoritesDirPath = "/feature/favorites"
 includeModuleFromDir(favoritesDirPath, "favorites_api", "favorites_impl")
+
+val phrasebookDirPath = "/feature/phrasebook"
+includeModuleFromDir(phrasebookDirPath, "phrasebook_api", "phrasebook_impl")

@@ -1,38 +1,15 @@
 import app.robot.sindarin_dictionary_en.AppModules
 import app.robot.sindarin_dictionary_en.Plugins
-import app.robot.sindarin_dictionary_en.Versions
 
-buildscript {
-    ext {
-        kspVersion = "${Versions.ksp}"
-        ksp = "${Plugins.ksp}"
-    }
-}
-
-plugins {
-    id 'com.google.devtools.ksp' version "${kspVersion}" // TODO don't use hardcoded strings
-}
 apply plugin: Plugins.library
 apply plugin: Plugins.kotlinAndroid
-apply plugin: Plugins.kotlinKapt
 
 apply from: "$rootDir/config/dependencies-groups.gradle"
 apply from: "$rootDir/config/config-android.gradle"
 
-android {
-    libraryVariants.all { variant ->
-        kotlin.sourceSets {
-            getByName(variant.name) {
-                kotlin.srcDir("build/generated/ksp/${variant.name}/java")
-            }
-        }
-    }
-}
-
 dependencies {
     implementation project(AppModules.baseUi)
     implementation project(AppModules.Dictionary.api)
-    implementation project(AppModules.Favorites.api)
     implementation project(AppModules.Phrasebook.api)
     kotlinLib()
     koin()
@@ -42,5 +19,6 @@ dependencies {
     support()
     networkCore()
     database()
-    paging()
+    timber()
+    lazyColumnScrollbar()
 }

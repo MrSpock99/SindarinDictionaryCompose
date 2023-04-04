@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="phrasebook_empty_list">There is nothing yet</string>
+    <string name="phrasebook_appbar_title">Phrasebook</string>
+    <string name="phrasebook_appbar_hint">Search here…</string>
+
+    <string-array name="phrasebook_categories">
+        <item>Greetings</item>
+        <item>Farewells</item>
+        <item>Titles of Address</item>
+        <item>Conversation</item>
+        <item>Small Talk</item>
+        <item>Questions and Answers</item>
+        <item>Compliments</item>
+        <item>Romance</item>
+        <item>Endearments</item>
+        <item>Adventuring</item>
+        <item>Exclamations</item>
+        <item>Pleas, Entreaties</item>
+        <item>Trouble</item>
+        <item>Insults</item>
+        <item>Threats</item>
+        <item>Battle Cries</item>
+        <item>Battle Phrases</item>
+        <item>Healing</item>
+        <item>Professions</item>
+        <item>Months</item>
+        <item>Seasons</item>
+        <item>Days of the Week</item>
+        <item>Weather</item>
+    </string-array>
+</resources>

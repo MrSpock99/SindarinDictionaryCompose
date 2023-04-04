@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import apps.robot.favorites.api.FavoritesFeatureApi
+import apps.robot.phrasebook.api.PhrasebookFeatureApi
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.navigation.register
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
 import org.koin.androidx.compose.get
@@ -16,6 +17,7 @@ fun AppNavGraph(
 ) {
     val dictionaryFeature = get<DictionaryFeatureApi>()
     val favoritesFeature = get<FavoritesFeatureApi>()
+    val phrasebookFeature = get<PhrasebookFeatureApi>()
     NavHost(
         navController = navController,
         startDestination = dictionaryFeature.listRoute()
@@ -34,6 +36,12 @@ fun AppNavGraph(
 
         register(
             dictionaryFeature,
+            navController = navController,
+            modifier = modifier
+        )
+
+        register(
+            phrasebookFeature,
             navController = navController,
             modifier = modifier
         )
