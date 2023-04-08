@@ -1,4 +1,4 @@
-package apps.robot.favorites.impl.list.presentation.composable
+package apps.robot.phrasebook.impl.category.presentation
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ContentAlpha
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -16,6 +17,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -24,22 +26,20 @@ import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import apps.robot.favorites.impl.R
-import apps.robot.favorites.impl.list.presentation.FavoritesViewModel
+import apps.robot.phrasebook.impl.R
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
-import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DetailsMode
 import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.DictionaryListTopAppBar
-import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-internal fun FavoritesList(
+fun PhrasebookCategory(
+    categoryName: String,
     navigator: NavController,
-    dictionaryFeatureApi: DictionaryFeatureApi = get(),
-    viewModel: FavoritesViewModel = getViewModel()
+    viewModel: PhrasebookCategoryViewModel = getViewModel()
 ) {
     val state by viewModel.state.collectAsState()
+    viewModel.onReceiveArgs(categoryName)
     val viewModelStoreOwner = checkNotNull(LocalViewModelStoreOwner.current) {
         "No ViewModelStoreOwner was provided via LocalViewModelStoreOwner"
     }
@@ -56,26 +56,36 @@ internal fun FavoritesList(
                 onSearchToggle = viewModel::onSearchToggle,
                 onTextChange = viewModel::onSearchTextChange,
                 searchTextState = state.searchText.collectAsState().value,
-                title = stringResource(R.string.favorites_appbar_title),
-                hint = stringResource(R.string.favorites_appbar_hint),
-            )
+                title = state.categoryName.asString(),
+                hint = stringResource(R.string.phrasebook_appbar_hint),
+            ) {
+                Icon(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .clickable {
+                            navigator.navigateUp()
+                        },
+                    painter = painterResource(id = apps.robot.dictionary.api.R.drawable.top_bar_arrow_ic),
+                    contentDescription = null
+                )
+            }
         }
     ) { paddingValues ->
         Surface(
             modifier = Modifier.padding(paddingValues),
         ) {
-            val list = state.favoritesList
+            val list = state.list
             if (list.isEmpty() && state.searchWidgetState == SearchWidgetState.OPENED) {
                 Text(
                     modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-                    text = stringResource(id = apps.robot.dictionary.api.R.string.dictionary_list_nothing_found),
+                    text = stringResource(id = R.string.dictionary_list_nothing_found),
                     fontSize = 16.sp,
                     color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
                 )
             } else if (list.isEmpty() && state.searchWidgetState == SearchWidgetState.CLOSED) {
                 Text(
                     modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-                    text = stringResource(id = R.string.favorites_empty_list),
+                    text = stringResource(id = R.string.phrasebook_empty_list),
                     fontSize = 16.sp,
                     color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
                 )
@@ -95,7 +105,7 @@ internal fun FavoritesList(
                 items(
                     count = list.size,
                     key = { index ->
-                        list[index].id
+                        list[index].text.asString(context)
                     }) { index ->
                     Text(
                         text = list[index].text.asString(),
@@ -104,14 +114,14 @@ internal fun FavoritesList(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                                navigator.navigate(
+                                /*navigator.navigate(
                                     dictionaryFeatureApi.detailsRoute(
                                         wordId = list[index].id,
                                         text = list[index].text.asString(context),
                                         translation = list[index].translation.asString(context),
                                         detailsMode = DetailsMode.FAVORITES.name
                                     )
-                                )
+                                )*/
                             },
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1

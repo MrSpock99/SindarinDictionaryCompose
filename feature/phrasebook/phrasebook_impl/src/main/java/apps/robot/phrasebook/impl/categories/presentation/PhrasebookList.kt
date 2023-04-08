@@ -21,17 +21,22 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import apps.robot.phrasebook.impl.R
+import apps.robot.phrasebook.impl.navigation.PhrasebookInternalFeature
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
 import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.DictionaryListTopAppBar
-import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.SearchWidgetState
+import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 internal fun PhrasebookCategoriesList(
-    viewModel: PhrasebookCategoriesViewModel = getViewModel()
+    viewModel: PhrasebookCategoriesViewModel = getViewModel(),
+    phrasebookInternalFeature: PhrasebookInternalFeature = get(),
+    navigator: NavHostController
 ) {
     val state by viewModel.state.collectAsState()
     val viewModelStoreOwner = checkNotNull(LocalViewModelStoreOwner.current) {
@@ -98,14 +103,11 @@ internal fun PhrasebookCategoriesList(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                                /*navigator.navigate(
-                                    dictionaryFeatureApi.detailsRoute(
-                                        wordId = list[index].id,
-                                        text = list[index].text.asString(context),
-                                        translation = list[index].translation.asString(context),
-                                        detailsMode = DetailsMode.FAVORITES.name
+                                navigator.navigate(
+                                    phrasebookInternalFeature.phrasebookCategoryScreen(
+                                        categoryName = list[index].text.asString(context)
                                     )
-                                )*/
+                                )
                             },
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1

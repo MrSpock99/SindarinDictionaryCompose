@@ -7,7 +7,9 @@ import androidx.navigation.compose.composable
 import apps.robot.phrasebook.api.PhrasebookFeatureApi
 import apps.robot.phrasebook.impl.categories.presentation.PhrasebookCategoriesList
 
-class PhrasebookFeatureApiImpl : PhrasebookFeatureApi {
+class PhrasebookFeatureApiImpl(
+    private val phrasebookInternalFeature: PhrasebookInternalFeature
+) : PhrasebookFeatureApi {
 
     override fun registerGraph(
         navGraphBuilder: NavGraphBuilder,
@@ -15,9 +17,20 @@ class PhrasebookFeatureApiImpl : PhrasebookFeatureApi {
         modifier: Modifier
     ) {
         navGraphBuilder.composable(phrasebookRoute()) {
-            PhrasebookCategoriesList()
+            PhrasebookCategoriesList(navigator = navController)
         }
+        phrasebookInternalFeature.registerGraph(
+            navGraphBuilder = navGraphBuilder,
+            navController = navController,
+            modifier = modifier
+        )
     }
 
     override fun phrasebookRoute(): String = "phrasebook_route"
+
+    override fun phrasebookCategoryRoute(): String = "phrasebook_category_route"
+
+    companion object {
+        const val CATEGORY_ROUTE = "phrasebook/category"
+    }
 }

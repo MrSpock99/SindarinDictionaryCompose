@@ -7,6 +7,10 @@ import org.koin.dsl.module
 
 internal fun phrasebookBaseModule() = module {
     factory<PhrasebookRepository> {
-        PhrasebookRepositoryImpl(resources = androidContext().resources)
+        PhrasebookRepositoryImpl(
+            resources = androidContext().resources,
+            db = get(),
+            dispatchers = get()
+        )
     }
 }

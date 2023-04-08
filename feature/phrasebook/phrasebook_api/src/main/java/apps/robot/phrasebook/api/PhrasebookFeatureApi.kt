@@ -4,4 +4,5 @@ import apps.robot.sindarin_dictionary_en.base_ui.presentation.navigation.Feature
 
 interface PhrasebookFeatureApi: FeatureApi {
     fun phrasebookRoute(): String
+    fun phrasebookCategoryRoute(): String
 }

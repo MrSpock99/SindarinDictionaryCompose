@@ -7,7 +7,7 @@ import apps.robot.favorites.impl.list.presentation.model.FavoritesListState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.BaseViewModel
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.Loading
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
-import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.SearchWidgetState
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow

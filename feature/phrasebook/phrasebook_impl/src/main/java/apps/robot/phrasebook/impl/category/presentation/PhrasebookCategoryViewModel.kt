@@ -1,4 +1,4 @@
-package apps.robot.phrasebook.impl.categories.presentation
+package apps.robot.phrasebook.impl.category.presentation
 
 import android.content.Context
 import androidx.lifecycle.viewModelScope
@@ -19,17 +19,18 @@ import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.plus
 
-class PhrasebookCategoriesViewModel(
-    private val repository: PhrasebookRepository,
+class PhrasebookCategoryViewModel(
     private val dispatchers: AppDispatchers,
-    context: Context
+    private val repository: PhrasebookRepository
 ) : BaseViewModel(), Searchable {
-    val state = MutableStateFlow(PhrasebookListState(uiState = Loading))
 
-    init {
-        loadCategories()
-        subscribeToSearch(context)
-    }
+    val state = MutableStateFlow(PhrasebookCategoryState(uiState = Loading))
+    private var categoryName = ""
+
+   fun onReceiveArgs(categoryName: String) {
+       this.categoryName = categoryName
+       loadItems()
+   }
 
     override fun onSearchToggle() {
         state.update {
@@ -53,32 +54,41 @@ class PhrasebookCategoriesViewModel(
             .mapLatest { searchQuery ->
                 if (searchQuery.isNotEmpty()) {
                     state.value = state.value.copy(
-                        categoriesList = state.value.categoriesList.filter {
+                        list = state.value.list.filter {
                             it.text.asString(context).lowercase().startsWith(searchQuery.lowercase())
                         }
                     )
                 } else {
-                    loadCategories()
+                    loadItems()
                 }
             }.launchIn(viewModelScope + dispatchers.computing)
     }
 
-    private fun loadCategories() {
-        state.value = state.value.copy(
-            categoriesList = repository.getPhrasebookCategories().map {
-                PhrasebookCategoryUiModel(UiText.DynamicString(it))
+    private fun loadItems() {
+        launchJob {
+            state.update {
+                it.copy(
+                    list = repository.getCategoryItems(categoryName).map {
+                        PhrasebookCategoryItemUiModel(
+                            text = UiText.DynamicString(it.word),
+                            translation = UiText.DynamicString(it.translation)
+                        )
+                    }
+                )
             }
-        )
+        }
     }
+
+    data class PhrasebookCategoryState(
+        override val searchWidgetState: SearchWidgetState = SearchWidgetState.CLOSED,
+        override val searchText: MutableStateFlow<String> = MutableStateFlow(""),
+        val categoryName: UiText = UiText.DynamicString(""),
+        val list: List<PhrasebookCategoryItemUiModel> = emptyList(),
+        val uiState: UiState,
+    ) : Searchable.SearchableState
+
 
     private companion object {
         const val SEARCH_DEBOUNCE = 300L
     }
-
-    data class PhrasebookListState(
-        override val searchWidgetState: SearchWidgetState = SearchWidgetState.CLOSED,
-        override val searchText: MutableStateFlow<String> = MutableStateFlow(""),
-        val categoriesList: List<PhrasebookCategoryUiModel> = emptyList(),
-        val uiState: UiState,
-    ) : Searchable.SearchableState
 }

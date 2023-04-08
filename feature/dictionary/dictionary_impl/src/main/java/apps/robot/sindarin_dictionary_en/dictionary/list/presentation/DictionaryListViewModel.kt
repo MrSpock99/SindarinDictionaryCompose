@@ -7,9 +7,9 @@ import apps.robot.sindarin_dictionary_en.base_ui.presentation.UiText
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.BaseViewModel
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.Content
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.Loading
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DictionaryMode
-import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetHeadersUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetPagedWordListAsFlowUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryLoadWordListUseCase

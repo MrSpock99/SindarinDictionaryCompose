@@ -32,6 +32,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelStoreOwner
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
 
 @Composable
 fun DictionaryListTopAppBar(
