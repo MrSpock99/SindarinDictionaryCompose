@@ -23,30 +23,40 @@ internal class DetailsViewModel(
     val state = MutableStateFlow(WordDetailsState())
 
     fun onReceiveArgs(
-        id: String,
+        id: String?,
         text: String?,
         translation: String?,
         detailsMode: DetailsMode?,
     ) {
         launchJob {
-            val favoriteModel = getFavoriteById(id)
+            val favoriteModel = getFavoriteById(text.orEmpty(), translation.orEmpty())
 
-            if (detailsMode == DetailsMode.FAVORITES) {
-                if (favoriteModel != null) {
+            when (detailsMode) {
+                DetailsMode.FAVORITES -> {
+                    if (favoriteModel != null) {
+                        state.value = WordDetailsState(
+                            id = id,
+                            word = UiText.DynamicString(favoriteModel.text),
+                            translation = UiText.DynamicString(favoriteModel.translation),
+                            isFavorite = true
+                        )
+                    }
+                }
+                DetailsMode.DICTIONARY -> {
                     state.value = WordDetailsState(
-                        id = id,
-                        word = UiText.DynamicString(favoriteModel.text),
-                        translation = UiText.DynamicString(favoriteModel.translation),
-                        isFavorite = true
+                        id = id.orEmpty(),
+                        word = UiText.DynamicString(text.orEmpty()),
+                        translation = UiText.DynamicString(translation.orEmpty()),
+                        isFavorite = favoriteModel != null
                     )
                 }
-            } else if (detailsMode == DetailsMode.DICTIONARY) {
-                state.value = WordDetailsState(
-                    id = id,
-                    word = UiText.DynamicString(text.orEmpty()),
-                    translation = UiText.DynamicString(translation.orEmpty()),
-                    isFavorite = favoriteModel != null
-                )
+                DetailsMode.PHRASEBOOK -> {
+                    state.value = WordDetailsState(
+                        word = UiText.DynamicString(text.orEmpty()),
+                        translation = UiText.DynamicString(translation.orEmpty()),
+                        isFavorite = favoriteModel != null
+                    )
+                }
             }
         }
     }

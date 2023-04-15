@@ -28,9 +28,7 @@ class PhrasebookFeatureApiImpl(
 
     override fun phrasebookRoute(): String = "phrasebook_route"
 
-    override fun phrasebookCategoryRoute(): String = "phrasebook_category_route"
-
     companion object {
-        const val CATEGORY_ROUTE = "phrasebook/category"
+        const val CATEGORY_ROUTE = "phrasebook_route/category"
     }
 }

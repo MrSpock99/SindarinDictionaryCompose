@@ -8,7 +8,7 @@ class FavoritesGetFavoriteByIdUseCaseImpl(
     private val dao: FavoritesDao
 ) : FavoritesGetFavoriteByIdUseCase {
 
-    override suspend fun invoke(id: String): FavoriteModel? {
-        return dao.get(id)
+    override suspend fun invoke(text: String, translation: String): FavoriteModel? {
+        return dao.get(text, translation)
     }
 }

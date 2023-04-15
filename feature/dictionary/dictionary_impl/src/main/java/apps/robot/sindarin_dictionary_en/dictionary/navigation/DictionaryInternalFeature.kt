@@ -62,7 +62,7 @@ internal class DictionaryInternalFeature : FeatureApi {
                 val detailsMode = arguments.getString(detailsMode)
 
                 WordDetails(
-                    wordId = wordId.orEmpty(),
+                    wordId = wordId,
                     text = text,
                     translation = translation,
                     navigator = navController,

@@ -21,14 +21,22 @@ import kotlinx.coroutines.plus
 
 class PhrasebookCategoryViewModel(
     private val dispatchers: AppDispatchers,
-    private val repository: PhrasebookRepository
+    private val repository: PhrasebookRepository,
+    context: Context
 ) : BaseViewModel(), Searchable {
 
     val state = MutableStateFlow(PhrasebookCategoryState(uiState = Loading))
     private var categoryName = ""
 
+    init {
+        subscribeToSearch(context)
+    }
+
    fun onReceiveArgs(categoryName: String) {
        this.categoryName = categoryName
+       state.value = state.value.copy(
+           categoryName = UiText.DynamicString(categoryName)
+       )
        loadItems()
    }
 

@@ -34,7 +34,7 @@ import org.koin.androidx.compose.getViewModel
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 internal fun WordDetails(
-    wordId: String,
+    wordId: String?,
     text: String?,
     translation: String?,
     detailsMode: DetailsMode,

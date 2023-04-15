@@ -38,7 +38,7 @@ fun SindarinBottomBar(
             backgroundColor = MaterialTheme.colors.surface
         ) {
             tabs.forEach { destination ->
-                val isCurrentDestOnBackStack = currentDestination?.route == destination.direction
+                val isCurrentDestOnBackStack = currentDestination?.route?.startsWith(destination.direction) ?: false
                 BottomNavigationItem(
                     selected = isCurrentDestOnBackStack,
                     onClick = {

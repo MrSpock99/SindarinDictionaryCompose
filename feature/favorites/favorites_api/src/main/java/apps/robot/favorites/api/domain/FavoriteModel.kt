@@ -5,7 +5,7 @@ import apps.robot.favorites.api.domain.FavoriteModel.Companion.FAVORITES_TABLE
 
 @Entity(tableName = FAVORITES_TABLE, primaryKeys = ["text", "translation"])
 class FavoriteModel(
-    var id: String,
+    var id: String?,
     val text: String,
     val translation: String,
 ) {

@@ -20,7 +20,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -39,9 +38,6 @@ internal fun PhrasebookCategoriesList(
     navigator: NavHostController
 ) {
     val state by viewModel.state.collectAsState()
-    val viewModelStoreOwner = checkNotNull(LocalViewModelStoreOwner.current) {
-        "No ViewModelStoreOwner was provided via LocalViewModelStoreOwner"
-    }
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
@@ -50,7 +46,6 @@ internal fun PhrasebookCategoriesList(
         topBar = {
             DictionaryListTopAppBar(
                 isTopBarVisible = isTopBarVisible,
-                viewModelStoreOwner = viewModelStoreOwner,
                 searchWidgetState = state.searchWidgetState,
                 onSearchToggle = viewModel::onSearchToggle,
                 onTextChange = viewModel::onSearchTextChange,

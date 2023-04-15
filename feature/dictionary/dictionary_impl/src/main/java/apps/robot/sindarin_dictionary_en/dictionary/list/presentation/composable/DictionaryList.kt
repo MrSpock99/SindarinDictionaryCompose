@@ -78,7 +78,6 @@ internal fun DictionaryList(
         topBar = {
             DictionaryListTopAppBar(
                 isTopBarVisible = isTopBarVisible,
-                viewModelStoreOwner = viewModelStoreOwner,
                 searchWidgetState = state.searchWidgetState,
                 onSearchToggle = viewModel::onSearchToggle,
                 onTextChange = viewModel::onSearchTextChange,

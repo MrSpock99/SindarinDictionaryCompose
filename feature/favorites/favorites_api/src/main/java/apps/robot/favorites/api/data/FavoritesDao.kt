@@ -20,8 +20,8 @@ abstract class FavoritesDao {
     @Delete
     abstract suspend fun remove(favoriteModel: FavoriteModel)
 
-    @Query("SELECT * FROM $FAVORITES_TABLE where id = :id")
-    abstract suspend fun get(id: String): FavoriteModel?
+    @Query("SELECT * FROM $FAVORITES_TABLE where text = :text AND translation = :translation")
+    abstract suspend fun get(text: String, translation: String): FavoriteModel?
 
     @Query("SELECT * FROM $FAVORITES_TABLE")
     abstract suspend fun getAll(): List<FavoriteModel?>

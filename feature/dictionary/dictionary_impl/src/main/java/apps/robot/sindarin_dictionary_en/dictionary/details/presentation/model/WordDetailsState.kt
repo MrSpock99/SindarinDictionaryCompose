@@ -4,7 +4,7 @@ import apps.robot.sindarin_dictionary_en.base_ui.presentation.UiText
 import apps.robot.sindarin_dictionary_en.dictionary.details.presentation.DetailsAction
 
 internal data class WordDetailsState(
-    val id: String = "",
+    val id: String? = null,
     val word: UiText = UiText.DynamicString(""),
     val translation: UiText = UiText.DynamicString(""),
     val isFavorite: Boolean = false,

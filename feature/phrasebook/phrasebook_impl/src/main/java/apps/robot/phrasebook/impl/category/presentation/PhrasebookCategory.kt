@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -17,32 +16,30 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import apps.robot.phrasebook.impl.R
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DetailsMode
 import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.DictionaryListTopAppBar
+import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun PhrasebookCategory(
     categoryName: String,
     navigator: NavController,
-    viewModel: PhrasebookCategoryViewModel = getViewModel()
+    viewModel: PhrasebookCategoryViewModel = getViewModel(),
+    dictionaryFeatureApi: DictionaryFeatureApi = get(),
 ) {
     val state by viewModel.state.collectAsState()
     viewModel.onReceiveArgs(categoryName)
-    val viewModelStoreOwner = checkNotNull(LocalViewModelStoreOwner.current) {
-        "No ViewModelStoreOwner was provided via LocalViewModelStoreOwner"
-    }
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
@@ -51,24 +48,14 @@ fun PhrasebookCategory(
         topBar = {
             DictionaryListTopAppBar(
                 isTopBarVisible = isTopBarVisible,
-                viewModelStoreOwner = viewModelStoreOwner,
                 searchWidgetState = state.searchWidgetState,
                 onSearchToggle = viewModel::onSearchToggle,
                 onTextChange = viewModel::onSearchTextChange,
                 searchTextState = state.searchText.collectAsState().value,
                 title = state.categoryName.asString(),
                 hint = stringResource(R.string.phrasebook_appbar_hint),
-            ) {
-                Icon(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .clickable {
-                            navigator.navigateUp()
-                        },
-                    painter = painterResource(id = apps.robot.dictionary.api.R.drawable.top_bar_arrow_ic),
-                    contentDescription = null
-                )
-            }
+                onBackClicked = navigator::navigateUp
+            )
         }
     ) { paddingValues ->
         Surface(
@@ -114,14 +101,13 @@ fun PhrasebookCategory(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                                /*navigator.navigate(
+                                navigator.navigate(
                                     dictionaryFeatureApi.detailsRoute(
-                                        wordId = list[index].id,
                                         text = list[index].text.asString(context),
                                         translation = list[index].translation.asString(context),
-                                        detailsMode = DetailsMode.FAVORITES.name
+                                        detailsMode = DetailsMode.PHRASEBOOK.name
                                     )
-                                )*/
+                                )
                             },
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1

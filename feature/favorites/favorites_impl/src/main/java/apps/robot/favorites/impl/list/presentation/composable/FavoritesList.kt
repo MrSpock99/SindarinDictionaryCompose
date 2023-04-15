@@ -20,7 +20,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -40,9 +39,6 @@ internal fun FavoritesList(
     viewModel: FavoritesViewModel = getViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    val viewModelStoreOwner = checkNotNull(LocalViewModelStoreOwner.current) {
-        "No ViewModelStoreOwner was provided via LocalViewModelStoreOwner"
-    }
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
@@ -51,7 +47,6 @@ internal fun FavoritesList(
         topBar = {
             DictionaryListTopAppBar(
                 isTopBarVisible = isTopBarVisible,
-                viewModelStoreOwner = viewModelStoreOwner,
                 searchWidgetState = state.searchWidgetState,
                 onSearchToggle = viewModel::onSearchToggle,
                 onTextChange = viewModel::onSearchTextChange,
@@ -95,7 +90,7 @@ internal fun FavoritesList(
                 items(
                     count = list.size,
                     key = { index ->
-                        list[index].id
+                        list[index].toString()
                     }) { index ->
                     Text(
                         text = list[index].text.asString(),
