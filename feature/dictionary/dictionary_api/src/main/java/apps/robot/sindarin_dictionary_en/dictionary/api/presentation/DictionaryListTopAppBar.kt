@@ -78,7 +78,7 @@ fun DictionaryModeAppBar(
     onBackClicked: (() -> Unit)? = null
 ) {
     TopAppBar(
-        backgroundColor = MaterialTheme.colors.surface,
+        backgroundColor = MaterialTheme.colors.primary,
     ) {
         if (onBackClicked != null) {
             IconButton(
@@ -99,7 +99,7 @@ fun DictionaryModeAppBar(
         Text(
             text = title,
             fontSize = 22.sp,
-            color = MaterialTheme.colors.onSurface,
+            color = MaterialTheme.colors.onPrimary,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.widthIn(0.dp, 200.dp)
@@ -124,7 +124,7 @@ fun DictionaryModeAppBar(
             Icon(
                 imageVector = Icons.Default.Search,
                 contentDescription = "Search Icon",
-                tint = MaterialTheme.colors.onSurface
+                tint = MaterialTheme.colors.onPrimary
             )
         }
         Spacer(modifier = Modifier.width(16.dp))
@@ -143,7 +143,7 @@ fun SearchAppBar(
             .fillMaxWidth()
             .height(56.dp),
         elevation = AppBarDefaults.TopAppBarElevation,
-        color = MaterialTheme.colors.surface
+        color = MaterialTheme.colors.primary
     ) {
         val focusRequester = remember { FocusRequester() }
 
@@ -160,7 +160,7 @@ fun SearchAppBar(
                     modifier = Modifier
                         .alpha(ContentAlpha.medium),
                     text = hint,
-                    color = MaterialTheme.colors.onSurface
+                    color = MaterialTheme.colors.onPrimary
                 )
             },
             textStyle = TextStyle(
@@ -179,7 +179,7 @@ fun SearchAppBar(
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
                         contentDescription = "Back Icon",
-                        tint = MaterialTheme.colors.onSurface
+                        tint = MaterialTheme.colors.onPrimary
                     )
                 }
             },
@@ -196,13 +196,13 @@ fun SearchAppBar(
                     Icon(
                         imageVector = Icons.Default.Close,
                         contentDescription = "Close Icon",
-                        tint = MaterialTheme.colors.onSurface
+                        tint = MaterialTheme.colors.onPrimary
                     )
                 }
             },
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = Color.Transparent,
-                cursorColor = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.medium),
+                cursorColor = MaterialTheme.colors.onPrimary.copy(alpha = ContentAlpha.medium),
                 focusedLabelColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent

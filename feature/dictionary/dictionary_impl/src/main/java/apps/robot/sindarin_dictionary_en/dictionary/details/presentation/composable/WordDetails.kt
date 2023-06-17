@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.ContentAlpha
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarHostState
@@ -20,6 +22,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -101,15 +105,18 @@ internal fun WordDetails(
                     .padding(bottom = 8.dp)
                     .clickable {
                         viewModel.onTextClick(state.word.asString(context))
-                    }
+                    },
+                color = MaterialTheme.colors.onBackground,
+                fontWeight = FontWeight.Bold
             )
             Text(
                 text = state.translation.asString(),
-                fontSize = 16.sp,
+                fontSize = 32.sp,
                 modifier = Modifier
                     .clickable {
                         viewModel.onTextClick(state.translation.asString(context))
-                    }
+                    },
+                color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium)
             )
         }
     }

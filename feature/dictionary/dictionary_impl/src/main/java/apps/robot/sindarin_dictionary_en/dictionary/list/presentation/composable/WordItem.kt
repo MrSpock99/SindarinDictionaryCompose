@@ -1,7 +1,9 @@
 package apps.robot.sindarin_dictionary_en.dictionary.list.presentation.composable
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.ContentAlpha
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -14,18 +16,32 @@ import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.Word
 
 @Composable
 internal fun WordItem(wordUiModel: WordUiModel, onClick: (WordUiModel) -> Unit) {
-    Text(
-        text = wordUiModel.word.asString(),
-        color = MaterialTheme.colors.onBackground,
-        fontSize = 32.sp,
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
                 onClick(wordUiModel)
-            },
-        overflow = TextOverflow.Ellipsis,
-        maxLines = 1
-    )
+            }
+    ) {
+        Text(
+            text = wordUiModel.word.asString(),
+            color = MaterialTheme.colors.onBackground,
+            fontSize = 32.sp,
+            modifier = Modifier
+                .fillMaxWidth(),
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1
+        )
+        Text(
+            text = wordUiModel.translation.asString(),
+            color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
+            fontSize = 24.sp,
+            modifier = Modifier
+                .fillMaxWidth(),
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1
+        )
+    }
 }
 
 @Preview(
@@ -37,7 +53,12 @@ internal fun WordItem(wordUiModel: WordUiModel, onClick: (WordUiModel) -> Unit) 
 fun WordItemPreview() {
     Text(text = "fuck")
     WordItem(
-        wordUiModel = WordUiModel("", UiText.DynamicString("aasdasd"), UiText.DynamicString("bbbbb"), false),
+        wordUiModel = WordUiModel(
+            "",
+            UiText.DynamicString("aasdasd"),
+            UiText.DynamicString("bbbbb"),
+            false
+        ),
         onClick = {}
     )
 }

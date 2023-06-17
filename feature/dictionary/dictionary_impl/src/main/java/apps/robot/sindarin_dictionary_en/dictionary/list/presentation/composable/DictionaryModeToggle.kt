@@ -59,14 +59,14 @@ internal fun DictionaryModeToggle(
         ) {
             Text(
                 text = toggleText,
-                color = MaterialTheme.colors.onSurface,
+                color = MaterialTheme.colors.onPrimary,
                 fontSize = 16.sp,
                 maxLines = 1
             )
         }
     } else {
         CircularProgressIndicator(
-            color = MaterialTheme.colors.onSurface
+            color = MaterialTheme.colors.onPrimary
         )
     }
 }

@@ -3,6 +3,7 @@ package apps.robot.sindarin_dictionary_en.bottomnav.navigation
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -35,7 +36,7 @@ fun SindarinBottomBar(
         visible = isBottomBarVisible
     ) {
         BottomNavigation(
-            backgroundColor = MaterialTheme.colors.surface
+            backgroundColor = MaterialTheme.colors.primary
         ) {
             tabs.forEach { destination ->
                 val isCurrentDestOnBackStack = currentDestination?.route?.startsWith(destination.direction) ?: false
@@ -56,9 +57,9 @@ fun SindarinBottomBar(
                         Icon(
                             painter = painterResource(id = destination.icon),
                             tint = if (isCurrentDestOnBackStack) {
-                                MaterialTheme.colors.primary
+                                MaterialTheme.colors.onPrimary
                             } else {
-                                MaterialTheme.colors.onSurface
+                                MaterialTheme.colors.onPrimary.copy(alpha = ContentAlpha.medium)
                             },
                             contentDescription = stringResource(destination.title)
                         )
@@ -69,9 +70,9 @@ fun SindarinBottomBar(
                             overflow = TextOverflow.Ellipsis,
                             maxLines = 1,
                             color = if (isCurrentDestOnBackStack) {
-                                MaterialTheme.colors.primary
+                                MaterialTheme.colors.onPrimary
                             } else {
-                                MaterialTheme.colors.onSurface
+                                MaterialTheme.colors.onPrimary.copy(alpha = ContentAlpha.medium)
                             }
                         )
                     }

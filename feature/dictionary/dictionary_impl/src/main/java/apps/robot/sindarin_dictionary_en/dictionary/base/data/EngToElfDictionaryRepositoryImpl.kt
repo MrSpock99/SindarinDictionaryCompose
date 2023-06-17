@@ -18,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -38,6 +39,7 @@ internal class EngToElfDictionaryRepositoryImpl(
                     .get()
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+                            Timber.d("EngToElfDictionaryRepository: success ${task.result?.documents?.size}")
                             emitter.resume(
                                 task.result.documents.map {
                                     val word = it.toObject(EngToElfWordEntity::class.java)

@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ContentAlpha
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -183,6 +184,8 @@ internal fun DictionaryListContentRow(
                                     navigator.navigate(screen)
                                 }
                             )
+                            if (index < words.itemSnapshotList.lastIndex)
+                                Divider(color = Color.Transparent, thickness = 1.dp)
                         }
                     }
                 }
