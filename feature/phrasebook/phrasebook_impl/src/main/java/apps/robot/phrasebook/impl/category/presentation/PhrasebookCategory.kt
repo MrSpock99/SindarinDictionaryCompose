@@ -26,6 +26,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import apps.robot.phrasebook.impl.R
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.UiState
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DetailsMode
 import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.DictionaryListTopAppBar
@@ -40,11 +41,14 @@ fun PhrasebookCategory(
     dictionaryFeatureApi: DictionaryFeatureApi = get(),
 ) {
     val state by viewModel.state.collectAsState()
+
     viewModel.onReceiveArgs(categoryName)
+
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     val isTopBarVisible = currentDestination?.route != DictionaryFeatureApi.DETAILS_ROUTE
+
     Scaffold(
         topBar = {
             DictionaryListTopAppBar(
@@ -63,7 +67,8 @@ fun PhrasebookCategory(
             modifier = Modifier.padding(paddingValues),
         ) {
             val list = state.list
-            if (list.isEmpty() && state.searchWidgetState == SearchWidgetState.OPENED) {
+
+            if (list.isEmpty() && state.uiState == UiState.Content && state.searchWidgetState == SearchWidgetState.OPENED) {
                 Text(
                     modifier = Modifier.padding(start = 16.dp, top = 16.dp),
                     text = stringResource(id = R.string.dictionary_list_nothing_found),
@@ -78,8 +83,10 @@ fun PhrasebookCategory(
                     color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
                 )
             }
+
             val listState = rememberLazyListState()
             val context = LocalContext.current
+
             LazyColumn(
                 state = listState
             ) {

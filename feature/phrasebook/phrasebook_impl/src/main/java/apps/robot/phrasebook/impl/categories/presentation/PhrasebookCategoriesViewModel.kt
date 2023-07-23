@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import apps.robot.phrasebook.impl.base.domain.PhrasebookRepository
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.UiText
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.BaseViewModel
-import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.Loading
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.Searchable
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.UiState
@@ -24,7 +23,8 @@ class PhrasebookCategoriesViewModel(
     private val dispatchers: AppDispatchers,
     context: Context
 ) : BaseViewModel(), Searchable {
-    val state = MutableStateFlow(PhrasebookListState(uiState = Loading))
+
+    val state = MutableStateFlow(PhrasebookListState(uiState = UiState.Loading))
 
     init {
         loadCategories()

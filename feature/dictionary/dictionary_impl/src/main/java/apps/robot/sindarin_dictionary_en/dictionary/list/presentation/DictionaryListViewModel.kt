@@ -5,9 +5,8 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.UiText
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.BaseViewModel
-import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.Content
-import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.Loading
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.UiState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DictionaryMode
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetHeadersUseCase
@@ -36,7 +35,7 @@ internal class DictionaryListViewModel(
     private val dispatchers: AppDispatchers
 ) : BaseViewModel() {
 
-    val state = MutableStateFlow(DictionaryListState(uiState = Loading))
+    val state = MutableStateFlow(DictionaryListState(uiState = UiState.Loading))
 
     init {
         launchJob {
@@ -46,7 +45,7 @@ internal class DictionaryListViewModel(
             ).awaitAll()
             subscribeToWords(state.value.dictionaryMode)
             subscribeToSearch()
-            state.update { it.copy(uiState = Content) }
+            state.update { it.copy(uiState = UiState.Content) }
         }
         //setHeaders(state.value.dictionaryMode)
     }

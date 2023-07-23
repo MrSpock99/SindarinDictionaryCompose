@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelStoreOwner
 import apps.robot.dictionary.impl.R
-import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.Content
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.UiState
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DictionaryMode
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.DictionaryListViewModel
 import org.koin.androidx.compose.getViewModel
@@ -42,7 +42,7 @@ internal fun DictionaryModeToggle(
         )
     }
 
-    if (state.uiState == Content) {
+    if (state.uiState == UiState.Content) {
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier

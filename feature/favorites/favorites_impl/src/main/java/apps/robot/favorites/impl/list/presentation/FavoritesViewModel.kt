@@ -5,9 +5,9 @@ import apps.robot.favorites.impl.list.domain.FavoritesSearchWordsUseCase
 import apps.robot.favorites.impl.list.domain.FavoritesyGetFavoritesAsFlowUseCase
 import apps.robot.favorites.impl.list.presentation.model.FavoritesListState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.BaseViewModel
-import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.Loading
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.UiState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,7 +24,7 @@ internal class FavoritesViewModel(
     private val searchWords: FavoritesSearchWordsUseCase
 ) : BaseViewModel() {
 
-    val state = MutableStateFlow(FavoritesListState(uiState = Loading))
+    val state = MutableStateFlow(FavoritesListState(uiState = UiState.Loading))
 
     init {
         getFavoritesAsFlow()
