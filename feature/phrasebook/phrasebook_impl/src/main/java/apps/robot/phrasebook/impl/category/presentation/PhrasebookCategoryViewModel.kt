@@ -11,6 +11,7 @@ import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.UiState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.launchIn
@@ -31,13 +32,13 @@ class PhrasebookCategoryViewModel(
         subscribeToSearch(context)
     }
 
-   fun onReceiveArgs(categoryName: String) {
-       this.categoryName = categoryName
-       state.value = state.value.copy(
-           categoryName = UiText.DynamicString(categoryName)
-       )
-       loadItems()
-   }
+    fun onReceiveArgs(categoryName: String) {
+        this.categoryName = categoryName
+        state.value = state.value.copy(
+            categoryName = UiText.DynamicString(categoryName)
+        )
+        loadItems()
+    }
 
     override fun onSearchToggle() {
         state.update {
@@ -62,7 +63,8 @@ class PhrasebookCategoryViewModel(
                 if (searchQuery.isNotEmpty()) {
                     state.value = state.value.copy(
                         list = state.value.list.filter {
-                            it.text.asString(context).lowercase().startsWith(searchQuery.lowercase())
+                            it.text.asString(context).lowercase()
+                                .startsWith(searchQuery.lowercase())
                         }
                     )
                 } else {
@@ -73,14 +75,16 @@ class PhrasebookCategoryViewModel(
 
     private fun loadItems() {
         launchJob {
+            val items = repository.getCategoryItems(categoryName).map {
+                PhrasebookCategoryItemUiModel(
+                    text = UiText.DynamicString(it.word),
+                    translation = UiText.DynamicString(it.translation)
+                )
+            }
             state.update {
                 it.copy(
-                    list = repository.getCategoryItems(categoryName).map {
-                        PhrasebookCategoryItemUiModel(
-                            text = UiText.DynamicString(it.word),
-                            translation = UiText.DynamicString(it.translation)
-                        )
-                    }
+                    list = items,
+                    uiState = UiState.Content
                 )
             }
         }

@@ -1,11 +1,14 @@
 package apps.robot.phrasebook.impl.category.presentation
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -15,6 +18,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -75,13 +79,26 @@ fun PhrasebookCategory(
                     fontSize = 16.sp,
                     color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
                 )
-            } else if (list.isEmpty() && state.searchWidgetState == SearchWidgetState.CLOSED) {
+            } else if (list.isEmpty() && state.uiState == UiState.Content && state.searchWidgetState == SearchWidgetState.CLOSED) {
                 Text(
                     modifier = Modifier.padding(start = 16.dp, top = 16.dp),
                     text = stringResource(id = R.string.phrasebook_empty_list),
                     fontSize = 16.sp,
                     color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
                 )
+            }
+
+            if (state.uiState == UiState.Loading) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    CircularProgressIndicator(
+                        color = MaterialTheme.colors.onBackground
+                    )
+                }
             }
 
             val listState = rememberLazyListState()
