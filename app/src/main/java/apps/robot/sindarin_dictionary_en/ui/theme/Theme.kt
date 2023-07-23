@@ -1,10 +1,15 @@
 package apps.robot.sindarin_dictionary_en.ui.theme
 
+import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
 
 private val DarkColorPalette = darkColors(
     primary = md_theme_light_primary,
@@ -38,6 +43,18 @@ fun SindarinDictionaryComposeTheme(darkTheme: Boolean = isSystemInDarkTheme(), c
         DarkColorPalette
     } else {
         LightColorPalette
+    }
+
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as Activity).window
+            val insets = WindowCompat.getInsetsController(window, view)
+            window.statusBarColor = colors.primary.toArgb() // choose a status bar color
+            window.navigationBarColor = colors.primary.toArgb() // choose a navigation bar color
+            insets.isAppearanceLightStatusBars = !darkTheme
+            insets.isAppearanceLightNavigationBars = !darkTheme
+        }
     }
 
     MaterialTheme(
