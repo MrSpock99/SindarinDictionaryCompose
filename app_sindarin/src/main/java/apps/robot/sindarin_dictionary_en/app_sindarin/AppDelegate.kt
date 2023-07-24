@@ -3,6 +3,7 @@ package apps.robot.sindarin_dictionary_en.app_sindarin
 import android.app.Application
 import android.content.Context
 import apps.robot.favorites.impl.favoritesModules
+import apps.robot.grammar.impl.grammarModules
 import apps.robot.phrasebook.impl.phrasebookModules
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.BaseAppInitializer
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.appModule
@@ -43,6 +44,7 @@ class AppDelegate : Application() {
             modules(databaseModule())
             modules(favoritesModules())
             modules(phrasebookModules())
+            modules(grammarModules())
         }
     }
 }

@@ -18,4 +18,9 @@ object AppModules {
         const val api = ":phrasebook_api"
         const val impl = ":phrasebook_impl"
     }
+
+    object Grammar {
+        const val api = ":grammar_api"
+        const val impl = ":grammar_impl"
+    }
 }

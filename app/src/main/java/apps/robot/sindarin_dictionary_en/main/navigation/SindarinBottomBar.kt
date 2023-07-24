@@ -1,4 +1,4 @@
-package apps.robot.sindarin_dictionary_en.bottomnav.navigation
+package apps.robot.sindarin_dictionary_en.main.navigation
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.material.BottomNavigation

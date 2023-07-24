@@ -1,4 +1,4 @@
-package apps.robot.sindarin_dictionary_en.bottomnav.navigation
+package apps.robot.sindarin_dictionary_en.main.navigation
 
 import apps.robot.monolith.R
 
@@ -21,7 +21,7 @@ object PhrasebookBottomUiTab : BottomUiTab(
 )
 
 object GrammarBottomUiTab : BottomUiTab(
-    "grammar",
+    "grammar_route",
     R.drawable.bottom_tab_grammar_ic,
     R.string.bottom_tab_grammar
 )

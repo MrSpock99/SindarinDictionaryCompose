@@ -9,7 +9,6 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import apps.robot.sindarin_dictionary_en.bottomnav.navigation.SindarinBottomBar
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
