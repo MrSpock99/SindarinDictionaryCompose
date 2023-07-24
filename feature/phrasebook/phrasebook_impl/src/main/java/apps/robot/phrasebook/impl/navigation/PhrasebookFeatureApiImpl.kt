@@ -5,7 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import apps.robot.phrasebook.api.PhrasebookFeatureApi
-import apps.robot.phrasebook.impl.categories.presentation.PhrasebookCategoriesList
+import apps.robot.phrasebook.impl.categories.presentation.composable.PhrasebookCategoriesList
 
 class PhrasebookFeatureApiImpl(
     private val phrasebookInternalFeature: PhrasebookInternalFeature

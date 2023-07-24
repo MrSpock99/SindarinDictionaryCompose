@@ -7,7 +7,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
-import apps.robot.phrasebook.impl.category.presentation.PhrasebookCategory
+import apps.robot.phrasebook.impl.category.presentation.composable.PhrasebookCategory
 import apps.robot.phrasebook.impl.navigation.PhrasebookFeatureApiImpl.Companion.CATEGORY_ROUTE
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.navigation.FeatureApi
 

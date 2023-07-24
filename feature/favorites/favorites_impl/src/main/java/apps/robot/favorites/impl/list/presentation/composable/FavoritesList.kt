@@ -86,32 +86,16 @@ internal fun FavoritesList(
                     key = { index ->
                         list[index].toString()
                     }) { index ->
-                    Text(
-                        text = list[index].text.asString(),
-                        color = MaterialTheme.colors.onBackground,
-                        fontSize = 32.sp,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable {
-                                navigator.navigate(
-                                    dictionaryFeatureApi.detailsRoute(
-                                        wordId = list[index].id,
-                                        text = list[index].text.asString(context),
-                                        translation = list[index].translation.asString(context),
-                                        detailsMode = DetailsMode.FAVORITES.name
-                                    )
-                                )
-                            }
-                            .padding(
-                                PaddingValues(
-                                    top = 16.dp,
-                                    start = 16.dp,
-                                    bottom = 16.dp
-                                )
-                            ),
-                        overflow = TextOverflow.Ellipsis,
-                        maxLines = 1
-                    )
+                    FavoriteItem(item = list[index]) {
+                        navigator.navigate(
+                            dictionaryFeatureApi.detailsRoute(
+                                wordId = list[index].id,
+                                text = list[index].text.asString(context),
+                                translation = list[index].translation.asString(context),
+                                detailsMode = DetailsMode.FAVORITES.name
+                            )
+                        )
+                    }
                     if (index < list.lastIndex)
                         Divider(color = MaterialTheme.colors.onBackground, thickness = 1.dp)
                 }
