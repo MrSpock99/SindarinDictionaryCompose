@@ -30,7 +30,7 @@ class PhrasebookRepositoryImpl(
             categories[1] -> "farewells"
             categories[2] -> "calls"
             categories[3] -> "talking"
-            categories[4] -> "smalltalk"
+            categories[4] -> "smallTalk"
             categories[5] -> "questionsAndAnswers"
             categories[6] -> "compliments"
             categories[7] -> "romance"
@@ -47,8 +47,8 @@ class PhrasebookRepositoryImpl(
             categories[18] -> "professions"
             categories[19] -> "monthsOfTheYear"
             categories[20] -> "seasons"
-            categories[22] -> "dayOfTheWeek"
-            categories[23] -> "weather"
+            categories[21] -> "dayOfTheWeek"
+            categories[22] -> "weather"
             else -> ""
         }
         val list = withContext(dispatchers.ui) {
