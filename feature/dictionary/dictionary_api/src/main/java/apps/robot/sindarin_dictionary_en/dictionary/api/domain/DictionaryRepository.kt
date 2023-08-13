@@ -4,10 +4,15 @@ import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 
 interface DictionaryRepository {
-    suspend fun loadWords()
+    suspend fun loadWords(loadStrategy: LoadStrategy)
     fun getPagedWordsAsFlow(keyword: String? = null): Flow<PagingData<Word>>
     suspend fun getAllWords(): List<Word>
     suspend fun getWordById(id: String): Word
     suspend fun updateWord(word: Word)
     fun getFavoriteWordsAsFlow(): Flow<List<Word>>
+}
+
+sealed class LoadStrategy {
+    object Cache : LoadStrategy()
+    object Remote : LoadStrategy()
 }

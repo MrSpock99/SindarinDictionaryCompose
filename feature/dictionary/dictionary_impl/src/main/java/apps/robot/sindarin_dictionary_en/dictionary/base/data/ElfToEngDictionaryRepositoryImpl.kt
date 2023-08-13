@@ -9,11 +9,13 @@ import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.Ap
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.ElfToEngDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.model.ElfToEngWordEntity
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.ElfToEngDictionaryRepository
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.LoadStrategy
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.Word
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordDomainMapper
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordElfToEngEntityMapper
 import apps.robot.sindarin_dictionary_en.dictionary.list.data.paging.DictionaryPagingSource
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Source
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
@@ -30,11 +32,16 @@ internal class ElfToEngDictionaryRepositoryImpl(
     private val dictionaryPagingSource: DictionaryPagingSource<ElfToEngWordEntity>
 ) : ElfToEngDictionaryRepository {
 
-    override suspend fun loadWords() {
+    override suspend fun loadWords(loadStrategy: LoadStrategy) {
+        val firestoreSource = when(loadStrategy) {
+            LoadStrategy.Cache -> Source.CACHE
+            LoadStrategy.Remote -> Source.SERVER
+        }
+
         val words = withContext(dispatchers.network) {
             suspendCoroutine<List<ElfToEngWordEntity?>> { emitter ->
                 db.collection(ELF_TO_ENG_WORDS)
-                    .get()
+                    .get(firestoreSource)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             emitter.resume(
@@ -61,7 +68,7 @@ internal class ElfToEngDictionaryRepositoryImpl(
                 pageSize = DictionaryPagingSource.DICTIONARY_PAGE_SIZE
             ),
             pagingSourceFactory = {
-                dictionaryPagingSource
+                DictionaryPagingSource(dictionaryDao = dao)
             }
         ).flow.map { pagingData ->
             if (keyword != null) {

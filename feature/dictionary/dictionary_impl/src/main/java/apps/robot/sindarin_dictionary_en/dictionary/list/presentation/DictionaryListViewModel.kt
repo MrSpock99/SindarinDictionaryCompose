@@ -9,6 +9,7 @@ import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetS
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.UiState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DictionaryMode
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.LoadStrategy
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetHeadersUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetPagedWordListAsFlowUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryLoadWordListUseCase
@@ -39,12 +40,9 @@ internal class DictionaryListViewModel(
 
     init {
         launchJob {
-            listOf(
-                asyncCatching { loadWordList(DictionaryMode.ELVISH_TO_ENGLISH) },
-                asyncCatching { loadWordList(DictionaryMode.ENGLISH_TO_ELVISH) }
-            ).awaitAll()
             subscribeToWords(state.value.dictionaryMode)
             subscribeToSearch()
+            loadWords(LoadStrategy.Remote)
             state.update { it.copy(uiState = UiState.Content) }
         }
         //setHeaders(state.value.dictionaryMode)
@@ -136,6 +134,13 @@ internal class DictionaryListViewModel(
                         }.cachedIn(viewModelScope + dispatchers.computing)
                 )
             }.launchIn(viewModelScope + dispatchers.computing)
+    }
+
+    private suspend fun loadWords(loadStrategy: LoadStrategy) {
+        listOf(
+            asyncCatching { loadWordList(DictionaryMode.ELVISH_TO_ENGLISH, loadStrategy) },
+            asyncCatching { loadWordList(DictionaryMode.ENGLISH_TO_ELVISH, loadStrategy) }
+        ).awaitAll()
     }
 
     private companion object {
