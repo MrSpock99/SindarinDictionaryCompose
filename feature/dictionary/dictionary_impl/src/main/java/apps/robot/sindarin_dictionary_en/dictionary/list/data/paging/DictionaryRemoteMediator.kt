@@ -13,9 +13,11 @@ import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.EngToElfDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.model.ElfToEngWordEntity
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.Word
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.ElfToEngDictionaryRepositoryImpl
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.HttpException
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Source
 import kotlinx.coroutines.withContext
+import java.io.IOException
 import java.lang.Exception
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -29,6 +31,10 @@ class DictionaryRemoteMediator(
     private val dispatchers: AppDispatchers,
     private val dao: ElfToEngDao
 ): RemoteMediator<Int, Word>() {
+
+    override suspend fun initialize(): InitializeAction {
+        return super.initialize()
+    }
 
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Word>): MediatorResult {
         return try {
@@ -99,7 +105,7 @@ class DictionaryRemoteMediator(
             }
 
             MediatorResult.Success(
-                endOfPaginationReached = response.nextKey == null
+                endOfPaginationReached = words.isNotEmpty()
             )
         } catch (e: IOException) {
             MediatorResult.Error(e)

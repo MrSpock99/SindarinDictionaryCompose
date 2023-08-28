@@ -99,7 +99,7 @@ internal class ElfToEngDictionaryRepositoryImpl(
         return dao.getFavoriteWordsAsFlow().map { it.map(mapper::map) }
     }
 
-    private companion object {
+    companion object {
         const val ELF_TO_ENG_WORDS = "elf_to_eng_words"
     }
 }

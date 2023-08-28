@@ -43,6 +43,7 @@ dependencies {
     implementation project(AppModules.baseUi)
     implementation project(AppModules.Dictionary.api)
     implementation project(AppModules.Favorites.api)
+    implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.9.6'
     kotlinLib()
     koin()
     firebase()

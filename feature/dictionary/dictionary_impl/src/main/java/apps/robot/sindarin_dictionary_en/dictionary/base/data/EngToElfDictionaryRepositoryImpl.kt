@@ -16,6 +16,7 @@ import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordDomain
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordEngToElfEntityMapper
 import apps.robot.sindarin_dictionary_en.dictionary.list.data.paging.DictionaryPagingSource
 import apps.robot.sindarin_dictionary_en.dictionary.list.data.paging.DictionaryPagingSource.Companion.DICTIONARY_PAGE_SIZE
+import apps.robot.sindarin_dictionary_en.dictionary.list.data.paging.DictionaryRemoteMediator
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Source
 import kotlinx.coroutines.flow.Flow
@@ -33,7 +34,8 @@ internal class EngToElfDictionaryRepositoryImpl(
     private val dao: EngToElfDao,
     private val mapper: WordDomainMapper,
     private val engToElfEntityMapper: WordEngToElfEntityMapper,
-    private val dictionaryPagingSource: DictionaryPagingSource<EngToElfWordEntity>
+    private val dictionaryPagingSource: DictionaryPagingSource<EngToElfWordEntity>,
+    private val dictionaryRemoteMediator: DictionaryRemoteMediator
 ) : EngToElfDictionaryRepository {
 
     override suspend fun loadWords(loadStrategy: LoadStrategy) {
@@ -73,9 +75,10 @@ internal class EngToElfDictionaryRepositoryImpl(
             config = PagingConfig(
                 pageSize = DICTIONARY_PAGE_SIZE
             ),
-            pagingSourceFactory = {
+            remoteMediator = dictionaryRemoteMediator,
+           /* pagingSourceFactory = {
                 DictionaryPagingSource(dictionaryDao = dao)
-            }
+            }*/
         ).flow.map { pagingData ->
             if (keyword != null) {
                 pagingData.filter { it.word.startsWith(keyword) }.map {
