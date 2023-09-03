@@ -22,8 +22,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
@@ -48,7 +46,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import apps.robot.dictionary.impl.R
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
-import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.UiState
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DetailsMode
 import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.DictionaryListTopAppBar
@@ -77,9 +74,6 @@ internal fun DictionaryList(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     val isTopBarVisible = currentDestination?.route != DictionaryFeatureApi.DETAILS_ROUTE
-    if (state.uiState == UiState.Content) {
-
-    }
 
     Scaffold(
         topBar = {
@@ -126,12 +120,6 @@ internal fun DictionaryListContentRow(
     val words = state.words.collectAsLazyPagingItems()
     val listState = rememberLazyListState()
     val context = LocalContext.current
-
-    if (state.uiState == UiState.Content) {
-        LaunchedEffect(Unit) {
-            words.refresh()
-        }
-    }
 
     if (headersState.shouldShowSelectedHeader.collectAsState().value) {
         Box(

@@ -19,7 +19,4 @@ abstract class ElfToEngDao: DictionaryDao<ElfToEngWordEntity> {
 
     @Query("SELECT * FROM $ELF_TO_ENG_WORDS_TABLE WHERE is_favorite=1")
     abstract override fun getFavoriteWordsAsFlow(): Flow<List<ElfToEngWordEntity>>
-
-    @Query("DELETE FROM $ELF_TO_ENG_WORDS_TABLE")
-    abstract override suspend fun deleteAll()
 }

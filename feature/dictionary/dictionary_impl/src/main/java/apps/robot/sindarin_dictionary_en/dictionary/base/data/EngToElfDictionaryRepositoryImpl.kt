@@ -6,22 +6,18 @@ import androidx.paging.PagingData
 import androidx.paging.filter
 import androidx.paging.map
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
-import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.ElfToEngDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.EngToElfDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.model.EngToElfWordEntity
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.EngToElfDictionaryRepository
-import apps.robot.sindarin_dictionary_en.dictionary.api.domain.LoadStrategy
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.Word
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordDomainMapper
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordEngToElfEntityMapper
 import apps.robot.sindarin_dictionary_en.dictionary.list.data.paging.DictionaryPagingSource
 import apps.robot.sindarin_dictionary_en.dictionary.list.data.paging.DictionaryPagingSource.Companion.DICTIONARY_PAGE_SIZE
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Source
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
-import org.koin.core.context.GlobalContext.get
 import timber.log.Timber
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -36,25 +32,20 @@ internal class EngToElfDictionaryRepositoryImpl(
     private val dictionaryPagingSource: DictionaryPagingSource<EngToElfWordEntity>
 ) : EngToElfDictionaryRepository {
 
-    override suspend fun loadWords(loadStrategy: LoadStrategy) {
-        val firestoreSource = when(loadStrategy) {
-            LoadStrategy.Cache -> Source.CACHE
-            LoadStrategy.Remote -> Source.SERVER
-        }
-
+    override suspend fun loadWords() {
         val words = withContext(dispatchers.network) {
             suspendCoroutine<List<EngToElfWordEntity?>> { emitter ->
                 db.collection(ENG_TO_ELF_WORDS)
-                    .get(firestoreSource)
+                    .get()
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             Timber.d("EngToElfDictionaryRepository: success ${task.result?.documents?.size}")
                             emitter.resume(
-                                task.result?.documents?.map {
+                                task.result.documents.map {
                                     val word = it.toObject(EngToElfWordEntity::class.java)
                                     word?.id = it.id
                                     word
-                                } ?: listOf()
+                                }
                             )
                         } else {
                             emitter.resumeWithException(
@@ -74,7 +65,7 @@ internal class EngToElfDictionaryRepositoryImpl(
                 pageSize = DICTIONARY_PAGE_SIZE
             ),
             pagingSourceFactory = {
-                DictionaryPagingSource(dictionaryDao = dao)
+                dictionaryPagingSource
             }
         ).flow.map { pagingData ->
             if (keyword != null) {
