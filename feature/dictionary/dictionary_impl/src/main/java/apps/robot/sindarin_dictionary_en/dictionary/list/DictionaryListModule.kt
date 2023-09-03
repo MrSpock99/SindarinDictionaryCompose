@@ -44,7 +44,8 @@ internal fun dictionaryListModule() = module {
             dispatchers = get(),
             loadWordList = get(),
             getHeaders = get(),
-            searchWords = get()
+            searchWords = get(),
+            repository = get<EngToElfDictionaryRepository>()
         )
     }
 }

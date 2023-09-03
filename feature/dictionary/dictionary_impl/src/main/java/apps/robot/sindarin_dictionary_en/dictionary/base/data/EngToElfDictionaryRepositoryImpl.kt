@@ -17,8 +17,10 @@ import apps.robot.sindarin_dictionary_en.dictionary.list.data.paging.DictionaryP
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.util.UUID
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -94,6 +96,31 @@ internal class EngToElfDictionaryRepositoryImpl(
 
     override fun getFavoriteWordsAsFlow(): Flow<List<Word>> {
         return dao.getFavoriteWordsAsFlow().map { it.map(mapper::map) }
+    }
+
+    suspend fun addItem(sound: String, example: String, sindarinExample: String) {
+        suspendCancellableCoroutine<Unit> { emitter ->
+            val map = HashMap<String, Any>()
+            val id = UUID.randomUUID().toString()
+            map["id"] = id
+            map["sound"] = sound
+            map["example"] = example
+            map["sindarinExample"] = sindarinExample
+            db.collection("pronunciation")
+                .document(id)
+                .set(map)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Timber.d("EngToElfDictionaryRepository: success add")
+                        emitter.resume(Unit)
+                    } else {
+                        emitter.resumeWithException(
+                            task.exception ?: java.lang.Exception()
+                        )
+                    }
+                }
+        }
+
     }
 
     private companion object {
