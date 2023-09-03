@@ -36,7 +36,8 @@ internal fun dictionaryBaseModule() = module {
             dao = get(),
             mapper = get(),
             engToElfEntityMapper = get(),
-            dictionaryPagingSource = get(named("EngToElf"))
+            dictionaryPagingSource = get(named("EngToElf")),
+            dictionaryRemoteMediator = get()
         )
     }
     factory(named("EngToElf")) {

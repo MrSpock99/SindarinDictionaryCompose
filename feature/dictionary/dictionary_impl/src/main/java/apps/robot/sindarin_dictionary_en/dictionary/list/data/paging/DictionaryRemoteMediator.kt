@@ -7,18 +7,14 @@ import androidx.paging.RemoteMediator
 import androidx.room.RoomDatabase
 import androidx.room.withTransaction
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
-import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.DictionaryDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.ElfToEngDao
-import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.EngToElfDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.model.ElfToEngWordEntity
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.Word
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.ElfToEngDictionaryRepositoryImpl
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.HttpException
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Source
 import kotlinx.coroutines.withContext
 import java.io.IOException
-import java.lang.Exception
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -28,8 +24,8 @@ class DictionaryRemoteMediator(
     private val query: String,
     private val database: RoomDatabase,
     private val firebaseFirestore: FirebaseFirestore,
-    private val dispatchers: AppDispatchers,
-    private val dao: ElfToEngDao
+    private val dao: ElfToEngDao,
+    private val dispatchers: AppDispatchers
 ): RemoteMediator<Int, Word>() {
 
     override suspend fun initialize(): InitializeAction {
@@ -108,8 +104,6 @@ class DictionaryRemoteMediator(
                 endOfPaginationReached = words.isNotEmpty()
             )
         } catch (e: IOException) {
-            MediatorResult.Error(e)
-        } catch (e: HttpException) {
             MediatorResult.Error(e)
         }
     }
