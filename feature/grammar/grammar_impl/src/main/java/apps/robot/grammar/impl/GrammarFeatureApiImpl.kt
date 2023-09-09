@@ -1,11 +1,11 @@
 package apps.robot.grammar.impl
 
-import androidx.compose.material.Text
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import apps.robot.grammar.api.GrammarFeatureApi
+import apps.robot.grammar.impl.pronounce.presentation.composable.PronounceScreen
 
 internal class GrammarFeatureApiImpl(): GrammarFeatureApi {
 
@@ -17,7 +17,7 @@ internal class GrammarFeatureApiImpl(): GrammarFeatureApi {
         modifier: Modifier
     ) {
         navGraphBuilder.composable(grammarRoute()) {
-            Text(text = "FUCK")
+           PronounceScreen()
         }
     }
 }
