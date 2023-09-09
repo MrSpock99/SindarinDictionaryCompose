@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pronounce_header_1">Sound</string>
+    <string name="pronounce_header_2">Example from English</string>
+    <string name="pronounce_header_3">Example from Sindarin</string>
+</resources>

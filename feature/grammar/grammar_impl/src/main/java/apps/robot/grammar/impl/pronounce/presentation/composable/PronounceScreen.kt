@@ -19,9 +19,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import apps.robot.grammar.impl.R
 import apps.robot.grammar.impl.pronounce.presentation.PronounceViewModel
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.BorderOrder
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.drawSegmentedBorder
@@ -65,21 +67,21 @@ fun TableScreen(viewModel: PronounceViewModel = getViewModel()) {
                         cornerPercent = 0
                     )
             ) {
-                TableCell(text = "Sound", weight = column1Weight)
+                TableCell(text = stringResource(id = R.string.pronounce_header_1), weight = column1Weight)
                 Divider(
                     color = MaterialTheme.colors.onBackground,
                     modifier = Modifier
                         .fillMaxHeight()
                         .width(1.dp)
                 )
-                TableCell(text = "Example from English", weight = column2Weight)
+                TableCell(text = stringResource(id = R.string.pronounce_header_2), weight = column2Weight)
                 Divider(
                     color = MaterialTheme.colors.onBackground,
                     modifier = Modifier
                         .fillMaxHeight()
                         .width(1.dp)
                 )
-                TableCell(text = "Example from Sindarin", weight = column3Weight)
+                TableCell(text = stringResource(id = R.string.pronounce_header_3), weight = column3Weight)
             }
         }
 
