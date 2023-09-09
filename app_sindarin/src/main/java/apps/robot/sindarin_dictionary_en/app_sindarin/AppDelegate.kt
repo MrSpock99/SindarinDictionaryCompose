@@ -26,12 +26,13 @@ class AppDelegate : Application() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-        getKoin().getAll<BaseAppInitializer>()
+        val initializers = getKoin().getAll<BaseAppInitializer>()
             .sortedByDescending {
                 it.getPriority()
-            }.forEach {
-                it.onAppStartInit()
             }
+        initializers.forEach {
+            it.onAppStartInit()
+        }
     }
 
     private fun initKoinDi() {

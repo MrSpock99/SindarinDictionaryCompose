@@ -96,6 +96,10 @@ internal class EngToElfDictionaryRepositoryImpl(
         return dao.getFavoriteWordsAsFlow().map { it.map(mapper::map) }
     }
 
+    override fun getWordsSize(): Int {
+        return dao.getWordsSize()
+    }
+
     private companion object {
         const val ENG_TO_ELF_WORDS = "eng_to_elf_words"
     }

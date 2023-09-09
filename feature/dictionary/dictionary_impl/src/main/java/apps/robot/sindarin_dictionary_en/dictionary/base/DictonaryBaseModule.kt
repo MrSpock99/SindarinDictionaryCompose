@@ -1,5 +1,7 @@
 package apps.robot.sindarin_dictionary_en.dictionary.base
 
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.BaseAppInitializer
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.processLifecycleScope
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.ElfToEngDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.EngToElfDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.ElfToEngDictionaryRepository
@@ -15,6 +17,7 @@ import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordEngToE
 import apps.robot.sindarin_dictionary_en.dictionary.list.data.paging.DictionaryPagingSource
 import com.google.firebase.firestore.FirebaseFirestore
 import org.koin.core.qualifier.named
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 internal fun dictionaryBaseModule() = module {
@@ -49,4 +52,13 @@ internal fun dictionaryBaseModule() = module {
     factory<WordDomainMapper> { WordDomainMapperImpl() }
     factory<WordElfToEngEntityMapper> { WordElfToEngEntityMapperImpl() }
     factory<WordEngToElfEntityMapper> { WordEngToElfEntityMapperImpl() }
+
+    factory {
+        DictionaryInitializer(
+            loadWordList = get(),
+            coroutineScope = processLifecycleScope,
+            repository = get(),
+            dispatchers = get()
+        )
+    } bind BaseAppInitializer::class
 }

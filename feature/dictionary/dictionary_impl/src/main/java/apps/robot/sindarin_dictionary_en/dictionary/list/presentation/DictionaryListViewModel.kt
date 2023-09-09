@@ -9,15 +9,14 @@ import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetS
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.UiState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DictionaryMode
+import apps.robot.sindarin_dictionary_en.dictionary.base.DictionaryInitializer
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetHeadersUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetPagedWordListAsFlowUseCase
-import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryLoadWordListUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionarySearchWordsUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.DictionaryListState
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.WordUiModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.launchIn
@@ -29,7 +28,6 @@ import timber.log.Timber
 
 internal class DictionaryListViewModel(
     private val getPagedWordListAsFlow: DictionaryGetPagedWordListAsFlowUseCase,
-    private val loadWordList: DictionaryLoadWordListUseCase,
     private val getHeaders: DictionaryGetHeadersUseCase,
     private val searchWords: DictionarySearchWordsUseCase,
     private val dispatchers: AppDispatchers
@@ -39,13 +37,11 @@ internal class DictionaryListViewModel(
 
     init {
         launchJob {
-            listOf(
-                asyncCatching { loadWordList(DictionaryMode.ELVISH_TO_ENGLISH) },
-                asyncCatching { loadWordList(DictionaryMode.ENGLISH_TO_ELVISH) }
-            ).awaitAll()
-            subscribeToWords(state.value.dictionaryMode)
-            subscribeToSearch()
-            state.update { it.copy(uiState = UiState.Content) }
+            DictionaryInitializer.areWordsLoaded.collect {
+                subscribeToWords(state.value.dictionaryMode)
+                subscribeToSearch()
+                state.update { it.copy(uiState = UiState.Content) }
+            }
         }
         //setHeaders(state.value.dictionaryMode)
     }

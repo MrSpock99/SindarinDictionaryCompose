@@ -21,4 +21,6 @@ interface DictionaryDao<T> {
 
     @Update
     suspend fun update(wordEntity: T)
+
+    fun getWordsSize(): Int
 }

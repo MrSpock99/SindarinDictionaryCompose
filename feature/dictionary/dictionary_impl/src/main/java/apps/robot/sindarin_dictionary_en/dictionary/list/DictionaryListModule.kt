@@ -42,7 +42,6 @@ internal fun dictionaryListModule() = module {
         DictionaryListViewModel(
             getPagedWordListAsFlow = get(),
             dispatchers = get(),
-            loadWordList = get(),
             getHeaders = get(),
             searchWords = get()
         )
