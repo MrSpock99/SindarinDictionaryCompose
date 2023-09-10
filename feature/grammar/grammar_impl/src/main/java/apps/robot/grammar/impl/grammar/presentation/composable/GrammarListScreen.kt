@@ -44,7 +44,7 @@ internal fun GrammarListScreen(grammarInternalFeature: GrammarInternalFeature = 
                     navigator.navigate(grammarInternalFeature.pronounceScreen())
                 }
                 GrammarCategoryItem(name = stringResource(R.string.grammar_item_stresses)) {
-
+                    navigator.navigate(grammarInternalFeature.stressesScreen())
                 }
                 GrammarCategoryItem(name = stringResource(R.string.grammar_item_plural)) {
 

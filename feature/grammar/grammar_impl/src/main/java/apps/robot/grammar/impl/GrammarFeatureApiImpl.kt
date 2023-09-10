@@ -34,6 +34,9 @@ internal class GrammarFeatureApiImpl(
 
     companion object {
         const val GRAMMAR_ROUTE = "grammar_route"
+
         const val PRONOUNCE_ROUTE = "$GRAMMAR_ROUTE/pronounce"
+        const val STRESSES_ROUTE = "$GRAMMAR_ROUTE/stresses"
+        const val PLURAL_ROUTE = "$GRAMMAR_ROUTE/plural"
     }
 }

@@ -5,8 +5,18 @@
     <string name="pronounce_header_3">Example from Sindarin</string>
     <string name="pronounce_text">If a consonant is doubled(mellon), it is pronounced longer.\nIf above a vowel is a \'triangle\' or a \'dash\', then the vowel is pronounced longer than usual. It\'s called \'a long vowel\'.</string>
 
+    <string name="stresses_text">In disyllabic words, the stress falls on the first syllable: Amar, thAla, sUIlad.\n
+        \n
+        \nIf the word has more than two syllables, the stress falls on the second from the end of the syllable, if the syllable is \'Long\' (contains a long vowel, diphthong or is accompanied by doubled or more than one consonant): anÍradd, nelchAEnen, erchAmmui.(keep in mind that \'th\' or \'ch\' - are an one consonant).\n
+        \n
+        \nIf none of the above is present, the stress falls on the third syllable from the end: nIphredil, adAnedair.</string>
+
+    <string name="plural_text"></string>
+
     <string name="topbar_grammar_header">Grammar</string>
     <string name="topbar_pronounce_header">Pronunciation</string>
+    <string name="topbar_stresses_header">Stresses</string>
+    <string name="topbar_plural_header">Plural</string>
 
     <string name="grammar_item_pronounce">Pronunciation</string>
     <string name="grammar_item_stresses">Stresses</string>
