@@ -37,7 +37,7 @@ class PhrasebookRepositoryImpl(
             categories[8] -> "tender"
             categories[9] -> "adventure"
             categories[10] -> "Exclamation"
-            categories[11] -> "Pleas, Entreaties" // надо в базу загрузить
+            categories[11] -> "Pleas, Entreaties"
             categories[12] -> "trouble"
             categories[13] -> "insults"
             categories[14] -> "threats"
