@@ -43,4 +43,8 @@ class GrammarRepositoryImpl(
     override suspend fun getPronunciationAsFlow(): Flow<List<PronounceItem>> {
         return dao.getItemsAsFlow()
     }
+
+    override suspend fun getPronounceItemSize(): Int {
+        return dao.getItemsSize()
+    }
 }

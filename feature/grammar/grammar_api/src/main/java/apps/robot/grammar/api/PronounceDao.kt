@@ -14,6 +14,9 @@ abstract class PronounceDao {
     @Query("SELECT * FROM '$PRONOUNCE_TABLE'")
     abstract fun getItemsAsFlow(): Flow<List<PronounceItem>>
 
+    @Query("SELECT COUNT(*) FROM '$PRONOUNCE_TABLE'")
+    abstract fun getItemsSize(): Int
+
     companion object {
         const val PRONOUNCE_TABLE = "pronounce"
     }

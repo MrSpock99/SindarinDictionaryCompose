@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface GrammarRepository {
     suspend fun loadPronounceItems()
     suspend fun getPronunciationAsFlow(): Flow<List<PronounceItem>>
+    suspend fun getPronounceItemSize(): Int
 }

@@ -12,7 +12,6 @@ class PronounceViewModel(
 
     init {
         launchJob {
-            grammarRepository.loadPronounceItems()
             grammarRepository.getPronunciationAsFlow().collect {
                 uiState.value = PronounceUiState(it)
             }
