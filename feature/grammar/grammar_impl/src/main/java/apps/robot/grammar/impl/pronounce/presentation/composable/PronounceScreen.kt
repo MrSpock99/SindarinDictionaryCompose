@@ -22,6 +22,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -96,21 +97,21 @@ fun TableScreen(viewModel: PronounceViewModel = getViewModel()) {
                         cornerPercent = 0
                     )
             ) {
-                TableCell(text = stringResource(id = R.string.pronounce_header_1), weight = column1Weight)
+                TableCell(text = stringResource(id = R.string.pronounce_header_1), weight = column1Weight, isBold = true)
                 Divider(
                     color = MaterialTheme.colors.onBackground,
                     modifier = Modifier
                         .fillMaxHeight()
                         .width(1.dp)
                 )
-                TableCell(text = stringResource(id = R.string.pronounce_header_2), weight = column2Weight)
+                TableCell(text = stringResource(id = R.string.pronounce_header_2), weight = column2Weight, isBold = true)
                 Divider(
                     color = MaterialTheme.colors.onBackground,
                     modifier = Modifier
                         .fillMaxHeight()
                         .width(1.dp)
                 )
-                TableCell(text = stringResource(id = R.string.pronounce_header_3), weight = column3Weight)
+                TableCell(text = stringResource(id = R.string.pronounce_header_3), weight = column3Weight, isBold = true)
             }
         }
 
@@ -164,7 +165,8 @@ fun TableScreen(viewModel: PronounceViewModel = getViewModel()) {
 fun RowScope.TableCell(
     text: String,
     weight: Float,
-    textColor: Color = MaterialTheme.colors.onBackground
+    textColor: Color = MaterialTheme.colors.onBackground,
+    isBold: Boolean = false
 ) {
     val modifier = Modifier
         .weight(weight)
@@ -175,6 +177,11 @@ fun RowScope.TableCell(
         modifier = modifier,
         fontSize = 12.sp,
         textAlign = TextAlign.Center,
-        color = textColor
+        color = textColor,
+        fontWeight = if (isBold) {
+            FontWeight.Bold
+        } else {
+            FontWeight.Normal
+        }
     )
 }
