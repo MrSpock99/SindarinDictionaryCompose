@@ -17,6 +17,7 @@ internal class GrammarInternalFeature : FeatureApi {
 
     fun pronounceScreen() = PRONOUNCE_ROUTE
     fun stressesScreen() = STRESSES_ROUTE
+    fun pluralScreen() = PLURAL_ROUTE
 
     override fun registerGraph(navGraphBuilder: NavGraphBuilder, navController: NavHostController, modifier: Modifier) {
         navGraphBuilder.navigation(

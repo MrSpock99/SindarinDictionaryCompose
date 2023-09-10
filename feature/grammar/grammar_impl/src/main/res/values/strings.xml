@@ -11,7 +11,10 @@
         \n
         \nIf none of the above is present, the stress falls on the third syllable from the end: nIphredil, adAnedair.</string>
 
-    <string name="plural_text"></string>
+    <string name="plural_header_1">Vowel</string>
+    <string name="plural_header_2">In the beginning/middle</string>
+    <string name="plural_header_3">In the end</string>
+    <string name="plural_header_4">Examples</string>
 
     <string name="topbar_grammar_header">Grammar</string>
     <string name="topbar_pronounce_header">Pronunciation</string>

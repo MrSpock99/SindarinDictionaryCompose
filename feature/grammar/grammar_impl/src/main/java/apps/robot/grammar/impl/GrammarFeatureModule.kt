@@ -1,6 +1,7 @@
 package apps.robot.grammar.impl
 
 import apps.robot.grammar.api.GrammarFeatureApi
+import apps.robot.grammar.impl.plural.presentation.PluralViewModel
 import apps.robot.grammar.impl.pronounce.data.GrammarRepositoryImpl
 import apps.robot.grammar.impl.pronounce.domain.GrammarRepository
 import apps.robot.grammar.impl.pronounce.domain.PronounceInitializer
@@ -25,6 +26,12 @@ internal fun grammarFeatureModule() = module {
 
     viewModel {
         PronounceViewModel(
+            get()
+        )
+    }
+
+    viewModel {
+        PluralViewModel(
             get()
         )
     }
