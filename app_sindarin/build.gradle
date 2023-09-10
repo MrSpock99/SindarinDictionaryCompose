@@ -8,6 +8,27 @@ apply plugin: Plugins.googleServices
 apply from: "$rootDir/config/dependencies-groups.gradle"
 apply from: "$rootDir/config/config-android.gradle"
 
+android {
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug
+        }
+    }
+    flavorDimensions "types"
+
+    productFlavors {
+        free {
+            dimension "types"
+            applicationId "apps.robot.sindarin_dictionary_en"
+        }
+        pro {
+            dimension "types"
+            applicationId "apps.robot.sindarin_dictionary_en_noad"
+        }
+    }
+}
+
 dependencies {
     implementation project(AppModules.app)
     implementation project(AppModules.baseUi)
