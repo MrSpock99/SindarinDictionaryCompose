@@ -6,4 +6,8 @@
 
     <string name="topbar_grammar_header">Grammar</string>
     <string name="topbar_pronounce_header">Pronunciation</string>
+
+    <string name="grammar_item_pronounce">Pronunciation</string>
+    <string name="grammar_item_stresses">Stresses</string>
+    <string name="grammar_item_plural">Plural</string>
 </resources>
