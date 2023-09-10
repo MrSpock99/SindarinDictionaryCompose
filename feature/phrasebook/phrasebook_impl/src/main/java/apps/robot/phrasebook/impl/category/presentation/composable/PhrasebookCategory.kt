@@ -23,8 +23,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
 import apps.robot.phrasebook.impl.R
 import apps.robot.phrasebook.impl.category.presentation.PhrasebookCategoryViewModel
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
@@ -46,15 +44,10 @@ fun PhrasebookCategory(
 
     viewModel.onReceiveArgs(categoryName)
 
-    val navController = rememberNavController()
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentDestination = navBackStackEntry?.destination
-    val isTopBarVisible = currentDestination?.route != DictionaryFeatureApi.DETAILS_ROUTE
-
     Scaffold(
         topBar = {
             DictionaryListTopAppBar(
-                isTopBarVisible = isTopBarVisible,
+                isTopBarVisible = true,
                 searchWidgetState = state.searchWidgetState,
                 onSearchToggle = viewModel::onSearchToggle,
                 onTextChange = viewModel::onSearchTextChange,

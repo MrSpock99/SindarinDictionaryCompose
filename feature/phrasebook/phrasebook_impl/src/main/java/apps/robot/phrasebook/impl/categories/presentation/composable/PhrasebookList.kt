@@ -1,8 +1,5 @@
 package apps.robot.phrasebook.impl.categories.presentation.composable
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -18,17 +15,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
 import apps.robot.phrasebook.impl.R
 import apps.robot.phrasebook.impl.categories.presentation.PhrasebookCategoriesViewModel
 import apps.robot.phrasebook.impl.navigation.PhrasebookInternalFeature
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
-import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
 import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.DictionaryListTopAppBar
 import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
@@ -40,14 +33,11 @@ internal fun PhrasebookCategoriesList(
     navigator: NavHostController
 ) {
     val state by viewModel.state.collectAsState()
-    val navController = rememberNavController()
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentDestination = navBackStackEntry?.destination
-    val isTopBarVisible = currentDestination?.route != DictionaryFeatureApi.DETAILS_ROUTE
+
     Scaffold(
         topBar = {
             DictionaryListTopAppBar(
-                isTopBarVisible = isTopBarVisible,
+                isTopBarVisible = true,
                 searchWidgetState = state.searchWidgetState,
                 onSearchToggle = viewModel::onSearchToggle,
                 onTextChange = viewModel::onSearchTextChange,

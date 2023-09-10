@@ -45,7 +45,7 @@ fun PronounceScreen(navigator: NavController) {
                 onSearchToggle = { },
                 onTextChange = { },
                 searchTextState = "",
-                title = stringResource(R.string.topbar_header),
+                title = stringResource(R.string.topbar_pronounce_header),
                 hint = "",
                 isSearchVisible = false,
                 onBackClicked = navigator::navigateUp

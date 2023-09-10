@@ -4,5 +4,6 @@
     <string name="pronounce_header_2">Example from English</string>
     <string name="pronounce_header_3">Example from Sindarin</string>
 
-    <string name="topbar_header">Grammar</string>
+    <string name="topbar_grammar_header">Grammar</string>
+    <string name="topbar_pronounce_header">Pronunciation</string>
 </resources>

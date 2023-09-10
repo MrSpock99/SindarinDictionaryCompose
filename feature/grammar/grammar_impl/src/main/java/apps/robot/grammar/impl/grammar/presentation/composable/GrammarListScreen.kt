@@ -26,7 +26,7 @@ internal fun GrammarListScreen(grammarInternalFeature: GrammarInternalFeature = 
                 onSearchToggle = { },
                 onTextChange = { },
                 searchTextState = "",
-                title = stringResource(R.string.topbar_header),
+                title = stringResource(R.string.topbar_grammar_header),
                 hint = "",
                 isSearchVisible = false,
             )

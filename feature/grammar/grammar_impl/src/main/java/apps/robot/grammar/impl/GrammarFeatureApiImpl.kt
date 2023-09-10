@@ -11,7 +11,7 @@ internal class GrammarFeatureApiImpl(
     private val grammarInternalFeature: GrammarInternalFeature
 ): GrammarFeatureApi {
 
-    override fun grammarRoute(): String = "grammar_route"
+    override fun grammarRoute(): String = GRAMMAR_ROUTE
     override fun pronounceRoute(): String {
         return grammarInternalFeature.pronounceScreen()
     }
@@ -33,6 +33,7 @@ internal class GrammarFeatureApiImpl(
     }
 
     companion object {
-        const val PRONOUNCE_ROUTE = "grammar/pronounce"
+        const val GRAMMAR_ROUTE = "grammar_route"
+        const val PRONOUNCE_ROUTE = "$GRAMMAR_ROUTE/pronounce"
     }
 }
