@@ -57,10 +57,10 @@ fun PluralScreen(navigator: NavController) {
 fun TableScreen(viewModel: PluralViewModel = getViewModel()) {
     val state by viewModel.uiState.collectAsState()
 
-    val column1Weight = .1f
+    val column1Weight = .2f
     val column2Weight = .2f
-    val column3Weight = .35f
-    val column4Weight = .35f
+    val column3Weight = .30f
+    val column4Weight = .30f
 
     LazyColumn(
         Modifier

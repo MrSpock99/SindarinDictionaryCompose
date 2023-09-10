@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -43,9 +44,15 @@ internal fun GrammarListScreen(grammarInternalFeature: GrammarInternalFeature = 
                 GrammarCategoryItem(name = stringResource(R.string.grammar_item_pronounce)) {
                     navigator.navigate(grammarInternalFeature.pronounceScreen())
                 }
+
+                Divider(color = MaterialTheme.colors.onBackground, thickness = 1.dp)
+
                 GrammarCategoryItem(name = stringResource(R.string.grammar_item_stresses)) {
                     navigator.navigate(grammarInternalFeature.stressesScreen())
                 }
+
+                Divider(color = MaterialTheme.colors.onBackground, thickness = 1.dp)
+
                 GrammarCategoryItem(name = stringResource(R.string.grammar_item_plural)) {
                     navigator.navigate(grammarInternalFeature.pluralScreen())
                 }
