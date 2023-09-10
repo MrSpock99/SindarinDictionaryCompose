@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -23,15 +25,42 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import apps.robot.grammar.impl.R
 import apps.robot.grammar.impl.pronounce.presentation.PronounceViewModel
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.BorderOrder
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.drawSegmentedBorder
+import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
+import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.DictionaryListTopAppBar
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun PronounceScreen() {
-    TableScreen()
+    val navController = rememberNavController()
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+    val isTopBarVisible = currentDestination?.route != DictionaryFeatureApi.DETAILS_ROUTE
+
+    Scaffold(
+        topBar = {
+            DictionaryListTopAppBar(
+                isTopBarVisible = isTopBarVisible,
+                searchWidgetState = SearchWidgetState.CLOSED,
+                onSearchToggle = { },
+                onTextChange = { },
+                searchTextState = "",
+                title = stringResource(R.string.topbar_header),
+                hint = "",
+                isSearchVisible = false
+            )
+        }
+    ) { paddingValues ->
+        Surface(modifier = Modifier.padding(paddingValues)) {
+            TableScreen()
+        }
+    }
 }
 
 @Composable

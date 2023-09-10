@@ -47,6 +47,7 @@ fun DictionaryListTopAppBar(
     hint: String,
     optionalContent: (@Composable () -> Unit)? = null,
     onBackClicked: (() -> Unit)? = null,
+    isSearchVisible: Boolean = true
 ) {
     AnimatedVisibility(visible = isTopBarVisible) {
         when (searchWidgetState) {
@@ -55,7 +56,8 @@ fun DictionaryListTopAppBar(
                     onSearchToggle = onSearchToggle,
                     title = title,
                     optionalContent = optionalContent,
-                    onBackClicked = onBackClicked
+                    onBackClicked = onBackClicked,
+                    isSearchVisible = isSearchVisible
                 )
             }
             SearchWidgetState.OPENED -> {
@@ -75,7 +77,8 @@ fun DictionaryModeAppBar(
     onSearchToggle: () -> Unit,
     title: String,
     optionalContent: (@Composable () -> Unit)? = null,
-    onBackClicked: (() -> Unit)? = null
+    onBackClicked: (() -> Unit)? = null,
+    isSearchVisible: Boolean = true
 ) {
     TopAppBar(
         backgroundColor = MaterialTheme.colors.primary,
@@ -114,18 +117,20 @@ fun DictionaryModeAppBar(
             optionalContent()
         }
         Spacer(modifier = Modifier.width(16.dp))
-        IconButton(
-            modifier = Modifier
-                .alpha(ContentAlpha.medium),
-            onClick = {
-                onSearchToggle()
+        if (isSearchVisible) {
+            IconButton(
+                modifier = Modifier
+                    .alpha(ContentAlpha.medium),
+                onClick = {
+                    onSearchToggle()
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = "Search Icon",
+                    tint = MaterialTheme.colors.onPrimary
+                )
             }
-        ) {
-            Icon(
-                imageVector = Icons.Default.Search,
-                contentDescription = "Search Icon",
-                tint = MaterialTheme.colors.onPrimary
-            )
         }
         Spacer(modifier = Modifier.width(16.dp))
     }
