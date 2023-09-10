@@ -26,35 +26,29 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavController
 import apps.robot.grammar.impl.R
 import apps.robot.grammar.impl.pronounce.presentation.PronounceViewModel
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.BorderOrder
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.drawSegmentedBorder
-import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
 import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.DictionaryListTopAppBar
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun PronounceScreen() {
-    val navController = rememberNavController()
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentDestination = navBackStackEntry?.destination
-    val isTopBarVisible = currentDestination?.route != DictionaryFeatureApi.DETAILS_ROUTE
-
+fun PronounceScreen(navigator: NavController) {
     Scaffold(
         topBar = {
             DictionaryListTopAppBar(
-                isTopBarVisible = isTopBarVisible,
+                isTopBarVisible = true,
                 searchWidgetState = SearchWidgetState.CLOSED,
                 onSearchToggle = { },
                 onTextChange = { },
                 searchTextState = "",
                 title = stringResource(R.string.topbar_header),
                 hint = "",
-                isSearchVisible = false
+                isSearchVisible = false,
+                onBackClicked = navigator::navigateUp
             )
         }
     ) { paddingValues ->

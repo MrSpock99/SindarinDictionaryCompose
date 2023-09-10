@@ -12,7 +12,8 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 internal fun grammarFeatureModule() = module {
-    factory<GrammarFeatureApi> { GrammarFeatureApiImpl() }
+    factory<GrammarFeatureApi> { GrammarFeatureApiImpl(get()) }
+    factory { GrammarInternalFeature() }
     factory<GrammarRepository> { GrammarRepositoryImpl(get(), get(), get()) }
     factory {
         PronounceInitializer(
