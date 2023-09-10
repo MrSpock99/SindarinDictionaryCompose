@@ -1,11 +1,12 @@
 package apps.robot.grammar.impl.pronounce.data
 
+import apps.robot.grammar.api.PronounceDao
+import apps.robot.grammar.api.PronounceItem
 import apps.robot.grammar.impl.pronounce.domain.GrammarRepository
-import apps.robot.grammar.impl.pronounce.domain.PronounceItem
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -13,9 +14,9 @@ import kotlin.coroutines.suspendCoroutine
 class GrammarRepositoryImpl(
     private val db: FirebaseFirestore,
     private val dispatchers: AppDispatchers,
+    private val dao: PronounceDao
 ) : GrammarRepository {
-
-    override suspend fun getPronunciation(): List<PronounceItem> {
+    override suspend fun loadPronounceItems() {
         val pronounceItems = withContext(dispatchers.network) {
             suspendCoroutine<List<PronounceItem?>> { emitter ->
                 db.collection("pronunciation")
@@ -36,6 +37,10 @@ class GrammarRepositoryImpl(
                     }
             }
         }
-        return pronounceItems.filterNotNull()
+        dao.addItems(pronounceItems.filterNotNull())
+    }
+
+    override suspend fun getPronunciationAsFlow(): Flow<List<PronounceItem>> {
+        return dao.getItemsAsFlow()
     }
 }

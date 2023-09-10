@@ -9,7 +9,7 @@ import org.koin.dsl.module
 
 internal fun grammarFeatureModule() = module {
     factory<GrammarFeatureApi> { GrammarFeatureApiImpl() }
-    factory<GrammarRepository> { GrammarRepositoryImpl(get(), get()) }
+    factory<GrammarRepository> { GrammarRepositoryImpl(get(), get(), get()) }
 
     viewModel {
         PronounceViewModel(

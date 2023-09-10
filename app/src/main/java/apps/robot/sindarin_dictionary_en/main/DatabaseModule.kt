@@ -25,9 +25,10 @@ fun databaseModule() = module {
             }
             .build()
     }
+    factory { get<OldDatabase>().oldFavoritesDao() }
 
     factory { get<AppDatabase>().elfToEngDao() }
     factory { get<AppDatabase>().engToElfDao() }
     factory { get<AppDatabase>().favoritesDao() }
-    factory { get<OldDatabase>().oldFavoritesDao() }
+    factory { get<AppDatabase>().pronounceDao() }
 }
