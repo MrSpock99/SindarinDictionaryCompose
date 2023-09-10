@@ -3,6 +3,7 @@
     <string name="pronounce_header_1">Sound</string>
     <string name="pronounce_header_2">Example from English</string>
     <string name="pronounce_header_3">Example from Sindarin</string>
+    <string name="pronounce_text">If a consonant is doubled(mellon), it is pronounced longer.\nIf above a vowel is a \'triangle\' or a \'dash\', then the vowel is pronounced longer than usual. It\'s called \'a long vowel\'.</string>
 
     <string name="topbar_grammar_header">Grammar</string>
     <string name="topbar_pronounce_header">Pronunciation</string>

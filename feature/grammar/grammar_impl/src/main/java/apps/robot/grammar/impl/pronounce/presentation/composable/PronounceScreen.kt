@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -91,21 +92,33 @@ fun TableScreen(viewModel: PronounceViewModel = getViewModel()) {
                         cornerPercent = 0
                     )
             ) {
-                TableCell(text = stringResource(id = R.string.pronounce_header_1), weight = column1Weight, isBold = true)
+                TableCell(
+                    text = stringResource(id = R.string.pronounce_header_1),
+                    weight = column1Weight,
+                    isBold = true
+                )
                 Divider(
                     color = MaterialTheme.colors.onBackground,
                     modifier = Modifier
                         .fillMaxHeight()
                         .width(1.dp)
                 )
-                TableCell(text = stringResource(id = R.string.pronounce_header_2), weight = column2Weight, isBold = true)
+                TableCell(
+                    text = stringResource(id = R.string.pronounce_header_2),
+                    weight = column2Weight,
+                    isBold = true
+                )
                 Divider(
                     color = MaterialTheme.colors.onBackground,
                     modifier = Modifier
                         .fillMaxHeight()
                         .width(1.dp)
                 )
-                TableCell(text = stringResource(id = R.string.pronounce_header_3), weight = column3Weight, isBold = true)
+                TableCell(
+                    text = stringResource(id = R.string.pronounce_header_3),
+                    weight = column3Weight,
+                    isBold = true
+                )
             }
         }
 
@@ -151,6 +164,12 @@ fun TableScreen(viewModel: PronounceViewModel = getViewModel()) {
                 )
                 TableCell(text = item.sindarinExample, weight = column3Weight)
             }
+        }
+
+        item {
+            Spacer(modifier = Modifier.padding(vertical = 16.dp))
+
+            Text(text = stringResource(R.string.pronounce_text))
         }
     }
 }
