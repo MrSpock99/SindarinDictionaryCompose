@@ -10,7 +10,8 @@ internal fun phrasebookBaseModule() = module {
         PhrasebookRepositoryImpl(
             resources = androidContext().resources,
             db = get(),
-            dispatchers = get()
+            dispatchers = get(),
+            dao = get()
         )
     }
 }

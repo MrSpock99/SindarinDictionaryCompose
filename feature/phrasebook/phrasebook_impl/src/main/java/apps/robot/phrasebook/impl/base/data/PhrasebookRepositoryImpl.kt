@@ -1,13 +1,13 @@
 package apps.robot.phrasebook.impl.base.data
 
 import android.content.res.Resources
+import apps.robot.phrasebook.api.CategoryItem
+import apps.robot.phrasebook.api.PhrasebookDao
 import apps.robot.phrasebook.impl.R
-import apps.robot.phrasebook.impl.base.domain.CategoryItem
 import apps.robot.phrasebook.impl.base.domain.PhrasebookRepository
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
-import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.model.ElfToEngWordEntity
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -16,14 +16,51 @@ import kotlin.coroutines.suspendCoroutine
 class PhrasebookRepositoryImpl(
     private val resources: Resources,
     private val db: FirebaseFirestore,
-    private val dispatchers: AppDispatchers
+    private val dispatchers: AppDispatchers,
+    private val dao: PhrasebookDao
 ) : PhrasebookRepository {
 
     override fun getPhrasebookCategories(): List<String> {
         return resources.getStringArray(R.array.phrasebook_categories).toList()
     }
 
-    override suspend fun getCategoryItems(categoryName: String): List<CategoryItem> {
+    override fun getCategoryItemsAsFlow(categoryName: String): Flow<List<CategoryItem>> {
+        return dao.getCategoryItemsAfFlow(getMappedId(categoryName))
+    }
+
+    override suspend fun isCacheEmpty(): Boolean {
+        return dao.getCategoryItemsSize() == 0
+    }
+
+    override suspend fun loadPhrasebookCategoryItems() {
+        listOfCategories.forEach { categoryId ->
+            val list = withContext(dispatchers.ui) {
+                suspendCoroutine<List<CategoryItem?>> { emitter ->
+                    db.collection(categoryId)
+                        .get()
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                emitter.resume(
+                                    task.result?.documents?.map {
+                                        val word = it.toObject(CategoryItem::class.java)
+                                        word
+                                    } ?: emptyList())
+                            } else {
+                                emitter.resumeWithException(
+                                    task.exception ?: java.lang.Exception()
+                                )
+                            }
+                        }
+                }
+            }.filterNotNull().map {
+                CategoryItem(it.id, it.word, it.translation, categoryId)
+            }
+
+            dao.insertAll(list)
+        }
+    }
+
+    private fun getMappedId(categoryName: String): String {
         val categories = getPhrasebookCategories()
         val mappedId = when(categoryName) {
             categories[0] -> "greetings"
@@ -51,25 +88,34 @@ class PhrasebookRepositoryImpl(
             categories[22] -> "weather"
             else -> ""
         }
-        val list = withContext(dispatchers.ui) {
-            suspendCoroutine<List<CategoryItem?>> { emitter ->
-                db.collection(mappedId)
-                    .get()
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            emitter.resume(
-                                task.result.documents.map {
-                                val word = it.toObject(CategoryItem::class.java)
-                                word
-                            })
-                        } else {
-                            emitter.resumeWithException(
-                                task.exception ?: java.lang.Exception()
-                            )
-                        }
-                    }
-            }
-        }
-        return list.filterNotNull()
+        return mappedId
+    }
+
+    companion object {
+        private val listOfCategories = listOf(
+            "greetings",
+            "farewells",
+            "calls",
+            "talking",
+            "smallTalk",
+            "questionsAndAnswers",
+            "compliments",
+            "romance",
+            "tender",
+            "adventure",
+            "Exclamation",
+            "Pleas, Entreaties",
+            "trouble",
+            "insults",
+            "threats",
+            "battle_cries",
+            "battle_phrases",
+            "healing",
+            "professions",
+            "monthsOfTheYear",
+            "seasons",
+            "dayOfTheWeek",
+            "weather",
+        )
     }
 }

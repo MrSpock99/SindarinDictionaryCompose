@@ -11,7 +11,6 @@ import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.UiState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.launchIn
@@ -75,17 +74,19 @@ class PhrasebookCategoryViewModel(
 
     private fun loadItems() {
         launchJob {
-            val items = repository.getCategoryItems(categoryName).map {
-                PhrasebookCategoryItemUiModel(
-                    text = UiText.DynamicString(it.word),
-                    translation = UiText.DynamicString(it.translation)
-                )
-            }
-            state.update {
-                it.copy(
-                    list = items,
-                    uiState = UiState.Content
-                )
+            repository.getCategoryItemsAsFlow(categoryName).collect { categoryItems ->
+                val items = categoryItems.map {
+                    PhrasebookCategoryItemUiModel(
+                        text = UiText.DynamicString(it.word),
+                        translation = UiText.DynamicString(it.translation)
+                    )
+                }
+                state.update {
+                    it.copy(
+                        list = items,
+                        uiState = UiState.Content
+                    )
+                }
             }
         }
     }

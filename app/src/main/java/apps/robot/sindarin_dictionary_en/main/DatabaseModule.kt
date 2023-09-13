@@ -31,4 +31,5 @@ fun databaseModule() = module {
     factory { get<AppDatabase>().engToElfDao() }
     factory { get<AppDatabase>().favoritesDao() }
     factory { get<AppDatabase>().pronounceDao() }
+    factory { get<AppDatabase>().phrasebookDao() }
 }

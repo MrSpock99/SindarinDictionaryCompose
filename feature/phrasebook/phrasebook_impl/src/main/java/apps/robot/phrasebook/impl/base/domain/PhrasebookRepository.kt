@@ -1,6 +1,11 @@
 package apps.robot.phrasebook.impl.base.domain
 
+import apps.robot.phrasebook.api.CategoryItem
+import kotlinx.coroutines.flow.Flow
+
 interface PhrasebookRepository {
     fun getPhrasebookCategories(): List<String>
-    suspend fun getCategoryItems(categoryName: String): List<CategoryItem>
+    fun getCategoryItemsAsFlow(categoryName: String): Flow<List<CategoryItem>>
+    suspend fun isCacheEmpty(): Boolean
+    suspend fun loadPhrasebookCategoryItems()
 }

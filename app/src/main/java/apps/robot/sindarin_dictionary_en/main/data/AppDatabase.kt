@@ -6,6 +6,8 @@ import apps.robot.favorites.api.data.FavoritesDao
 import apps.robot.favorites.api.domain.FavoriteModel
 import apps.robot.grammar.api.PronounceDao
 import apps.robot.grammar.api.PronounceItem
+import apps.robot.phrasebook.api.CategoryItem
+import apps.robot.phrasebook.api.PhrasebookDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.ElfToEngDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.EngToElfDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.model.ElfToEngWordEntity
@@ -18,6 +20,7 @@ import apps.robot.sindarin_dictionary_en.main.data.AppDatabase.Companion.VERSION
         ElfToEngWordEntity::class,
         FavoriteModel::class,
         PronounceItem::class,
+        CategoryItem::class,
     ],
     version = VERSION
 )
@@ -26,6 +29,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun elfToEngDao(): ElfToEngDao
     abstract fun favoritesDao(): FavoritesDao
     abstract fun pronounceDao(): PronounceDao
+    abstract fun phrasebookDao(): PhrasebookDao
 
     companion object {
         const val VERSION = 1
