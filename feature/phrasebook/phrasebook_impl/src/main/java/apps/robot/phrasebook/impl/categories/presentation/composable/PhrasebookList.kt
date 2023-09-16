@@ -29,7 +29,6 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 internal fun PhrasebookCategoriesList(
     viewModel: PhrasebookCategoriesViewModel = getViewModel(),
-    phrasebookInternalFeature: PhrasebookInternalFeature = get(),
     navigator: NavHostController
 ) {
     val state by viewModel.state.collectAsState()
@@ -77,11 +76,7 @@ internal fun PhrasebookCategoriesList(
                         list[index].text.asString(context)
                     }) { index ->
                     PhrasebookCategoriesItem(item = list[index]) {
-                        navigator.navigate(
-                            phrasebookInternalFeature.phrasebookCategoryScreen(
-                                categoryName = list[index].text.asString(context)
-                            )
-                        )
+                        viewModel.onPhrasebookCategoryClick(list[index], navigator, context)
                     }
                     if (index < list.lastIndex)
                         Divider(color = MaterialTheme.colors.onBackground, thickness = 1.dp)

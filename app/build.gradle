@@ -27,6 +27,13 @@ android {
             }
         }
     }
+    flavorDimensions "types"
+
+    productFlavors {
+        register("EngFree")
+        register("EngPro")
+    }
+
 }
 
 dependencies {

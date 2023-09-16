@@ -24,6 +24,10 @@ class PhrasebookRepositoryImpl(
         return resources.getStringArray(R.array.phrasebook_categories).toList()
     }
 
+    override fun getPhrasebookProCategories(): List<String> {
+        return resources.getStringArray(R.array.phrasebook_categories_pro).toList()
+    }
+
     override fun getCategoryItemsAsFlow(categoryName: String): Flow<List<CategoryItem>> {
         return dao.getCategoryItemsAfFlow(getMappedId(categoryName))
     }

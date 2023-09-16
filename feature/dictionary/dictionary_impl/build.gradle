@@ -32,6 +32,13 @@ android {
         arg("compose-destinations.mode", "destinations")
         arg("compose-destinations.moduleName", "dictionary_impl")
     }
+
+    flavorDimensions "types"
+
+    productFlavors {
+        register("EngFree")
+        register("EngPro")
+    }
 }
 
 ksp {
