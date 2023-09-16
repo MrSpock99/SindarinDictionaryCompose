@@ -18,6 +18,7 @@ apply plugin: Plugins.kotlinKapt
 
 apply from: "$rootDir/config/dependencies-groups.gradle"
 apply from: "$rootDir/config/config-android.gradle"
+apply from: "$rootDir/config/config-product-flavors.gradle"
 
 android {
     libraryVariants.all { variant ->
@@ -27,13 +28,6 @@ android {
             }
         }
     }
-    flavorDimensions "types"
-
-    productFlavors {
-        register("EngFree")
-        register("EngPro")
-    }
-
 }
 
 dependencies {

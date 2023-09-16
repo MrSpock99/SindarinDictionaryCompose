@@ -6,15 +6,7 @@ apply plugin: Plugins.kotlinAndroid
 
 apply from: "$rootDir/config/dependencies-groups.gradle"
 apply from: "$rootDir/config/config-android.gradle"
-
-android {
-    flavorDimensions "types"
-
-    productFlavors {
-        register("EngFree")
-        register("EngPro")
-    }
-}
+apply from: "$rootDir/config/config-product-flavors.gradle"
 
 dependencies {
     implementation project(AppModules.baseUi)
