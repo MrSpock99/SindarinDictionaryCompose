@@ -9,6 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import java.util.UUID
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -20,27 +21,34 @@ class GrammarRepositoryImpl(
     private val dao: PronounceDao
 ) : GrammarRepository {
     override suspend fun loadPronounceItems() {
-        val pronounceItems = withContext(dispatchers.network) {
-            suspendCoroutine<List<PronounceItem?>> { emitter ->
-                db.collection("pronunciation")
-                    .get()
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            emitter.resume(
-                                task.result?.documents?.map {
-                                    val word = it.toObject(PronounceItem::class.java)
-                                    word
-                                } ?: emptyList()
-                            )
-                        } else {
-                            emitter.resumeWithException(
-                                task.exception ?: Exception()
-                            )
+        val pronounceItems = kotlin.runCatching {
+            withContext(dispatchers.network) {
+                suspendCoroutine<List<PronounceItem?>> { emitter ->
+                    db.collection("pronunciation")
+                        .get()
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                emitter.resume(
+                                    task.result?.documents?.map {
+                                        val word = it.toObject(PronounceItem::class.java)
+                                        word
+                                    } ?: emptyList()
+                                )
+                            } else {
+                                emitter.resumeWithException(
+                                    task.exception ?: Exception()
+                                )
+                            }
                         }
-                    }
+                }
             }
+        }.onFailure {
+            Timber.d("Error while fetching data $it")
+        }.getOrNull()
+
+        pronounceItems?.filterNotNull()?.let {
+            dao.addItems(it)
         }
-        dao.addItems(pronounceItems.filterNotNull())
     }
 
     override suspend fun getPronunciationAsFlow(): Flow<List<PronounceItem>> {
@@ -58,15 +66,23 @@ class GrammarRepositoryImpl(
     override fun getPluralItemsAsFlow(): Flow<List<PluralItem>> {
         val pluralData = mutableListOf<PluralItem>()
 
-        pluralData.add(PluralItem(UUID.randomUUID().toString(),"A", "e", "ai (арх. ei*)", "Adan – Edain\nAras - Erais"))
-        pluralData.add(PluralItem(UUID.randomUUID().toString(),"E", "e", "i", "Edhel - Edhil"))
-        pluralData.add(PluralItem(UUID.randomUUID().toString(),"I", "i ", "i", "Ithil - Ithil"))
-        pluralData.add(PluralItem(UUID.randomUUID().toString(),"O", "e", "y", "Orod – Eryd\nBrog - Bryg"))
-        pluralData.add(PluralItem(UUID.randomUUID().toString(),"U", "y", "y\nui (long)", "Ungol – Yngyl\nDûr - Duir"))
-        pluralData.add(PluralItem(UUID.randomUUID().toString(),"Y", "y", "y", "Ylf - Ylf"))
-        pluralData.add(PluralItem(UUID.randomUUID().toString(),"io", "y", "y", "Thalion - Thelyn"))
-        pluralData.add(PluralItem(UUID.randomUUID().toString(),"au", "oe", "oe", "Draug - Droeg"))
-        pluralData.add(PluralItem(UUID.randomUUID().toString(),"ie", "ie", "i", "Tiriel - Tiril"))
+        pluralData.add(
+            PluralItem(
+                UUID.randomUUID().toString(),
+                "A",
+                "e",
+                "ai (арх. ei*)",
+                "Adan – Edain\nAras - Erais"
+            )
+        )
+        pluralData.add(PluralItem(UUID.randomUUID().toString(), "E", "e", "i", "Edhel - Edhil"))
+        pluralData.add(PluralItem(UUID.randomUUID().toString(), "I", "i ", "i", "Ithil - Ithil"))
+        pluralData.add(PluralItem(UUID.randomUUID().toString(), "O", "e", "y", "Orod – Eryd\nBrog - Bryg"))
+        pluralData.add(PluralItem(UUID.randomUUID().toString(), "U", "y", "y\nui (long)", "Ungol – Yngyl\nDûr - Duir"))
+        pluralData.add(PluralItem(UUID.randomUUID().toString(), "Y", "y", "y", "Ylf - Ylf"))
+        pluralData.add(PluralItem(UUID.randomUUID().toString(), "io", "y", "y", "Thalion - Thelyn"))
+        pluralData.add(PluralItem(UUID.randomUUID().toString(), "au", "oe", "oe", "Draug - Droeg"))
+        pluralData.add(PluralItem(UUID.randomUUID().toString(), "ie", "ie", "i", "Tiriel - Tiril"))
 
         return flow {
             emit(pluralData)

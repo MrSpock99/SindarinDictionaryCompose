@@ -33,30 +33,35 @@ internal class EngToElfDictionaryRepositoryImpl(
 ) : EngToElfDictionaryRepository {
 
     override suspend fun loadWords() {
-        val words = withContext(dispatchers.network) {
-            suspendCoroutine<List<EngToElfWordEntity?>> { emitter ->
-                db.collection(ENG_TO_ELF_WORDS)
-                    .get()
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            Timber.d("EngToElfDictionaryRepository: success ${task.result?.documents?.size}")
-                            emitter.resume(
-                                task.result?.documents?.map {
-                                    val word = it.toObject(EngToElfWordEntity::class.java)
-                                    word?.id = it.id
-                                    word
-                                } ?: emptyList()
-                            )
-                        } else {
-                            emitter.resumeWithException(
-                                task.exception ?: java.lang.Exception()
-                            )
+        val words = runCatching {
+            withContext(dispatchers.network) {
+                suspendCoroutine<List<EngToElfWordEntity?>> { emitter ->
+                    db.collection(ENG_TO_ELF_WORDS)
+                        .get()
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                Timber.d("EngToElfDictionaryRepository: success ${task.result?.documents?.size}")
+                                emitter.resume(
+                                    task.result?.documents?.map {
+                                        val word = it.toObject(EngToElfWordEntity::class.java)
+                                        word?.id = it.id
+                                        word
+                                    } ?: emptyList()
+                                )
+                            } else {
+                                emitter.resumeWithException(
+                                    task.exception ?: java.lang.Exception()
+                                )
+                            }
                         }
-                    }
+                }
             }
-        }
+        }.onFailure {
+            Timber.d("Error while fetching data $it")
+        }.getOrNull()
 
-        dao.insertAll(words.filterNotNull().sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.word }))
+        words?.filterNotNull()?.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.word })
+            ?.let { dao.insertAll(it) }
     }
 
     override fun getPagedWordsAsFlow(keyword: String?): Flow<PagingData<Word>> {

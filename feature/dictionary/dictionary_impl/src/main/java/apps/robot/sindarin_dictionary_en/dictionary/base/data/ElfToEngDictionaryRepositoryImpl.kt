@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -31,28 +32,34 @@ internal class ElfToEngDictionaryRepositoryImpl(
 ) : ElfToEngDictionaryRepository {
 
     override suspend fun loadWords() {
-        val words = withContext(dispatchers.network) {
-            suspendCoroutine<List<ElfToEngWordEntity?>> { emitter ->
-                db.collection(ELF_TO_ENG_WORDS)
-                    .get()
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            emitter.resume(
-                                task.result.documents.map {
-                                    val word = it.toObject(ElfToEngWordEntity::class.java)
-                                    word?.id = it.id
-                                    word
-                                }
-                            )
-                        } else {
-                            emitter.resumeWithException(
-                                task.exception ?: java.lang.Exception()
-                            )
+        val words = runCatching {
+            withContext(dispatchers.network) {
+                suspendCoroutine<List<ElfToEngWordEntity?>> { emitter ->
+                    db.collection(ELF_TO_ENG_WORDS)
+                        .get()
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                emitter.resume(
+                                    task.result?.documents?.map {
+                                        val word = it.toObject(ElfToEngWordEntity::class.java)
+                                        word?.id = it.id
+                                        word
+                                    } ?: listOf()
+                                )
+                            } else {
+                                emitter.resumeWithException(
+                                    task.exception ?: java.lang.Exception()
+                                )
+                            }
                         }
-                    }
+                }
             }
-        }
-        dao.insertAll(words.filterNotNull().sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.word }))
+        }.onFailure {
+            Timber.d("Error while fetching data $it")
+        }.getOrNull()
+
+        words?.filterNotNull()?.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.word })
+            ?.let { dao.insertAll(it) }
     }
 
     override fun getPagedWordsAsFlow(keyword: String?): Flow<PagingData<Word>> {

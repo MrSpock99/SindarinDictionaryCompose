@@ -9,6 +9,7 @@ import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.Ap
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -38,35 +39,41 @@ class PhrasebookRepositoryImpl(
 
     override suspend fun loadPhrasebookCategoryItems() {
         listOfCategories.forEach { categoryId ->
-            val list = withContext(dispatchers.ui) {
-                suspendCoroutine<List<CategoryItem?>> { emitter ->
-                    db.collection(categoryId)
-                        .get()
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                emitter.resume(
-                                    task.result?.documents?.map {
-                                        val word = it.toObject(CategoryItem::class.java)
-                                        word
-                                    } ?: emptyList())
-                            } else {
-                                emitter.resumeWithException(
-                                    task.exception ?: java.lang.Exception()
-                                )
+            val list = runCatching {
+                withContext(dispatchers.ui) {
+                    suspendCoroutine<List<CategoryItem?>> { emitter ->
+                        db.collection(categoryId)
+                            .get()
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    emitter.resume(
+                                        task.result?.documents?.map {
+                                            val word = it.toObject(CategoryItem::class.java)
+                                            word
+                                        } ?: emptyList())
+                                } else {
+                                    emitter.resumeWithException(
+                                        task.exception ?: java.lang.Exception()
+                                    )
+                                }
                             }
-                        }
+                    }
+                }.filterNotNull().map {
+                    CategoryItem(it.id, it.word, it.translation, categoryId)
                 }
-            }.filterNotNull().map {
-                CategoryItem(it.id, it.word, it.translation, categoryId)
-            }
+            }.onFailure {
+                Timber.d("Error while fetching data $it")
+            }.getOrNull()
 
-            dao.insertAll(list)
+            list?.let {
+                dao.insertAll(it)
+            }
         }
     }
 
     private fun getMappedId(categoryName: String): String {
         val categories = getPhrasebookCategories()
-        val mappedId = when(categoryName) {
+        val mappedId = when (categoryName) {
             categories[0] -> "greetings"
             categories[1] -> "farewells"
             categories[2] -> "calls"
