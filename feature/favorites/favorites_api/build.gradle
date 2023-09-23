@@ -15,4 +15,5 @@ dependencies {
     support()
     networkCore()
     database()
+    timber()
 }

@@ -2,10 +2,11 @@ package apps.robot.favorites.api.data.migration
 
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import timber.log.Timber
 
 class OldFavoritesTableMigration(oldVersion: Int, newVersion: Int): Migration(oldVersion, newVersion) {
 
     override fun migrate(database: SupportSQLiteDatabase) {
-        // noting to do
+        Timber.d("migrate old database")
     }
 }
