@@ -24,3 +24,11 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+static int generateVersionCode() {
+    /**
+     * Use the number of seconds / 20 since Jan 1 1970 as the versionCode.
+     * This lets us upload a new build at most every 20 seconds until 3331 year.
+     */
+    return (int) (new Date().getTime() / 20000)
+}
