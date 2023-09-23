@@ -6,6 +6,7 @@ import apps.robot.favorites.api.domain.FavoriteModel
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.BaseAppInitializer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class OldToNewFavoritesInitializer(
     private val coroutineScope: CoroutineScope,
@@ -16,6 +17,9 @@ class OldToNewFavoritesInitializer(
     override fun onAppStartInit() {
         coroutineScope.launch {
             val oldFavoritesTable = oldFavoritesDao.getAll()
+            oldFavoritesTable.forEach {
+                Timber.d("OldToNewFavoritesInitializer: old $it")
+            }
             if (oldFavoritesTable.isNotEmpty()) {
                 val oldFavorites = oldFavoritesTable.map {
                     val text = it.text?.substringBefore("|").orEmpty()
@@ -28,6 +32,7 @@ class OldToNewFavoritesInitializer(
                 }
                 oldFavorites.forEach {
                     favoritesDao.add(it)
+                    Timber.d("OldToNewFavoritesInitializer: insert to new $it")
                 }
                 oldFavoritesDao.deleteAll()
             }
