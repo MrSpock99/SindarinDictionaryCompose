@@ -22,7 +22,8 @@ import apps.robot.sindarin_dictionary_en.main.data.AppDatabase.Companion.VERSION
         PronounceItem::class,
         CategoryItem::class,
     ],
-    version = VERSION
+    version = VERSION,
+    exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun engToElfDao(): EngToElfDao

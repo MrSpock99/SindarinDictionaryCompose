@@ -18,13 +18,38 @@ android {
     flavorDimensions "types"
 
     productFlavors {
-        free {
+        EngFree {
             dimension "types"
             applicationId "apps.robot.sindarin_dictionary_en"
+            buildConfigField "String", "FLAVOR", '"EngFree"'
         }
-        pro {
+        EngPro {
             dimension "types"
             applicationId "apps.robot.sindarin_dictionary_en_noad"
+            buildConfigField "String", "FLAVOR", '"EngPro"'
+        }
+        RusFree {
+            dimension "types"
+            applicationId "apps.robot.sindarin_dictionary_ru"
+            buildConfigField "String", "FLAVOR", '"RusFree"'
+        }
+        RusPro {
+            dimension "types"
+            applicationId "apps.robot.sindarin_dictionary_ru_noad"
+            buildConfigField "String", "FLAVOR", '"RusPro"'
+        }
+    }
+    buildFeatures {
+        buildConfig = true
+    }
+    defaultConfig {
+
+        // ... (applicationId, miSdkVersion, etc)
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
         }
     }
 }

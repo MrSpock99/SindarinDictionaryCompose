@@ -41,11 +41,11 @@ internal class EngToElfDictionaryRepositoryImpl(
                         if (task.isSuccessful) {
                             Timber.d("EngToElfDictionaryRepository: success ${task.result?.documents?.size}")
                             emitter.resume(
-                                task.result.documents.map {
+                                task.result?.documents?.map {
                                     val word = it.toObject(EngToElfWordEntity::class.java)
                                     word?.id = it.id
                                     word
-                                }
+                                } ?: emptyList()
                             )
                         } else {
                             emitter.resumeWithException(

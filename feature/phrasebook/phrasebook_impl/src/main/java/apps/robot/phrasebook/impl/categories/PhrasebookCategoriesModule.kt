@@ -9,7 +9,8 @@ internal fun phrasebookCategoryModule() = module {
         PhrasebookCategoriesViewModel(
             repository = get(),
             context = androidContext(),
-            dispatchers = get()
+            dispatchers = get(),
+            phrasebookInternalFeature = get()
         )
     }
 }
