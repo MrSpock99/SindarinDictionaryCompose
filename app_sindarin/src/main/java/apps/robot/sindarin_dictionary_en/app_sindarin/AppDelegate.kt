@@ -29,7 +29,7 @@ class AppDelegate : Application() {
         val initializers = getKoin().getAll<BaseAppInitializer>()
             .sortedByDescending {
                 it.getPriority()
-            }
+            }.distinct()
         initializers.forEach {
             it.onAppStartInit()
         }
