@@ -3,7 +3,6 @@ package apps.robot.phrasebook.impl.categories.presentation
 import android.content.Context
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
-import apps.robot.phrasebook.impl.BuildConfig
 import apps.robot.phrasebook.impl.base.domain.PhrasebookRepository
 import apps.robot.phrasebook.impl.navigation.PhrasebookInternalFeature
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.UiText
@@ -21,7 +20,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.plus
-import org.koin.androidx.compose.get
 
 class PhrasebookCategoriesViewModel(
     private val repository: PhrasebookRepository,
@@ -60,7 +58,9 @@ class PhrasebookCategoriesViewModel(
     ) {
         val proCategories = repository.getPhrasebookProCategories()
 
-        if (isFree() && !proCategories.contains(item.text.asString(context))) {
+        if (isFree() && proCategories.contains(item.text.asString(context))) {
+            // show dialog
+        } else {
             navigator.navigate(
                 phrasebookInternalFeature.phrasebookCategoryScreen(
                     categoryName = item.text.asString(context)
