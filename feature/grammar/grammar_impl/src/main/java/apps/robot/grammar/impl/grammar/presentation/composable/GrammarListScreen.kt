@@ -11,7 +11,12 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -19,12 +24,17 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import apps.robot.grammar.impl.GrammarInternalFeature
 import apps.robot.grammar.impl.R
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.ProVersionPromotionDialog
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.isFree
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.openProVersionInMarket
 import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.DictionaryListTopAppBar
 import org.koin.androidx.compose.get
 
 @Composable
 internal fun GrammarListScreen(grammarInternalFeature: GrammarInternalFeature = get(), navigator: NavHostController) {
+    var showDialog by remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
             DictionaryListTopAppBar(
@@ -40,6 +50,8 @@ internal fun GrammarListScreen(grammarInternalFeature: GrammarInternalFeature = 
         }
     ) { paddingValues ->
         Surface(modifier = Modifier.padding(paddingValues)) {
+            val context = LocalContext.current
+
             Column {
                 GrammarCategoryItem(name = stringResource(R.string.grammar_item_pronounce)) {
                     navigator.navigate(grammarInternalFeature.pronounceScreen())
@@ -54,8 +66,22 @@ internal fun GrammarListScreen(grammarInternalFeature: GrammarInternalFeature = 
                 Divider(color = MaterialTheme.colors.onBackground, thickness = 1.dp)
 
                 GrammarCategoryItem(name = stringResource(R.string.grammar_item_plural)) {
-                    navigator.navigate(grammarInternalFeature.pluralScreen())
+                    if (isFree()) {
+                        showDialog = true
+                    } else {
+                        navigator.navigate(grammarInternalFeature.pluralScreen())
+                    }
                 }
+            }
+
+            if (showDialog) {
+                ProVersionPromotionDialog(
+                    onConfirmClick = {
+                        openProVersionInMarket(context)
+                    }, onDismissClick = {
+                        showDialog = false
+                    }
+                )
             }
         }
     }

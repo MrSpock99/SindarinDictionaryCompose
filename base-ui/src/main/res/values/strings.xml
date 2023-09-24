@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pro_version_promo_dialog_title">Oops…</string>
+    <string name="pro_version_promo_dialog_text">This section is only available in a Pro version. You can buy the Pro version in Google Play and get access to this section</string>
+    <string name="pro_version_promo_dialog_button_confirm">Go to Google Play</string>
+    <string name="pro_version_promo_dialog_button_dismiss">Cancel</string>
+</resources>

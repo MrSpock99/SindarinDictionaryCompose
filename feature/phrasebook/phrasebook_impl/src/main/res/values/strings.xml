@@ -36,5 +36,6 @@
         <item>Seasons</item>
         <item>Days of the Week</item>
         <item>Weather</item>
+        <item>Colors</item>
     </string-array>
 </resources>

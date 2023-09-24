@@ -59,7 +59,11 @@ class PhrasebookCategoriesViewModel(
         val proCategories = repository.getPhrasebookProCategories()
 
         if (isFree() && proCategories.contains(item.text.asString(context))) {
-            // show dialog
+            state.update {
+                it.copy(
+                    showProPromotionDialog = true
+                )
+            }
         } else {
             navigator.navigate(
                 phrasebookInternalFeature.phrasebookCategoryScreen(
@@ -94,11 +98,20 @@ class PhrasebookCategoriesViewModel(
         )
     }
 
+    fun onDismissPromoDialog() {
+        state.update {
+            it.copy(
+                showProPromotionDialog = false
+            )
+        }
+    }
+
     data class PhrasebookListState(
         override val searchWidgetState: SearchWidgetState = SearchWidgetState.CLOSED,
         override val searchText: MutableStateFlow<String> = MutableStateFlow(""),
         val categoriesList: List<PhrasebookCategoryUiModel> = emptyList(),
         val uiState: UiState,
+        val showProPromotionDialog: Boolean = false
     ) : Searchable.SearchableState
 
     private companion object {
