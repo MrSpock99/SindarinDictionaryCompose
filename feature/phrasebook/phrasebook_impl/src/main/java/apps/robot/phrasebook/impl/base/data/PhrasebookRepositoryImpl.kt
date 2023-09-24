@@ -97,6 +97,7 @@ class PhrasebookRepositoryImpl(
             categories[20] -> "seasons"
             categories[21] -> "dayOfTheWeek"
             categories[22] -> "weather"
+            categories[23] -> "colors"
             else -> ""
         }
         return mappedId
@@ -127,6 +128,7 @@ class PhrasebookRepositoryImpl(
             "seasons",
             "dayOfTheWeek",
             "weather",
+            "colors",
         )
     }
 }

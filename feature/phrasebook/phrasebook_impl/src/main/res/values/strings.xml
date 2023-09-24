@@ -28,6 +28,7 @@
         <item>Seasons</item>
         <item>Days of the Week</item>
         <item>Weather</item>
+        <item>Colors</item>
     </string-array>
 
     <string-array name="phrasebook_categories_pro">
