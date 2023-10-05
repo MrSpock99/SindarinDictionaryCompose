@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">SindarinDictionaryCompose</string>
     <string name="dictionary_list_toolbar_title">Словарь</string>
     <string name="dictionary_mode_eng_to_elv">Англ/Эльф</string>
     <string name="dictionary_mode_elv_to_eng">Эльф/Англ</string>

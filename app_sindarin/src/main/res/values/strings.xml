@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">SindarinDictionaryCompose</string>
+    <string name="app_name" translatable="false">Sindarin Dictionary Pro</string>
     <string name="admob_app_id" translatable="false">ca-app-pub-2471262936820592~3686881668</string>
 </resources>
