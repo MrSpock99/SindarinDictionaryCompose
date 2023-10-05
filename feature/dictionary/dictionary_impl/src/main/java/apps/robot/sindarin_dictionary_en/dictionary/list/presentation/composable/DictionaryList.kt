@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -46,6 +47,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import apps.robot.dictionary.impl.R
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.UiState
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DetailsMode
 import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.DictionaryListTopAppBar
@@ -144,6 +146,18 @@ internal fun DictionaryListContentRow(
             fontSize = 16.sp,
             color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
         )
+    }
+    if (state.uiState == UiState.Loading) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(),
+            contentAlignment = Alignment.Center,
+        ) {
+            CircularProgressIndicator(
+                color = MaterialTheme.colors.onBackground
+            )
+        }
     }
     Row(
         modifier = Modifier.fillMaxWidth(),
