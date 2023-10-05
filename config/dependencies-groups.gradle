@@ -73,4 +73,8 @@ ext {
     lazyColumnScrollbar = Group {
         implementation Libraries.Compose.lazyColumnScrollbar
     }
+
+    admob = Group {
+        EngFreeImplementation Libraries.Ads.admob
+    }
 }

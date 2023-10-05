@@ -5,6 +5,7 @@ import android.content.Context
 import apps.robot.favorites.impl.favoritesModules
 import apps.robot.grammar.impl.grammarModules
 import apps.robot.phrasebook.impl.phrasebookModules
+import apps.robot.sindarin_dictionary_en.base_ui.ad.adModule
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.BaseAppInitializer
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.appModule
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.coroutinesModule
@@ -26,6 +27,7 @@ class AppDelegate : Application() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
+
         val initializers = getKoin().getAll<BaseAppInitializer>()
             .sortedByDescending {
                 it.getPriority()
@@ -46,6 +48,7 @@ class AppDelegate : Application() {
             modules(favoritesModules())
             modules(phrasebookModules())
             modules(grammarModules())
+            modules(adModule())
         }
     }
 }

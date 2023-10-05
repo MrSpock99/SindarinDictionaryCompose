@@ -69,4 +69,5 @@ dependencies {
     support()
     composeCore()
     timber()
+    admob()
 }

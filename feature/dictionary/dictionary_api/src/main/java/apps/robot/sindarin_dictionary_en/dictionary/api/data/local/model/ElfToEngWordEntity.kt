@@ -10,8 +10,8 @@ import com.google.gson.annotations.SerializedName
 class ElfToEngWordEntity(
     @PrimaryKey
     var id: String,
-    val word: String,
-    val translation: String,
+    var word: String,
+    var translation: String,
     @SerializedName("is_favorite")
     @ColumnInfo(name = "is_favorite")
     var isFavorite: Boolean

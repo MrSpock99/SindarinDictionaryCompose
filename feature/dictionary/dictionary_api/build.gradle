@@ -9,26 +9,12 @@ buildscript {
     }
 }
 
-plugins {
-    id 'com.google.devtools.ksp' version "${kspVersion}" // TODO don't use hardcoded strings
-}
-
 apply plugin: Plugins.library
 apply plugin: Plugins.kotlinAndroid
 
 apply from: "$rootDir/config/dependencies-groups.gradle"
 apply from: "$rootDir/config/config-android.gradle"
 apply from: "$rootDir/config/config-product-flavors.gradle"
-
-android {
-    libraryVariants.all { variant ->
-        kotlin.sourceSets {
-            getByName(variant.name) {
-                kotlin.srcDir("build/generated/ksp/${variant.name}/java")
-            }
-        }
-    }
-}
 
 dependencies {
     implementation project(AppModules.baseUi)

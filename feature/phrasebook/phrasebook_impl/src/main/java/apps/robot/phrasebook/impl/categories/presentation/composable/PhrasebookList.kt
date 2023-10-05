@@ -1,8 +1,9 @@
 package apps.robot.phrasebook.impl.categories.presentation.composable
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -20,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import apps.robot.phrasebook.impl.R
 import apps.robot.phrasebook.impl.categories.presentation.PhrasebookCategoriesViewModel
+import apps.robot.sindarin_dictionary_en.base_ui.ad.AdmobBanner
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.ProVersionPromotionDialog
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.openProVersionInMarket
@@ -65,21 +67,21 @@ internal fun PhrasebookCategoriesList(
                     color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
                 )
             }
-            val listState = rememberLazyListState()
             val context = LocalContext.current
-            LazyColumn(
-                state = listState
+            Column(
+                modifier = Modifier.verticalScroll(rememberScrollState())
             ) {
-                items(
-                    count = list.size,
-                    key = { index ->
-                        list[index].text.asString(context)
-                    }) { index ->
-                    PhrasebookCategoriesItem(item = list[index]) {
-                        viewModel.onPhrasebookCategoryClick(list[index], navigator, context)
+                list.forEachIndexed { index, item ->
+                    if (index == 0) {
+                        AdmobBanner()
+                    }
+                    PhrasebookCategoriesItem(item = item) {
+                        viewModel.onPhrasebookCategoryClick(item, navigator, context)
                     }
                     if (index < list.lastIndex)
                         Divider(color = MaterialTheme.colors.onBackground, thickness = 1.dp)
+                    else if (index == list.lastIndex)
+                        AdmobBanner()
                 }
             }
 

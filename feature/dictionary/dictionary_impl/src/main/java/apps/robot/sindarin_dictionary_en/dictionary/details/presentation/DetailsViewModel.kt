@@ -57,6 +57,10 @@ internal class DetailsViewModel(
                         isFavorite = favoriteModel != null
                     )
                 }
+
+                null -> {
+                    TODO()
+                }
             }
         }
     }

@@ -1,12 +1,12 @@
 package apps.robot.sindarin_dictionary_en.dictionary.list.presentation.composable
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -108,6 +108,7 @@ internal fun DictionaryList(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun DictionaryListContentRow(
     state: DictionaryListState,
@@ -120,7 +121,6 @@ internal fun DictionaryListContentRow(
     val words = state.words.collectAsLazyPagingItems()
     val listState = rememberLazyListState()
     val context = LocalContext.current
-
     if (headersState.shouldShowSelectedHeader.collectAsState().value) {
         Box(
             modifier = Modifier

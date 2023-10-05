@@ -1,11 +1,12 @@
 package apps.robot.phrasebook.impl.category.presentation.composable
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Divider
@@ -25,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import apps.robot.phrasebook.impl.R
 import apps.robot.phrasebook.impl.category.presentation.PhrasebookCategoryViewModel
+import apps.robot.sindarin_dictionary_en.base_ui.ad.AdmobBanner
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.UiState
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
@@ -92,18 +94,16 @@ fun PhrasebookCategory(
                 }
             }
 
-            val listState = rememberLazyListState()
             val context = LocalContext.current
 
-            LazyColumn(
-                state = listState
+            Column(
+                modifier = Modifier.verticalScroll(rememberScrollState())
             ) {
-                items(
-                    count = list.size,
-                    key = { index ->
-                        list[index].text.asString(context)
-                    }) { index ->
-                    PhrasebookCategoriesItem(list[index]) {
+                list.forEachIndexed { index, item ->
+                    if (index == 0) {
+                        AdmobBanner()
+                    }
+                    PhrasebookCategoriesItem(item = item) {
                         navigator.navigate(
                             dictionaryFeatureApi.detailsRoute(
                                 text = list[index].text.asString(context),
@@ -114,6 +114,8 @@ fun PhrasebookCategory(
                     }
                     if (index < list.lastIndex)
                         Divider(color = MaterialTheme.colors.onBackground, thickness = 1.dp)
+                    else if (index == list.lastIndex)
+                        AdmobBanner()
                 }
             }
         }

@@ -13,4 +13,5 @@ dependencies {
     navigationCompose()
     koin()
     kotlinLib()
+    admob()
 }

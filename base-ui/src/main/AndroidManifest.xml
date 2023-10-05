@@ -2,4 +2,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="apps.robot.sindarin_dictionary_en.base_ui">
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

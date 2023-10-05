@@ -1,17 +1,5 @@
 import app.robot.sindarin_dictionary_en.AppModules
 import app.robot.sindarin_dictionary_en.Plugins
-import app.robot.sindarin_dictionary_en.Versions
-
-buildscript {
-    ext {
-        kspVersion = "${Versions.ksp}"
-        ksp = "${Plugins.ksp}"
-    }
-}
-
-plugins {
-    id 'com.google.devtools.ksp' version "${kspVersion}" // TODO don't use hardcoded strings
-}
 
 apply plugin: Plugins.library
 apply plugin: Plugins.kotlinAndroid
@@ -19,26 +7,6 @@ apply plugin: Plugins.kotlinAndroid
 apply from: "$rootDir/config/dependencies-groups.gradle"
 apply from: "$rootDir/config/config-android.gradle"
 apply from: "$rootDir/config/config-product-flavors.gradle"
-
-android {
-    libraryVariants.all { variant ->
-        kotlin.sourceSets {
-            getByName(variant.name) {
-                kotlin.srcDir("build/generated/ksp/${variant.name}/java")
-            }
-        }
-    }
-
-    ksp {
-        arg("compose-destinations.mode", "destinations")
-        arg("compose-destinations.moduleName", "dictionary_impl")
-    }
-}
-
-ksp {
-    arg("compose-destinations.mode", "[GENERATION_MODE_FOR_MODULE]")
-    arg("compose-destinations.moduleName", "[YOUR_MODULE_NAME")
-}
 
 dependencies {
     implementation project(AppModules.baseUi)
@@ -55,4 +23,5 @@ dependencies {
     paging()
     timber()
     lazyColumnScrollbar()
+    admob()
 }

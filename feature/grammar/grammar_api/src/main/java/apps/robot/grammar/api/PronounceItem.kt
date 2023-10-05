@@ -5,10 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = PronounceDao.PRONOUNCE_TABLE)
 data class PronounceItem(
-    @PrimaryKey val id: String,
-    val sound: String,
-    val example: String,
-    val sindarinExample: String
+    @PrimaryKey var id: String,
+    var sound: String,
+    var example: String,
+    var sindarinExample: String
 ) {
     constructor() : this("", "", "", "")
 }

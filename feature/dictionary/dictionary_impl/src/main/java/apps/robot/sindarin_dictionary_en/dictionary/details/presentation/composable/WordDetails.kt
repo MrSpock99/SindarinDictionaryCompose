@@ -1,6 +1,7 @@
 package apps.robot.sindarin_dictionary_en.dictionary.details.presentation.composable
 
 import android.annotation.SuppressLint
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -22,13 +23,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import apps.robot.dictionary.impl.R
+import apps.robot.sindarin_dictionary_en.base_ui.ad.loadInterstitial
+import apps.robot.sindarin_dictionary_en.base_ui.ad.showInterstitial
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DetailsMode
 import apps.robot.sindarin_dictionary_en.dictionary.details.presentation.DetailsAction
 import apps.robot.sindarin_dictionary_en.dictionary.details.presentation.DetailsViewModel
@@ -46,6 +48,8 @@ internal fun WordDetails(
     viewModel: DetailsViewModel = getViewModel()
 ) {
     val state = viewModel.state.collectAsState().value
+    val context = LocalContext.current
+
     LaunchedEffect(key1 = Unit) {
         viewModel.onReceiveArgs(
             id = wordId,
@@ -53,11 +57,17 @@ internal fun WordDetails(
             translation = translation,
             detailsMode = detailsMode
         )
+        loadInterstitial(context)
     }
     val snackbarHostState = remember { SnackbarHostState() }
 
     val scope = rememberCoroutineScope()
-    val context = LocalContext.current
+
+    BackHandler {
+        showInterstitial(context)
+        navigator.navigateUp()
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -68,6 +78,7 @@ internal fun WordDetails(
                     modifier = Modifier
                         .padding(16.dp)
                         .clickable {
+                            showInterstitial(context)
                             navigator.navigateUp()
                         },
                     painter = painterResource(id = R.drawable.top_bar_arrow_ic),

@@ -68,4 +68,8 @@ object Libraries {
     object Utils {
         const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
     }
+
+    object Ads {
+        const val admob = "com.google.android.gms:play-services-ads:${Versions.admob}"
+    }
 }
