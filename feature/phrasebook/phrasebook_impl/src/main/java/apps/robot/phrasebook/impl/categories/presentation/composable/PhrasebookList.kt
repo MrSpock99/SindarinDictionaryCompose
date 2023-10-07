@@ -1,6 +1,8 @@
 package apps.robot.phrasebook.impl.categories.presentation.composable
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -21,10 +23,10 @@ import androidx.navigation.NavHostController
 import apps.robot.phrasebook.impl.R
 import apps.robot.phrasebook.impl.categories.presentation.PhrasebookCategoriesViewModel
 import apps.robot.sindarin_dictionary_en.base_ui.ad.AdmobBanner
-import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.ProVersionPromotionDialog
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.openProVersionInMarket
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.DictionaryListTopAppBar
 import org.koin.androidx.compose.getViewModel
 
@@ -49,7 +51,10 @@ internal fun PhrasebookCategoriesList(
         }
     ) { paddingValues ->
         Surface(
-            modifier = Modifier.padding(paddingValues),
+            modifier = Modifier
+                .padding(paddingValues)
+                .fillMaxWidth()
+                .fillMaxHeight(),
             color = CustomTheme.colors.background
         ) {
             val list = state.categoriesList

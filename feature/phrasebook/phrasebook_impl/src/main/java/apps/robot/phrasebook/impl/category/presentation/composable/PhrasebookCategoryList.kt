@@ -26,9 +26,9 @@ import androidx.navigation.NavController
 import apps.robot.phrasebook.impl.R
 import apps.robot.phrasebook.impl.category.presentation.PhrasebookCategoryViewModel
 import apps.robot.sindarin_dictionary_en.base_ui.ad.AdmobBanner
-import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.UiState
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DetailsMode
 import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.DictionaryListTopAppBar
@@ -61,7 +61,10 @@ fun PhrasebookCategory(
         }
     ) { paddingValues ->
         Surface(
-            modifier = Modifier.padding(paddingValues),
+            modifier = Modifier
+                .padding(paddingValues)
+                .fillMaxHeight()
+                .fillMaxWidth(),
             color = CustomTheme.colors.background
         ) {
             val list = state.list
