@@ -102,7 +102,7 @@ fun CustomTheme(
         listItemTitle = TextStyle(fontSize = 24.sp),
         listItemSubtitle = TextStyle(fontSize = 18.sp),
         singleListItemTitle = TextStyle(fontSize = 24.sp),
-        subtitle = TextStyle(fontSize = 12.sp),
+        subtitle = TextStyle(fontSize = 14.sp),
     )
     val customElevation = CustomElevation(
         default = 4.dp,
