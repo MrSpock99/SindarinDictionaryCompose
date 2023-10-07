@@ -5,14 +5,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ContentAlpha
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.UiText
 import apps.robot.sindarin_dictionary_en.dictionary.list.presentation.model.WordUiModel
 
@@ -33,8 +32,8 @@ internal fun WordItem(wordUiModel: WordUiModel, onClick: (WordUiModel) -> Unit) 
     ) {
         Text(
             text = wordUiModel.word.asString(),
-            color = MaterialTheme.colors.onBackground,
-            fontSize = 32.sp,
+            color = CustomTheme.colors.onBackground,
+            fontSize = CustomTheme.typography.listItemTitle.fontSize,
             modifier = Modifier
                 .fillMaxWidth(),
             overflow = TextOverflow.Ellipsis,
@@ -42,8 +41,8 @@ internal fun WordItem(wordUiModel: WordUiModel, onClick: (WordUiModel) -> Unit) 
         )
         Text(
             text = wordUiModel.translation.asString(),
-            color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
-            fontSize = 24.sp,
+            color = CustomTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
+            fontSize = CustomTheme.typography.listItemSubtitle.fontSize,
             modifier = Modifier
                 .fillMaxWidth(),
             overflow = TextOverflow.Ellipsis,

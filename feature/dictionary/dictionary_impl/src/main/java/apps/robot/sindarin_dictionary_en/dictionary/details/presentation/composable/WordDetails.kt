@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarHostState
@@ -31,6 +30,7 @@ import androidx.navigation.NavHostController
 import apps.robot.dictionary.impl.R
 import apps.robot.sindarin_dictionary_en.base_ui.ad.loadInterstitial
 import apps.robot.sindarin_dictionary_en.base_ui.ad.showInterstitial
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DetailsMode
 import apps.robot.sindarin_dictionary_en.dictionary.details.presentation.DetailsAction
 import apps.robot.sindarin_dictionary_en.dictionary.details.presentation.DetailsViewModel
@@ -82,12 +82,14 @@ internal fun WordDetails(
                             navigator.navigateUp()
                         },
                     painter = painterResource(id = R.drawable.top_bar_arrow_ic),
+                    tint = CustomTheme.colors.onBackground,
                     contentDescription = null
                 )
             }
         },
         floatingActionButton = {
             FloatingActionButton(
+                backgroundColor = CustomTheme.colors.secondary,
                 onClick = {
                     viewModel.onFavoriteBtnClick(context)
                 }
@@ -98,16 +100,19 @@ internal fun WordDetails(
                     } else {
                         painterResource(id = R.drawable.details_favorite_off_ic)
                     },
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = CustomTheme.colors.background,
                 )
             }
         },
         snackbarHost = {
             SnackbarHost(hostState = snackbarHostState)
-        }
+        },
+        backgroundColor = CustomTheme.colors.background
     ) {
         Column(
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+            modifier = Modifier
+                .padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
             Text(
                 text = state.word.asString(),
@@ -117,7 +122,7 @@ internal fun WordDetails(
                     .clickable {
                         viewModel.onTextClick(state.word.asString(context))
                     },
-                color = MaterialTheme.colors.onBackground,
+                color = CustomTheme.colors.onBackground,
                 fontWeight = FontWeight.Bold
             )
             Text(
@@ -127,7 +132,7 @@ internal fun WordDetails(
                     .clickable {
                         viewModel.onTextClick(state.translation.asString(context))
                     },
-                color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium)
+                color = CustomTheme.colors.onBackground.copy(alpha = ContentAlpha.medium)
             )
         }
     }

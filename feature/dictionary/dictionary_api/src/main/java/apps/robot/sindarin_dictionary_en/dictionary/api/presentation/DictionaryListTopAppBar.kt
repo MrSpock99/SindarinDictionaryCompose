@@ -10,7 +10,6 @@ import androidx.compose.material.AppBarDefaults
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -35,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import apps.robot.dictionary.api.R
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 
 @Composable
 fun DictionaryListTopAppBar(
@@ -81,7 +81,7 @@ fun DictionaryModeAppBar(
     isSearchVisible: Boolean = true
 ) {
     TopAppBar(
-        backgroundColor = MaterialTheme.colors.primary,
+        backgroundColor = CustomTheme.colors.primary,
     ) {
         if (onBackClicked != null) {
             IconButton(
@@ -102,7 +102,7 @@ fun DictionaryModeAppBar(
         Text(
             text = title,
             fontSize = 22.sp,
-            color = MaterialTheme.colors.onPrimary,
+            color = CustomTheme.colors.onPrimary,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.widthIn(0.dp, 200.dp)
@@ -128,7 +128,7 @@ fun DictionaryModeAppBar(
                 Icon(
                     imageVector = Icons.Default.Search,
                     contentDescription = "Search Icon",
-                    tint = MaterialTheme.colors.onPrimary
+                    tint = CustomTheme.colors.onPrimary
                 )
             }
         }
@@ -148,7 +148,7 @@ fun SearchAppBar(
             .fillMaxWidth()
             .height(56.dp),
         elevation = AppBarDefaults.TopAppBarElevation,
-        color = MaterialTheme.colors.primary
+        color = CustomTheme.colors.primary
     ) {
         val focusRequester = remember { FocusRequester() }
 
@@ -165,11 +165,11 @@ fun SearchAppBar(
                     modifier = Modifier
                         .alpha(ContentAlpha.medium),
                     text = hint,
-                    color = MaterialTheme.colors.onPrimary
+                    color = CustomTheme.colors.onPrimary
                 )
             },
             textStyle = TextStyle(
-                fontSize = MaterialTheme.typography.subtitle1.fontSize
+                fontSize = CustomTheme.typography.subtitle.fontSize
             ),
             singleLine = true,
             leadingIcon = {
@@ -184,7 +184,7 @@ fun SearchAppBar(
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
                         contentDescription = "Back Icon",
-                        tint = MaterialTheme.colors.onPrimary
+                        tint = CustomTheme.colors.onPrimary
                     )
                 }
             },
@@ -201,13 +201,13 @@ fun SearchAppBar(
                     Icon(
                         imageVector = Icons.Default.Close,
                         contentDescription = "Close Icon",
-                        tint = MaterialTheme.colors.onPrimary
+                        tint = CustomTheme.colors.onPrimary
                     )
                 }
             },
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = Color.Transparent,
-                cursorColor = MaterialTheme.colors.onPrimary.copy(alpha = ContentAlpha.medium),
+                cursorColor = CustomTheme.colors.onPrimary.copy(alpha = ContentAlpha.medium),
                 focusedLabelColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent

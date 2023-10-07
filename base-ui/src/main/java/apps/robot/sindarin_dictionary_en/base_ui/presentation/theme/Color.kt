@@ -1,4 +1,4 @@
-package apps.robot.sindarin_dictionary_en.ui.theme
+package apps.robot.sindarin_dictionary_en.base_ui.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

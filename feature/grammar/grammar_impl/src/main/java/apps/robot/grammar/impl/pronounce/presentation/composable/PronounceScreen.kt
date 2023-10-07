@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -33,6 +32,7 @@ import apps.robot.grammar.impl.pronounce.presentation.PronounceViewModel
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.BorderOrder
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.drawSegmentedBorder
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.DictionaryListTopAppBar
 import org.koin.androidx.compose.getViewModel
 
@@ -53,7 +53,10 @@ fun PronounceScreen(navigator: NavController) {
             )
         }
     ) { paddingValues ->
-        Surface(modifier = Modifier.padding(paddingValues)) {
+        Surface(
+            modifier = Modifier.padding(paddingValues),
+            color = CustomTheme.colors.background
+        ) {
             TableScreen()
         }
     }
@@ -76,17 +79,17 @@ fun TableScreen(viewModel: PronounceViewModel = getViewModel()) {
             Row(
                 Modifier
                     .height(IntrinsicSize.Min)
-                    .background(MaterialTheme.colors.secondaryVariant)
+                    .background(CustomTheme.colors.primary)
                     .drawSegmentedBorder(
                         strokeWidth = 1.dp,
-                        color = MaterialTheme.colors.onBackground,
+                        color = CustomTheme.colors.onBackground,
                         borderOrder = BorderOrder.Start,
                         drawDivider = true,
                         cornerPercent = 0
                     )
                     .drawSegmentedBorder(
                         strokeWidth = 1.dp,
-                        color = MaterialTheme.colors.onBackground,
+                        color = CustomTheme.colors.onBackground,
                         borderOrder = BorderOrder.End,
                         drawDivider = true,
                         cornerPercent = 0
@@ -95,10 +98,11 @@ fun TableScreen(viewModel: PronounceViewModel = getViewModel()) {
                 TableCell(
                     text = stringResource(id = R.string.pronounce_header_1),
                     weight = column1Weight,
-                    isBold = true
+                    isBold = true,
+                    textColor = CustomTheme.colors.onPrimary
                 )
                 Divider(
-                    color = MaterialTheme.colors.onBackground,
+                    color = CustomTheme.colors.onBackground,
                     modifier = Modifier
                         .fillMaxHeight()
                         .width(1.dp)
@@ -106,10 +110,11 @@ fun TableScreen(viewModel: PronounceViewModel = getViewModel()) {
                 TableCell(
                     text = stringResource(id = R.string.pronounce_header_2),
                     weight = column2Weight,
-                    isBold = true
+                    isBold = true,
+                    textColor = CustomTheme.colors.onPrimary
                 )
                 Divider(
-                    color = MaterialTheme.colors.onBackground,
+                    color = CustomTheme.colors.onBackground,
                     modifier = Modifier
                         .fillMaxHeight()
                         .width(1.dp)
@@ -117,7 +122,8 @@ fun TableScreen(viewModel: PronounceViewModel = getViewModel()) {
                 TableCell(
                     text = stringResource(id = R.string.pronounce_header_3),
                     weight = column3Weight,
-                    isBold = true
+                    isBold = true,
+                    textColor = CustomTheme.colors.onPrimary
                 )
             }
         }
@@ -135,14 +141,14 @@ fun TableScreen(viewModel: PronounceViewModel = getViewModel()) {
                     .fillMaxWidth()
                     .drawSegmentedBorder(
                         strokeWidth = 1.dp,
-                        color = MaterialTheme.colors.onBackground,
+                        color = CustomTheme.colors.onBackground,
                         borderOrder = BorderOrder.Start,
                         drawDivider = true,
                         cornerPercent = 0
                     )
                     .drawSegmentedBorder(
                         strokeWidth = 1.dp,
-                        color = MaterialTheme.colors.onBackground,
+                        color = CustomTheme.colors.onBackground,
                         borderOrder = BorderOrder.End,
                         drawDivider = true,
                         cornerPercent = 0
@@ -150,14 +156,14 @@ fun TableScreen(viewModel: PronounceViewModel = getViewModel()) {
             ) {
                 TableCell(text = item.sound, weight = column1Weight)
                 Divider(
-                    color = MaterialTheme.colors.onBackground,
+                    color = CustomTheme.colors.onBackground,
                     modifier = Modifier
                         .fillMaxHeight()
                         .width(1.dp)
                 )
                 TableCell(text = item.example, weight = column2Weight)
                 Divider(
-                    color = MaterialTheme.colors.onBackground,
+                    color = CustomTheme.colors.onBackground,
                     modifier = Modifier
                         .fillMaxHeight()
                         .width(1.dp)
@@ -169,7 +175,10 @@ fun TableScreen(viewModel: PronounceViewModel = getViewModel()) {
         item {
             Spacer(modifier = Modifier.padding(vertical = 16.dp))
 
-            Text(text = stringResource(R.string.pronounce_text))
+            Text(
+                text = stringResource(R.string.pronounce_text),
+                color = CustomTheme.colors.onBackground
+            )
         }
     }
 }
@@ -178,7 +187,7 @@ fun TableScreen(viewModel: PronounceViewModel = getViewModel()) {
 fun RowScope.TableCell(
     text: String,
     weight: Float,
-    textColor: Color = MaterialTheme.colors.onBackground,
+    textColor: Color = CustomTheme.colors.onBackground,
     isBold: Boolean = false
 ) {
     val modifier = Modifier

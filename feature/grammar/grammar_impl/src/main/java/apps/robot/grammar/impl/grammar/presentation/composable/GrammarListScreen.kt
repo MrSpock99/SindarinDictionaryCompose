@@ -3,10 +3,10 @@ package apps.robot.grammar.impl.grammar.presentation.composable
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -20,7 +20,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import apps.robot.grammar.impl.GrammarInternalFeature
 import apps.robot.grammar.impl.R
@@ -28,6 +27,7 @@ import apps.robot.sindarin_dictionary_en.base_ui.presentation.ProVersionPromotio
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.isFree
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.openProVersionInMarket
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.DictionaryListTopAppBar
 import org.koin.androidx.compose.get
 
@@ -49,7 +49,10 @@ internal fun GrammarListScreen(grammarInternalFeature: GrammarInternalFeature = 
             )
         }
     ) { paddingValues ->
-        Surface(modifier = Modifier.padding(paddingValues)) {
+        Surface(
+            modifier = Modifier.padding(paddingValues).fillMaxHeight(),
+            color = CustomTheme.colors.background
+        ) {
             val context = LocalContext.current
 
             Column {
@@ -57,13 +60,13 @@ internal fun GrammarListScreen(grammarInternalFeature: GrammarInternalFeature = 
                     navigator.navigate(grammarInternalFeature.pronounceScreen())
                 }
 
-                Divider(color = MaterialTheme.colors.onBackground, thickness = 1.dp)
+                Divider(color = CustomTheme.colors.onBackground, thickness = 1.dp)
 
                 GrammarCategoryItem(name = stringResource(R.string.grammar_item_stresses)) {
                     navigator.navigate(grammarInternalFeature.stressesScreen())
                 }
 
-                Divider(color = MaterialTheme.colors.onBackground, thickness = 1.dp)
+                Divider(color = CustomTheme.colors.onBackground, thickness = 1.dp)
 
                 GrammarCategoryItem(name = stringResource(R.string.grammar_item_plural)) {
                     if (isFree()) {
@@ -105,8 +108,8 @@ fun GrammarCategoryItem(name: String, onClick: () -> (Unit)) {
     ) {
         Text(
             text = name,
-            color = MaterialTheme.colors.onBackground,
-            fontSize = 32.sp,
+            color = CustomTheme.colors.onBackground,
+            fontSize = CustomTheme.typography.singleListItemTitle.fontSize,
             modifier = Modifier
                 .fillMaxWidth(),
             overflow = TextOverflow.Ellipsis,

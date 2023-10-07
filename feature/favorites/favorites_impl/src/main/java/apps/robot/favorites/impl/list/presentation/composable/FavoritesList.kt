@@ -1,14 +1,12 @@
 package apps.robot.favorites.impl.list.presentation.composable
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -18,7 +16,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -27,6 +24,7 @@ import androidx.navigation.compose.rememberNavController
 import apps.robot.favorites.impl.R
 import apps.robot.favorites.impl.list.presentation.FavoritesViewModel
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DetailsMode
 import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.DictionaryListTopAppBar
@@ -58,7 +56,11 @@ internal fun FavoritesList(
         }
     ) { paddingValues ->
         Surface(
-            modifier = Modifier.padding(paddingValues),
+            modifier = Modifier
+                .padding(paddingValues)
+                .fillMaxHeight()
+                .fillMaxWidth(),
+            color = CustomTheme.colors.background
         ) {
             val list = state.favoritesList
             if (list.isEmpty() && state.searchWidgetState == SearchWidgetState.OPENED) {
@@ -66,14 +68,14 @@ internal fun FavoritesList(
                     modifier = Modifier.padding(start = 16.dp, top = 16.dp),
                     text = stringResource(id = apps.robot.dictionary.api.R.string.dictionary_list_nothing_found),
                     fontSize = 16.sp,
-                    color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
+                    color = CustomTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
                 )
             } else if (list.isEmpty() && state.searchWidgetState == SearchWidgetState.CLOSED) {
                 Text(
                     modifier = Modifier.padding(start = 16.dp, top = 16.dp),
                     text = stringResource(id = R.string.favorites_empty_list),
                     fontSize = 16.sp,
-                    color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
+                    color = CustomTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
                 )
             }
             val listState = rememberLazyListState()
@@ -97,7 +99,7 @@ internal fun FavoritesList(
                         )
                     }
                     if (index < list.lastIndex)
-                        Divider(color = MaterialTheme.colors.onBackground, thickness = 1.dp)
+                        Divider(color = CustomTheme.colors.onBackground, thickness = 1.dp)
                 }
             }
         }

@@ -1,5 +1,6 @@
 package apps.robot.grammar.impl.stresses.presentation.composable
 
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -11,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import apps.robot.grammar.impl.R
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.DictionaryListTopAppBar
 
 @Composable
@@ -30,10 +32,16 @@ fun StressesScreen(navigator: NavController) {
             )
         }
     ) { paddingValues ->
-        Surface(modifier = Modifier.padding(paddingValues)) {
+        Surface(
+            modifier = Modifier
+                .padding(paddingValues)
+                .fillMaxHeight(),
+            color = CustomTheme.colors.background
+        ) {
             Text(
                 modifier = Modifier.padding(16.dp),
-                text = stringResource(R.string.stresses_text)
+                text = stringResource(R.string.stresses_text),
+                color = CustomTheme.colors.onBackground
             );
         }
     }

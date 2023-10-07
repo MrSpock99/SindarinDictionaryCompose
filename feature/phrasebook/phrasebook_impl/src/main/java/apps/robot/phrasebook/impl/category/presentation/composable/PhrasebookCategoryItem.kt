@@ -6,14 +6,13 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ContentAlpha
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import apps.robot.phrasebook.impl.category.presentation.PhrasebookCategoryItemUiModel
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 
 @Composable
 fun PhrasebookCategoriesItem(item: PhrasebookCategoryItemUiModel, onClick: () -> (Unit)) {
@@ -33,8 +32,8 @@ fun PhrasebookCategoriesItem(item: PhrasebookCategoryItemUiModel, onClick: () ->
     ) {
         Text(
             text = item.text.asString(),
-            color = MaterialTheme.colors.onBackground,
-            fontSize = 32.sp,
+            color = CustomTheme.colors.onBackground,
+            fontSize = CustomTheme.typography.listItemTitle.fontSize,
             modifier = Modifier
                 .fillMaxWidth(),
             overflow = TextOverflow.Ellipsis,
@@ -42,8 +41,8 @@ fun PhrasebookCategoriesItem(item: PhrasebookCategoryItemUiModel, onClick: () ->
         )
         Text(
             text = item.translation.asString(),
-            color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
-            fontSize = 24.sp,
+            color = CustomTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
+            fontSize = CustomTheme.typography.listItemSubtitle.fontSize,
             modifier = Modifier
                 .fillMaxWidth(),
             overflow = TextOverflow.Ellipsis,

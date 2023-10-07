@@ -15,7 +15,7 @@ object Versions {
     const val kotlinCoroutines = "1.6.2"
     const val koin = "3.2.0-beta-1"
 
-    const val compose = "1.2.0"
+    const val compose = "1.5.3"
     const val composeConstraintLayout = "1.0.1"
     const val composeCompiler = "1.4.0"
     const val activityCompose = "1.5.0"

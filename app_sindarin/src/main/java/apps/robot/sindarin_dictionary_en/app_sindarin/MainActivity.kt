@@ -3,8 +3,8 @@ package apps.robot.sindarin_dictionary_en.app_sindarin
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 import apps.robot.sindarin_dictionary_en.main.navigation.MainFlow
-import apps.robot.sindarin_dictionary_en.ui.theme.SindarinDictionaryComposeTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -12,7 +12,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            SindarinDictionaryComposeTheme {
+            CustomTheme() {
                 MainFlow()
             }
         }

@@ -10,7 +10,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -27,6 +26,7 @@ import androidx.navigation.NavController
 import apps.robot.phrasebook.impl.R
 import apps.robot.phrasebook.impl.category.presentation.PhrasebookCategoryViewModel
 import apps.robot.sindarin_dictionary_en.base_ui.ad.AdmobBanner
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.UiState
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
@@ -62,6 +62,7 @@ fun PhrasebookCategory(
     ) { paddingValues ->
         Surface(
             modifier = Modifier.padding(paddingValues),
+            color = CustomTheme.colors.background
         ) {
             val list = state.list
 
@@ -70,14 +71,14 @@ fun PhrasebookCategory(
                     modifier = Modifier.padding(start = 16.dp, top = 16.dp),
                     text = stringResource(id = R.string.dictionary_list_nothing_found),
                     fontSize = 16.sp,
-                    color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
+                    color = CustomTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
                 )
             } else if (list.isEmpty() && state.uiState == UiState.Content && state.searchWidgetState == SearchWidgetState.CLOSED) {
                 Text(
                     modifier = Modifier.padding(start = 16.dp, top = 16.dp),
                     text = stringResource(id = R.string.phrasebook_empty_list),
                     fontSize = 16.sp,
-                    color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
+                    color = CustomTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
                 )
             }
 
@@ -89,7 +90,7 @@ fun PhrasebookCategory(
                     contentAlignment = Alignment.Center,
                 ) {
                     CircularProgressIndicator(
-                        color = MaterialTheme.colors.onBackground
+                        color = CustomTheme.colors.onBackground
                     )
                 }
             }
@@ -113,7 +114,7 @@ fun PhrasebookCategory(
                         )
                     }
                     if (index < list.lastIndex)
-                        Divider(color = MaterialTheme.colors.onBackground, thickness = 1.dp)
+                        Divider(color = CustomTheme.colors.onBackground, thickness = 1.dp)
                     else if (index == list.lastIndex)
                         AdmobBanner()
                 }

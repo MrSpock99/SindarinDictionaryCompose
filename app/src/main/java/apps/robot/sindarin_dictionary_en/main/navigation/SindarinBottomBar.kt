@@ -5,7 +5,6 @@ import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
 
 @Composable
@@ -36,7 +36,7 @@ fun SindarinBottomBar(
         visible = isBottomBarVisible
     ) {
         BottomNavigation(
-            backgroundColor = MaterialTheme.colors.primary
+            backgroundColor = CustomTheme.colors.primary
         ) {
             tabs.forEach { destination ->
                 val isCurrentDestOnBackStack = currentDestination?.route?.startsWith(destination.direction) ?: false
@@ -57,9 +57,9 @@ fun SindarinBottomBar(
                         Icon(
                             painter = painterResource(id = destination.icon),
                             tint = if (isCurrentDestOnBackStack) {
-                                MaterialTheme.colors.onPrimary
+                                CustomTheme.colors.onPrimary
                             } else {
-                                MaterialTheme.colors.onPrimary.copy(alpha = ContentAlpha.medium)
+                                CustomTheme.colors.onPrimary.copy(alpha = ContentAlpha.medium)
                             },
                             contentDescription = stringResource(destination.title)
                         )
@@ -70,9 +70,9 @@ fun SindarinBottomBar(
                             overflow = TextOverflow.Ellipsis,
                             maxLines = 1,
                             color = if (isCurrentDestOnBackStack) {
-                                MaterialTheme.colors.onPrimary
+                                CustomTheme.colors.onPrimary
                             } else {
-                                MaterialTheme.colors.onPrimary.copy(alpha = ContentAlpha.medium)
+                                CustomTheme.colors.onPrimary.copy(alpha = ContentAlpha.medium)
                             }
                         )
                     }

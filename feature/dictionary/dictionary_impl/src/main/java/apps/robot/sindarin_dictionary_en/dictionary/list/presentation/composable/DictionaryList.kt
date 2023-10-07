@@ -18,7 +18,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -46,6 +45,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import apps.robot.dictionary.impl.R
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.UiState
 import apps.robot.sindarin_dictionary_en.dictionary.api.DictionaryFeatureApi
@@ -93,11 +93,7 @@ internal fun DictionaryList(
     ) { paddingValues ->
         Surface(
             modifier = Modifier.padding(paddingValues),
-            color = if (state.headersState.shouldShowSelectedHeader.collectAsState().value) {
-                colorResource(id = R.color.black).copy(alpha = ContentAlpha.medium)
-            } else {
-                Color.Transparent
-            },
+            color = CustomTheme.colors.background
         ) {
             DictionaryListContentRow(
                 state = state,
@@ -144,7 +140,7 @@ internal fun DictionaryListContentRow(
             modifier = Modifier.padding(start = 16.dp, top = 16.dp),
             text = stringResource(id = R.string.dictionary_list_nothing_found),
             fontSize = 16.sp,
-            color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
+            color = CustomTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
         )
     }
     if (state.uiState == UiState.Loading) {
@@ -155,7 +151,7 @@ internal fun DictionaryListContentRow(
             contentAlignment = Alignment.Center,
         ) {
             CircularProgressIndicator(
-                color = MaterialTheme.colors.onBackground
+                color = CustomTheme.colors.onBackground
             )
         }
     }
@@ -166,8 +162,8 @@ internal fun DictionaryListContentRow(
         LazyColumnScrollbar(
             listState = listState,
             selectionMode = ScrollbarSelectionMode.Full,
-            thumbColor = MaterialTheme.colors.secondary,
-            thumbSelectedColor = MaterialTheme.colors.primary,
+            thumbColor = CustomTheme.colors.primary.copy(alpha = 0.5F),
+            thumbSelectedColor = CustomTheme.colors.primary,
             content = {
                 LazyColumn(
                     state = listState,
@@ -193,7 +189,7 @@ internal fun DictionaryListContentRow(
                                 }
                             )
                             if (index < words.itemSnapshotList.lastIndex)
-                                Divider(color = MaterialTheme.colors.onBackground, thickness = 1.dp)
+                                Divider(color = CustomTheme.colors.onBackground, thickness = 1.dp)
                         }
                     }
                 }
@@ -295,7 +291,7 @@ internal fun DictionaryListContentRow(
                                     color = if (isHeaderSelected) {
                                         colorResource(id = R.color.white)
                                     } else {
-                                        MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium)
+                                        CustomTheme.colors.onBackground.copy(alpha = ContentAlpha.medium)
                                     }
                                 )
                             }

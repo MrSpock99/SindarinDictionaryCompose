@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,11 +33,11 @@ fun AdmobBanner() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(60.dp)
-                .background(MaterialTheme.colors.background),
+                .background(CustomTheme.colors.background),
             contentAlignment = Alignment.Center
         ) {
             CircularProgressIndicator(
-                color = MaterialTheme.colors.onBackground
+                color = CustomTheme.colors.onBackground
             )
         }
     }

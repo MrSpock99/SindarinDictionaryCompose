@@ -4,7 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -59,14 +59,14 @@ internal fun DictionaryModeToggle(
         ) {
             Text(
                 text = toggleText,
-                color = MaterialTheme.colors.onPrimary,
+                color = CustomTheme.colors.onPrimary,
                 fontSize = 16.sp,
                 maxLines = 1
             )
         }
     } else {
         CircularProgressIndicator(
-            color = MaterialTheme.colors.onPrimary
+            color = CustomTheme.colors.onPrimary
         )
     }
 }
