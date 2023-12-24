@@ -17,8 +17,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,6 +37,7 @@ import apps.robot.sindarin_dictionary_en.dictionary.api.presentation.DictionaryL
 import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun PhrasebookCategory(
     categoryName: String,
@@ -99,9 +102,13 @@ fun PhrasebookCategory(
             }
 
             val context = LocalContext.current
-
+            val scrollState = rememberScrollState()
+            if (scrollState.isScrollInProgress) {
+                val keyboardController = LocalSoftwareKeyboardController.current
+                keyboardController?.hide()
+            }
             Column(
-                modifier = Modifier.verticalScroll(rememberScrollState())
+                modifier = Modifier.verticalScroll(scrollState)
             ) {
                 list.forEachIndexed { index, item ->
                     if (index == 0) {
