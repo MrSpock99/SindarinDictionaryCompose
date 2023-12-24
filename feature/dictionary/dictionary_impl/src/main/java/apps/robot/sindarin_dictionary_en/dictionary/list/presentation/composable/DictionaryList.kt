@@ -1,7 +1,6 @@
 package apps.robot.sindarin_dictionary_en.dictionary.list.presentation.composable
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.foundation.layout.Arrangement
@@ -108,7 +107,7 @@ internal fun DictionaryList(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun DictionaryListContentRow(
     state: DictionaryListState,
