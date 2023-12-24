@@ -1,10 +1,12 @@
 package apps.robot.sindarin_dictionary_en.dictionary.base.data
 
+import android.content.res.Resources
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.filter
 import androidx.paging.map
+import apps.robot.dictionary.impl.R
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.ElfToEngDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.model.ElfToEngWordEntity
@@ -14,10 +16,13 @@ import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordDomain
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordElfToEngEntityMapper
 import apps.robot.sindarin_dictionary_en.dictionary.list.data.paging.DictionaryPagingSource
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.lang.reflect.Type
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -28,35 +33,18 @@ internal class ElfToEngDictionaryRepositoryImpl(
     private val dao: ElfToEngDao,
     private val mapper: WordDomainMapper,
     private val elfToEngEntityMapper: WordElfToEngEntityMapper,
-    private val dictionaryPagingSource: DictionaryPagingSource<ElfToEngWordEntity>
+    private val dictionaryPagingSource: DictionaryPagingSource<ElfToEngWordEntity>,
+    private val resources: Resources,
 ) : ElfToEngDictionaryRepository {
 
     override suspend fun loadWords() {
-        val words = runCatching {
-            withContext(dispatchers.network) {
-                suspendCoroutine<List<ElfToEngWordEntity?>> { emitter ->
-                    db.collection(ELF_TO_ENG_WORDS)
-                        .get()
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                emitter.resume(
-                                    task.result?.documents?.map {
-                                        val word = it.toObject(ElfToEngWordEntity::class.java)
-                                        word?.id = it.id
-                                        word
-                                    } ?: listOf()
-                                )
-                            } else {
-                                emitter.resumeWithException(
-                                    task.exception ?: java.lang.Exception()
-                                )
-                            }
-                        }
-                }
-            }
-        }.onFailure {
-            Timber.d("Error while fetching data $it")
-        }.getOrNull()
+        val loadFromRemote = false
+
+        val words = if (loadFromRemote) {
+            loadWordsFromRemote()
+        } else {
+            loadWordsFromCache()
+        }
 
         words?.filterNotNull()?.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.word })
             ?.let { dao.insertAll(it) }
@@ -101,6 +89,41 @@ internal class ElfToEngDictionaryRepositoryImpl(
 
     override fun getWordsSize(): Int {
         return dao.getWordsSize()
+    }
+
+    private suspend fun loadWordsFromRemote(): List<ElfToEngWordEntity?>? {
+        return runCatching {
+            withContext(dispatchers.network) {
+                suspendCoroutine { emitter ->
+                    db.collection(ELF_TO_ENG_WORDS)
+                        .get()
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                emitter.resume(
+                                    task.result?.documents?.map {
+                                        val word = it.toObject(ElfToEngWordEntity::class.java)
+                                        word?.id = it.id
+                                        word
+                                    } ?: listOf()
+                                )
+                            } else {
+                                emitter.resumeWithException(
+                                    task.exception ?: java.lang.Exception()
+                                )
+                            }
+                        }
+                }
+            }
+        }.onFailure {
+            Timber.d("Error while fetching data $it")
+        }.getOrNull()
+    }
+
+    private fun loadWordsFromCache(): List<ElfToEngWordEntity?> {
+        val json = resources.openRawResource(R.raw.elf_to_eng)
+            .bufferedReader().use { it.readText() }
+        val listType: Type = object : TypeToken<ArrayList<ElfToEngWordEntity?>?>() {}.type
+        return Gson().fromJson<List<ElfToEngWordEntity>?>(json, listType)
     }
 
     private companion object {

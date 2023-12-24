@@ -16,6 +16,7 @@ import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordEngToE
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordEngToElfEntityMapperImpl
 import apps.robot.sindarin_dictionary_en.dictionary.list.data.paging.DictionaryPagingSource
 import com.google.firebase.firestore.FirebaseFirestore
+import org.koin.android.ext.koin.androidApplication
 import org.koin.core.qualifier.named
 import org.koin.dsl.bind
 import org.koin.dsl.module
@@ -29,7 +30,8 @@ internal fun dictionaryBaseModule() = module {
             dao = get(),
             mapper = get(),
             elfToEngEntityMapper = get(),
-            dictionaryPagingSource = get(named("ElfToEng"))
+            dictionaryPagingSource = get(named("ElfToEng")),
+            resources = androidApplication().resources
         )
     }
     factory<EngToElfDictionaryRepository> {
@@ -39,7 +41,8 @@ internal fun dictionaryBaseModule() = module {
             dao = get(),
             mapper = get(),
             engToElfEntityMapper = get(),
-            dictionaryPagingSource = get(named("EngToElf"))
+            dictionaryPagingSource = get(named("EngToElf")),
+            resources = androidApplication().resources
         )
     }
     factory(named("EngToElf")) {
