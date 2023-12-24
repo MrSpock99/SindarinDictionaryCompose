@@ -30,7 +30,11 @@ class PhrasebookRepositoryImpl(
     }
 
     override fun getCategoryItemsAsFlow(categoryName: String): Flow<List<CategoryItem>> {
-        return dao.getCategoryItemsAfFlow(getMappedId(categoryName))
+        return dao.getCategoryItemsAsFlow(getMappedId(categoryName))
+    }
+
+    override fun getCategoryItems(categoryName: String): List<CategoryItem> {
+        return dao.getCategoryItems(categoryName)
     }
 
     override suspend fun isCacheEmpty(): Boolean {

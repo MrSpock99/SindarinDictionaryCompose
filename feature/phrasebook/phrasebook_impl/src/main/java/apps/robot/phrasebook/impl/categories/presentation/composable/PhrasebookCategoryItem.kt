@@ -13,7 +13,7 @@ import apps.robot.phrasebook.impl.categories.presentation.PhrasebookCategoryUiMo
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 
 @Composable
-fun PhrasebookCategoriesItem(item: PhrasebookCategoryUiModel, onClick: () -> Unit) {
+fun PhrasebookCategoryItem(item: PhrasebookCategoryUiModel, onClick: () -> Unit) {
     Text(
         text = item.text.asString(),
         color = CustomTheme.colors.onBackground,

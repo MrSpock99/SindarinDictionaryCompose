@@ -3,7 +3,9 @@ package apps.robot.phrasebook.impl.categories.presentation
 import android.content.Context
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
+import apps.robot.phrasebook.api.CategoryItem
 import apps.robot.phrasebook.impl.base.domain.PhrasebookRepository
+import apps.robot.phrasebook.impl.category.presentation.PhrasebookCategoryItemUiModel
 import apps.robot.phrasebook.impl.navigation.PhrasebookInternalFeature
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.UiText
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.BaseViewModel
@@ -78,10 +80,29 @@ class PhrasebookCategoriesViewModel(
         state.value.searchText.debounce(SEARCH_DEBOUNCE)
             .mapLatest { searchQuery ->
                 if (searchQuery.isNotEmpty()) {
+
+                    val categories = repository.getPhrasebookCategories()
+                    val allItems = mutableListOf<List<CategoryItem>>()
+                    categories.forEach {
+                        val items = repository.getCategoryItems(it)
+                        allItems.add(items)
+                    }
+
+                    val filteredCategories = categories.filter { it.lowercase().startsWith(searchQuery.lowercase()) }
+                    val filteredItems = allItems.filter {
+                        it.filter {
+                            it.word.lowercase().startsWith(searchQuery.lowercase()) || it.translation.lowercase().startsWith(searchQuery.lowercase())
+                        }.isNotEmpty()
+                    }.flatten()
+
                     state.value = state.value.copy(
-                        categoriesList = state.value.categoriesList.filter {
-                            it.text.asString(context).lowercase()
-                                .startsWith(searchQuery.lowercase())
+                        categoriesList = filteredCategories.map {
+                            PhrasebookCategoryUiModel(UiText.DynamicString(it))
+                        } + filteredItems.map {
+                            PhrasebookCategoryItemUiModel(
+                                text = UiText.DynamicString(it.word),
+                                translation = UiText.DynamicString(it.translation)
+                            )
                         }
                     )
                 } else {
@@ -109,7 +130,7 @@ class PhrasebookCategoriesViewModel(
     data class PhrasebookListState(
         override val searchWidgetState: SearchWidgetState = SearchWidgetState.CLOSED,
         override val searchText: MutableStateFlow<String> = MutableStateFlow(""),
-        val categoriesList: List<PhrasebookCategoryUiModel> = emptyList(),
+        val categoriesList: List<Any> = emptyList(),
         val uiState: UiState,
         val showProPromotionDialog: Boolean = false
     ) : Searchable.SearchableState
