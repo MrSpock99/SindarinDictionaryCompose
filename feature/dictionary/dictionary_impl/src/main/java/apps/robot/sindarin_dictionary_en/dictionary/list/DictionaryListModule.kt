@@ -1,7 +1,5 @@
 package apps.robot.sindarin_dictionary_en.dictionary.list
 
-import apps.robot.sindarin_dictionary_en.dictionary.api.domain.ElfToEngDictionaryRepository
-import apps.robot.sindarin_dictionary_en.dictionary.api.domain.EngToElfDictionaryRepository
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetHeadersUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryGetPagedWordListAsFlowUseCase
 import apps.robot.sindarin_dictionary_en.dictionary.list.domain.DictionaryLoadWordListUseCase
@@ -13,29 +11,25 @@ import org.koin.dsl.module
 internal fun dictionaryListModule() = module {
     factory {
         DictionaryGetPagedWordListAsFlowUseCase(
-            engToElfDictionaryRepository = get(),
-            elfToEngDictionaryRepository = get()
+            dictionaryRepository = get()
         )
     }
 
     factory {
         DictionaryLoadWordListUseCase(
-            elfToEngRepository = get<ElfToEngDictionaryRepository>(),
-            engToElfRepository = get<EngToElfDictionaryRepository>()
+            dictionaryRepository = get()
         )
     }
 
     factory {
         DictionaryGetHeadersUseCase(
-            elfToEngRepository = get<ElfToEngDictionaryRepository>(),
-            engToElfRepository = get<EngToElfDictionaryRepository>()
+            dictionaryRepository = get()
         )
     }
 
     factory {
         DictionarySearchWordsUseCase(
-            engToElfDictionaryRepository = get(),
-            elfToEngDictionaryRepository = get()
+            dictionaryRepository = get()
         )
     }
     viewModel {

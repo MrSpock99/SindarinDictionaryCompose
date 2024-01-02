@@ -4,10 +4,8 @@ import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.BaseAppInitia
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.processLifecycleScope
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.ElfToEngDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.EngToElfDao
-import apps.robot.sindarin_dictionary_en.dictionary.api.domain.ElfToEngDictionaryRepository
-import apps.robot.sindarin_dictionary_en.dictionary.api.domain.EngToElfDictionaryRepository
-import apps.robot.sindarin_dictionary_en.dictionary.base.data.ElfToEngDictionaryRepositoryImpl
-import apps.robot.sindarin_dictionary_en.dictionary.base.data.EngToElfDictionaryRepositoryImpl
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DictionaryRepository
+import apps.robot.sindarin_dictionary_en.dictionary.base.data.DictionaryRepositoryImpl
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordDomainMapper
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordDomainMapperImpl
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordElfToEngEntityMapper
@@ -23,28 +21,20 @@ import org.koin.dsl.module
 
 internal fun dictionaryBaseModule() = module {
     single { FirebaseFirestore.getInstance() }
-    factory<ElfToEngDictionaryRepository> {
-        ElfToEngDictionaryRepositoryImpl(
+    factory<DictionaryRepository> {
+        DictionaryRepositoryImpl(
             db = get(),
             dispatchers = get(),
-            dao = get(),
+            elfToEngDao = get(),
+            engToElfDao = get(),
             mapper = get(),
             elfToEngEntityMapper = get(),
-            dictionaryPagingSource = get(named("ElfToEng")),
-            resources = androidApplication().resources
+            elfToEngPagingSource = get(named("ElfToEng")),
+            resources = androidApplication().resources,
+            engToElfPagingSource = get(named("EngToElf"))
         )
     }
-    factory<EngToElfDictionaryRepository> {
-        EngToElfDictionaryRepositoryImpl(
-            db = get(),
-            dispatchers = get(),
-            dao = get(),
-            mapper = get(),
-            engToElfEntityMapper = get(),
-            dictionaryPagingSource = get(named("EngToElf")),
-            resources = androidApplication().resources
-        )
-    }
+
     factory(named("EngToElf")) {
         DictionaryPagingSource(dictionaryDao = get<EngToElfDao>())
     }

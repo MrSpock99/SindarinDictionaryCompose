@@ -22,4 +22,14 @@ internal class WordDomainMapperImpl : WordDomainMapper {
             isFavorite = engToElfWordEntity.isFavorite
         )
     }
+
+    override fun map(entity: Any): Word {
+        return if (entity is ElfToEngWordEntity) {
+            map(entity)
+        } else if (entity is EngToElfWordEntity) {
+            map(entity)
+        } else {
+            throw IllegalArgumentException()
+        }
+    }
 }

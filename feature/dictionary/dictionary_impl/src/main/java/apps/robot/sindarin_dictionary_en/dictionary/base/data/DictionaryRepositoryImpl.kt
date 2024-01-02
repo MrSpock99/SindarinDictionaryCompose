@@ -8,9 +8,13 @@ import androidx.paging.filter
 import androidx.paging.map
 import apps.robot.dictionary.impl.R
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
+import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.DictionaryDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.ElfToEngDao
+import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.EngToElfDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.model.ElfToEngWordEntity
-import apps.robot.sindarin_dictionary_en.dictionary.api.domain.ElfToEngDictionaryRepository
+import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.model.EngToElfWordEntity
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DictionaryMode
+import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DictionaryRepository
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.Word
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordDomainMapper
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordElfToEngEntityMapper
@@ -27,40 +31,48 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-internal class ElfToEngDictionaryRepositoryImpl(
+internal class DictionaryRepositoryImpl(
     private val db: FirebaseFirestore,
     private val dispatchers: AppDispatchers,
-    private val dao: ElfToEngDao,
+    private val elfToEngDao: ElfToEngDao,
+    private val engToElfDao: EngToElfDao,
     private val mapper: WordDomainMapper,
     private val elfToEngEntityMapper: WordElfToEngEntityMapper,
-    private val dictionaryPagingSource: DictionaryPagingSource<ElfToEngWordEntity>,
+    private val elfToEngPagingSource: DictionaryPagingSource<ElfToEngWordEntity>,
+    private val engToElfPagingSource: DictionaryPagingSource<EngToElfWordEntity>,
     private val resources: Resources,
-) : ElfToEngDictionaryRepository {
+) : DictionaryRepository {
 
-    override suspend fun loadWords() {
+    override suspend fun loadWords(dictionaryMode: DictionaryMode) {
         val loadFromRemote = false
 
         val words = if (loadFromRemote) {
-            loadWordsFromRemote()
+            loadWordsFromRemote(dictionaryMode)
         } else {
-            loadWordsFromCache()
+            loadWordsFromCache(dictionaryMode)
         }
 
         words?.filterNotNull()?.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.word })
-            ?.let { dao.insertAll(it) }
+            ?.let { elfToEngDao.insertAll(it) }
     }
 
-    override fun getPagedWordsAsFlow(keyword: String?): Flow<PagingData<Word>> {
+    override fun getPagedWordsAsFlow(dictionaryMode: DictionaryMode, keyword: String?): Flow<PagingData<Word>> {
         return Pager(
             config = PagingConfig(
                 pageSize = DictionaryPagingSource.DICTIONARY_PAGE_SIZE
             ),
             pagingSourceFactory = {
-                dictionaryPagingSource
+                if (dictionaryMode == DictionaryMode.ELVISH_TO_ENGLISH) {
+                    elfToEngPagingSource
+                } else {
+                    engToElfPagingSource
+                }
             }
         ).flow.map { pagingData ->
             if (keyword != null) {
-                pagingData.filter { it.word.startsWith(keyword) }.map {
+                pagingData.filter {
+                    it.word.startsWith(keyword)
+                }.map {
                     mapper.map(it)
                 }
             } else {
@@ -71,31 +83,38 @@ internal class ElfToEngDictionaryRepositoryImpl(
         }
     }
 
-    override suspend fun getAllWords(): List<Word> {
+    override suspend fun getAllWords(dictionaryMode: DictionaryMode): List<Word> {
+        val dao = getDao(dictionaryMode)
         return dao.getAllWords().map(mapper::map)
     }
 
-    override suspend fun getWordById(id: String): Word {
-        return mapper.map(dao.getWordById(id))
+    override suspend fun getWordById(dictionaryMode: DictionaryMode, id: String): Word {
+        return mapper.map(elfToEngDao.getWordById(id))
     }
 
-    override suspend fun updateWord(word: Word) {
-        dao.update(elfToEngEntityMapper.map(word))
+    override suspend fun updateWord(dictionaryMode: DictionaryMode, word: Word) {
+        elfToEngDao.update(elfToEngEntityMapper.map(word))
     }
 
-    override fun getFavoriteWordsAsFlow(): Flow<List<Word>> {
-        return dao.getFavoriteWordsAsFlow().map { it.map(mapper::map) }
+    override fun getFavoriteWordsAsFlow(dictionaryMode: DictionaryMode): Flow<List<Word>> {
+        return elfToEngDao.getFavoriteWordsAsFlow().map { it.map(mapper::map) }
     }
 
     override fun getWordsSize(): Int {
-        return dao.getWordsSize()
+        return engToElfDao.getWordsSize()
     }
 
-    private suspend fun loadWordsFromRemote(): List<ElfToEngWordEntity?>? {
+    private suspend fun loadWordsFromRemote(dictionaryMode: DictionaryMode): List<ElfToEngWordEntity?>? {
+
         return runCatching {
+            val dbName = if (dictionaryMode == DictionaryMode.ELVISH_TO_ENGLISH) {
+                ELF_TO_ENG_WORDS
+            } else {
+                ENG_TO_ELF_WORDS
+            }
             withContext(dispatchers.network) {
                 suspendCoroutine { emitter ->
-                    db.collection(ELF_TO_ENG_WORDS)
+                    db.collection(dbName)
                         .get()
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
@@ -119,14 +138,27 @@ internal class ElfToEngDictionaryRepositoryImpl(
         }.getOrNull()
     }
 
-    private fun loadWordsFromCache(): List<ElfToEngWordEntity?> {
-        val json = resources.openRawResource(R.raw.elf_to_eng)
-            .bufferedReader().use { it.readText() }
+    private fun loadWordsFromCache(dictionaryMode: DictionaryMode): List<ElfToEngWordEntity?> {
+        val json = if (dictionaryMode == DictionaryMode.ELVISH_TO_ENGLISH) {
+            resources.openRawResource(R.raw.elf_to_eng)
+        } else {
+            resources.openRawResource(R.raw.eng_to_elf)
+        }.bufferedReader().use { it.readText() }
+
         val listType: Type = object : TypeToken<ArrayList<ElfToEngWordEntity?>?>() {}.type
         return Gson().fromJson<List<ElfToEngWordEntity>?>(json, listType)
     }
 
+    private fun getDao(dictionaryMode: DictionaryMode): DictionaryDao<out Any> {
+        return if (dictionaryMode == DictionaryMode.ELVISH_TO_ENGLISH) {
+            engToElfDao
+        } else {
+            elfToEngDao
+        }
+    }
+
     private companion object {
         const val ELF_TO_ENG_WORDS = "elf_to_eng_words"
+        const val ENG_TO_ELF_WORDS = "eng_to_elf_words"
     }
 }

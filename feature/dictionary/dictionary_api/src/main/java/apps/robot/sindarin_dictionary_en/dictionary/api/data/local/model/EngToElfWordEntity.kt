@@ -10,12 +10,12 @@ import com.google.gson.annotations.SerializedName
 class EngToElfWordEntity(
     @PrimaryKey
     var id: String,
-    var word: String,
+    override var word: String,
     var translation: String,
     @SerializedName("is_favorite")
     @ColumnInfo(name = "is_favorite")
     var isFavorite: Boolean
-) {
+): WordEntity {
     constructor() : this("","", "", false)
 
     companion object {
