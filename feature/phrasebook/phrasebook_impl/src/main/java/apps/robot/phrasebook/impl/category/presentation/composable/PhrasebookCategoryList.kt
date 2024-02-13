@@ -112,7 +112,7 @@ fun PhrasebookCategory(
             ) {
                 list.forEachIndexed { index, item ->
                     if (index == 0) {
-                        AdmobBanner()
+                        AdmobBanner(stringResource(id = R.string.admob_banner_id_phr_category_list_1))
                     }
                     PhrasebookCategoriesItem(item = item) {
                         navigator.navigate(
@@ -126,7 +126,7 @@ fun PhrasebookCategory(
                     if (index < list.lastIndex)
                         Divider(color = CustomTheme.colors.onBackground, thickness = 1.dp)
                     else if (index == list.lastIndex)
-                        AdmobBanner()
+                        AdmobBanner(stringResource(id = R.string.admob_banner_id_phr_category_list_2))
                 }
             }
         }

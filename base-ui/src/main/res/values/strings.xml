@@ -5,6 +5,10 @@
     <string name="pro_version_promo_dialog_button_confirm">Go to Google Play</string>
     <string name="pro_version_promo_dialog_button_dismiss">Cancel</string>
 
-    <string name="admob_banner_id">ca-app-pub-2471262936820592/1276004336</string>
+    <string name="admob_banner_id_phr_list_1">ca-app-pub-2471262936820592/2044638398</string>
+    <string name="admob_banner_id_phr_list_2">ca-app-pub-2471262936820592/7497696503</string>
+    <string name="admob_banner_id_phr_category_list_1">ca-app-pub-2471262936820592/4110746148</string>
+    <string name="admob_banner_id_phr_category_list_2">ca-app-pub-2471262936820592/1254300904</string>
+
     <string name="admob_interstitial_id">ca-app-pub-2471262936820592/3651897991</string>
 </resources>

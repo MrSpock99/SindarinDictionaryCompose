@@ -12,6 +12,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -94,7 +95,7 @@ internal fun PhrasebookCategoriesList(
             ) {
                 list.forEachIndexed { index, item ->
                     if (index == 0) {
-                        AdmobBanner()
+                        AdmobBanner(stringResource(id = R.string.admob_banner_id_phr_list_1))
                     }
                     if (item is PhrasebookCategoryUiModel) {
                         PhrasebookCategoryItem(item = item) {
@@ -115,7 +116,7 @@ internal fun PhrasebookCategoriesList(
                     if (index < list.lastIndex)
                         Divider(color = CustomTheme.colors.onBackground, thickness = 1.dp)
                     else if (index == list.lastIndex)
-                        AdmobBanner()
+                        AdmobBanner(stringResource(id = R.string.admob_banner_id_phr_list_2))
                 }
             }
 

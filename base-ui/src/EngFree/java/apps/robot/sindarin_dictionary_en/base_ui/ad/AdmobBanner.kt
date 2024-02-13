@@ -1,12 +1,12 @@
 package apps.robot.sindarin_dictionary_en.base_ui.ad
 
 import android.app.Activity
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.CircularProgressIndicator
-import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -16,7 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import apps.robot.sindarin_dictionary_en.base_ui.R
+import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
@@ -24,7 +24,7 @@ import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.LoadAdError
 
 @Composable
-fun AdmobBanner() {
+fun AdmobBanner(bannerId: String) {
     var isAdLoaded by remember {
         mutableStateOf(false)
     }
@@ -47,17 +47,19 @@ fun AdmobBanner() {
         factory = { context ->
             AdView(context as Activity).apply {
                 setAdSize(AdSize(-1, 60))
-                adUnitId = context.resources.getString(R.string.admob_banner_id)
+                adUnitId = bannerId
                 loadAd(AdRequest.Builder().build())
 
                 adListener = object : AdListener() {
                     override fun onAdLoaded() {
                         super.onAdLoaded()
+                        Log.d("Admob","banner load success")
                         isAdLoaded = true
                     }
 
                     override fun onAdFailedToLoad(p0: LoadAdError) {
                         super.onAdFailedToLoad(p0)
+                        Log.d("Admob","banner load error $p0")
                         isAdLoaded = true
                     }
                 }
