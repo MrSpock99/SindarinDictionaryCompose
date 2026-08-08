@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="admob_banner_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_banner_id_phr_list_1">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_banner_id_phr_list_2">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_banner_id_phr_category_list_1">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_banner_id_phr_category_list_2">ca-app-pub-3940256099942544/6300978111</string>
+
     <string name="admob_interstitial_id">ca-app-pub-3940256099942544/1033173712</string>
 </resources>
