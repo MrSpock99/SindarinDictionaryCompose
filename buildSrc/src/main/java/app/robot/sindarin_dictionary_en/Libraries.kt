@@ -20,6 +20,7 @@ object Libraries {
     }
 
     object Compose {
+        const val compiler = "org.jetbrains.kotlin.plugin.compose:${Versions.kotlin}"
         const val ui = "androidx.compose.ui:ui:${Versions.compose}"
         const val material = "androidx.compose.material:material:${Versions.compose}"
         const val preview = "androidx.compose.ui:ui-tooling-preview:${Versions.compose}"

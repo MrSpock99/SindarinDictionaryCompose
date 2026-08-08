@@ -9,6 +9,8 @@ buildscript {
         classpath Plugins.ClassPaths.gradle
         classpath Plugins.ClassPaths.googleServices
         classpath Plugins.ClassPaths.kotlin
+        classpath Plugins.ClassPaths.composeCompiler
+        classpath Plugins.ClassPaths.ksp
     }
 }
 allprojects {

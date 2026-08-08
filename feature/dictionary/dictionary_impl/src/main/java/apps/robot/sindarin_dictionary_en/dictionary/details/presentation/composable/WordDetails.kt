@@ -1,6 +1,5 @@
 package apps.robot.sindarin_dictionary_en.dictionary.details.presentation.composable
 
-import android.annotation.SuppressLint
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -37,7 +36,6 @@ import apps.robot.sindarin_dictionary_en.dictionary.details.presentation.Details
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 internal fun WordDetails(
     wordId: String?,
@@ -109,9 +107,10 @@ internal fun WordDetails(
             SnackbarHost(hostState = snackbarHostState)
         },
         backgroundColor = CustomTheme.colors.background
-    ) {
+    ) { paddingValues ->
         Column(
             modifier = Modifier
+                .padding(paddingValues)
                 .padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
             Text(

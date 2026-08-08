@@ -2,16 +2,16 @@ package app.robot.sindarin_dictionary_en
 
 object Versions {
     const val googleServices = "4.3.13"
-    const val gradle = "7.1.3"
+    const val gradle = "8.10.1"
     const val minSdk = 21
-    const val compileSdk = 34
+    const val compileSdk = 36
     const val targetSdk = compileSdk
 
     const val androidxCore = "1.7.0"
     const val androidxLifecycle = "2.4.1"
-    const val kotlin = "1.8.0"
+    const val kotlin = "2.0.21"
     const val lifecycle = "2.4.1"
-    const val ksp = "1.6.21-1.0.6"
+    const val ksp = "2.0.21-1.0.28"
     const val kotlinCoroutines = "1.6.2"
     const val koin = "3.2.0-beta-1"
 

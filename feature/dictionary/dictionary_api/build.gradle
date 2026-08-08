@@ -6,6 +6,9 @@ buildscript {
     ext {
         kspVersion = "${Versions.ksp}"
         ksp = "${Plugins.ksp}"
+
+        composeCompilerVersion = "${Versions.kotlin}"
+        composeCompiler = "${Plugins.composeCompiler}"
     }
 }
 
@@ -15,6 +18,10 @@ apply plugin: Plugins.kotlinAndroid
 apply from: "$rootDir/config/dependencies-groups.gradle"
 apply from: "$rootDir/config/config-android.gradle"
 apply from: "$rootDir/config/config-product-flavors.gradle"
+
+android {
+    namespace 'apps.robot.dictionary.api'
+}
 
 dependencies {
     implementation project(AppModules.baseUi)

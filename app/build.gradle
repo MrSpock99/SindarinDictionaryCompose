@@ -6,16 +6,22 @@ buildscript {
     ext {
         kspVersion = "${Versions.ksp}"
         ksp = "${Plugins.ksp}"
+
+        composeCompilerVersion = "${Versions.kotlin}"
+        composeCompiler = "${Plugins.composeCompiler}"
     }
 }
 
 apply plugin: Plugins.library
 apply plugin: Plugins.kotlinAndroid
-apply plugin: Plugins.kotlinKapt
 
 apply from: "$rootDir/config/dependencies-groups.gradle"
 apply from: "$rootDir/config/config-android.gradle"
 apply from: "$rootDir/config/config-product-flavors.gradle"
+
+android {
+    namespace 'apps.robot.monolith'
+}
 
 dependencies {
     implementation project(AppModules.baseUi)
@@ -31,5 +37,6 @@ dependencies {
     support()
     networkCore()
     database()
+    roomCompiler()
     paging()
 }

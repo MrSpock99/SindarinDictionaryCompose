@@ -1,11 +1,22 @@
 import app.robot.sindarin_dictionary_en.Plugins
+import app.robot.sindarin_dictionary_en.Versions
 
+buildscript {
+    ext {
+        composeCompilerVersion = "${Versions.kotlin}"
+        composeCompiler = "${Plugins.composeCompiler}"
+    }
+}
 apply plugin: Plugins.library
 apply plugin: Plugins.kotlinAndroid
 
 apply from: "$rootDir/config/dependencies-groups.gradle"
 apply from: "$rootDir/config/config-android.gradle"
 apply from: "$rootDir/config/config-product-flavors.gradle"
+
+android {
+    namespace 'apps.robot.sindarin_dictionary_en.base_ui'
+}
 
 dependencies {
     composeCore()

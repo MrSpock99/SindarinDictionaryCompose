@@ -9,6 +9,7 @@ apply from: "$rootDir/config/dependencies-groups.gradle"
 apply from: "$rootDir/config/config-android.gradle"
 
 android {
+    namespace 'apps.robot.sindarin_dictionary_en'
 
     buildTypes {
         release {

@@ -2,7 +2,8 @@ import app.robot.sindarin_dictionary_en.Versions
 import app.robot.sindarin_dictionary_en.Plugins
 
 apply plugin: Plugins.kotlinAndroid
-apply plugin: Plugins.kotlinKapt
+apply plugin: Plugins.composeCompiler
+apply plugin: Plugins.ksp
 
 // apply plugin: Plugins.detekt
 // apply plugin: Plugins.moduleName
@@ -12,6 +13,7 @@ apply plugin: Plugins.kotlinKapt
 
 android {
     compileSdkVersion Versions.targetSdk
+    buildToolsVersion "36.1.0"
 
     defaultConfig {
         minSdkVersion Versions.minSdk
@@ -50,6 +52,7 @@ android {
 
     buildFeatures {
         compose true
+        buildConfig true
     }
 
     composeOptions {

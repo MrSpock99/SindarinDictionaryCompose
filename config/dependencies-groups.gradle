@@ -58,7 +58,10 @@ ext {
         implementation Libraries.Database.runtime
         implementation Libraries.Database.ktx
         implementation Libraries.Database.paging
-        kapt Libraries.Database.compile
+    }
+
+    roomCompiler = Group {
+        ksp Libraries.Database.compile
     }
 
     paging = Group {
