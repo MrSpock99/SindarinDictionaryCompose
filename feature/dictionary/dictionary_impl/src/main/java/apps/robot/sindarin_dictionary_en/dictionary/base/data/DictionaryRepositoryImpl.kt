@@ -17,6 +17,7 @@ import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DictionaryMode
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DictionaryRepository
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.Word
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordDomainMapper
+import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordEngToElfEntityMapper
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordElfToEngEntityMapper
 import apps.robot.sindarin_dictionary_en.dictionary.list.data.paging.DictionaryPagingSource
 import com.google.firebase.firestore.FirebaseFirestore
@@ -37,6 +38,7 @@ internal class DictionaryRepositoryImpl(
     private val elfToEngDao: ElfToEngDao,
     private val engToElfDao: EngToElfDao,
     private val mapper: WordDomainMapper,
+    private val engToElfEntityMapper: WordEngToElfEntityMapper,
     private val elfToEngEntityMapper: WordElfToEngEntityMapper,
     private val elfToEngPagingSource: DictionaryPagingSource<ElfToEngWordEntity>,
     private val engToElfPagingSource: DictionaryPagingSource<EngToElfWordEntity>,
@@ -44,16 +46,16 @@ internal class DictionaryRepositoryImpl(
 ) : DictionaryRepository {
 
     override suspend fun loadWords(dictionaryMode: DictionaryMode) {
-        val loadFromRemote = false
+        if (getWordsSize(dictionaryMode) > 0) return
 
-        val words = if (loadFromRemote) {
-            loadWordsFromRemote(dictionaryMode)
+        val words = loadWordsFromRemote(dictionaryMode) ?: loadWordsFromCache(dictionaryMode)
+        val sortedWords = words.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.word })
+
+        if (dictionaryMode == DictionaryMode.ELVISH_TO_ENGLISH) {
+            elfToEngDao.insertAll(sortedWords.map(elfToEngEntityMapper::map))
         } else {
-            loadWordsFromCache(dictionaryMode)
+            engToElfDao.insertAll(sortedWords.map(engToElfEntityMapper::map))
         }
-
-        words?.filterNotNull()?.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.word })
-            ?.let { elfToEngDao.insertAll(it) }
     }
 
     override fun getPagedWordsAsFlow(dictionaryMode: DictionaryMode, keyword: String?): Flow<PagingData<Word>> {
@@ -100,11 +102,15 @@ internal class DictionaryRepositoryImpl(
         return elfToEngDao.getFavoriteWordsAsFlow().map { it.map(mapper::map) }
     }
 
-    override fun getWordsSize(): Int {
-        return engToElfDao.getWordsSize()
+    override fun getWordsSize(dictionaryMode: DictionaryMode): Int {
+        return if (dictionaryMode == DictionaryMode.ELVISH_TO_ENGLISH) {
+            elfToEngDao.getWordsSize()
+        } else {
+            engToElfDao.getWordsSize()
+        }
     }
 
-    private suspend fun loadWordsFromRemote(dictionaryMode: DictionaryMode): List<ElfToEngWordEntity?>? {
+    private suspend fun loadWordsFromRemote(dictionaryMode: DictionaryMode): List<Word>? {
 
         return runCatching {
             val dbName = if (dictionaryMode == DictionaryMode.ELVISH_TO_ENGLISH) {
@@ -119,11 +125,17 @@ internal class DictionaryRepositoryImpl(
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
                                 emitter.resume(
-                                    task.result?.documents?.map {
-                                        val word = it.toObject(ElfToEngWordEntity::class.java)
-                                        word?.id = it.id
-                                        word
-                                    } ?: listOf()
+                                    task.result?.documents?.mapNotNull {
+                                        if (dictionaryMode == DictionaryMode.ELVISH_TO_ENGLISH) {
+                                            it.toObject(ElfToEngWordEntity::class.java)
+                                                ?.apply { id = it.id }
+                                                ?.let(mapper::map)
+                                        } else {
+                                            it.toObject(EngToElfWordEntity::class.java)
+                                                ?.apply { id = it.id }
+                                                ?.let(mapper::map)
+                                        }
+                                    } ?: emptyList()
                                 )
                             } else {
                                 emitter.resumeWithException(
@@ -138,22 +150,22 @@ internal class DictionaryRepositoryImpl(
         }.getOrNull()
     }
 
-    private fun loadWordsFromCache(dictionaryMode: DictionaryMode): List<ElfToEngWordEntity?> {
+    private fun loadWordsFromCache(dictionaryMode: DictionaryMode): List<Word> {
         val json = if (dictionaryMode == DictionaryMode.ELVISH_TO_ENGLISH) {
             resources.openRawResource(R.raw.elf_to_eng)
         } else {
             resources.openRawResource(R.raw.eng_to_elf)
         }.bufferedReader().use { it.readText() }
 
-        val listType: Type = object : TypeToken<ArrayList<ElfToEngWordEntity?>?>() {}.type
-        return Gson().fromJson<List<ElfToEngWordEntity>?>(json, listType)
+        val listType: Type = object : TypeToken<ArrayList<Word>>() {}.type
+        return Gson().fromJson(json, listType)
     }
 
     private fun getDao(dictionaryMode: DictionaryMode): DictionaryDao<out Any> {
         return if (dictionaryMode == DictionaryMode.ELVISH_TO_ENGLISH) {
-            engToElfDao
-        } else {
             elfToEngDao
+        } else {
+            engToElfDao
         }
     }
 

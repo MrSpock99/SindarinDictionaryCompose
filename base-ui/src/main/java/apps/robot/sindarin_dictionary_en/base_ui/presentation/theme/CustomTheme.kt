@@ -7,9 +7,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.staticCompositionLocalOf
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.graphics.Color import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -119,10 +117,8 @@ fun CustomTheme(
         SideEffect {
             val window = (view.context as Activity).window
             val insets = WindowCompat.getInsetsController(window, view)
-            window.statusBarColor = customColors.primary.toArgb() // choose a status bar color
-            window.navigationBarColor = customColors.primary.toArgb() // choose a navigation bar color
-            insets.isAppearanceLightStatusBars = darkTheme
-            insets.isAppearanceLightNavigationBars = darkTheme
+            insets.isAppearanceLightStatusBars = !darkTheme
+            insets.isAppearanceLightNavigationBars = !darkTheme
         }
     }
 }

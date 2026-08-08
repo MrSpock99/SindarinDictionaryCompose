@@ -28,6 +28,7 @@ internal fun dictionaryBaseModule() = module {
             elfToEngDao = get(),
             engToElfDao = get(),
             mapper = get(),
+            engToElfEntityMapper = get(),
             elfToEngEntityMapper = get(),
             elfToEngPagingSource = get(named("ElfToEng")),
             resources = androidApplication().resources,

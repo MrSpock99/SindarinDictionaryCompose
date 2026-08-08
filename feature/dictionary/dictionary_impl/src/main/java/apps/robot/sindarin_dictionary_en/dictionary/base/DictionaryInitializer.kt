@@ -20,15 +20,14 @@ class DictionaryInitializer(
 
     override fun onAppStartInit() {
         coroutineScope.launch(dispatchers.network) {
-            if (repository.getWordsSize() == 0) {
-                listOf(
-                    async { loadWordList(DictionaryMode.ELVISH_TO_ENGLISH) },
-                    async { loadWordList(DictionaryMode.ENGLISH_TO_ELVISH) }
-                ).awaitAll()
-                areWordsLoaded.value = true
-            } else {
-                areWordsLoaded.value = true
-            }
+            DictionaryMode.entries.map { mode ->
+                async {
+                    if (repository.getWordsSize(mode) == 0) {
+                        loadWordList(mode)
+                    }
+                }
+            }.awaitAll()
+            areWordsLoaded.value = true
         }
     }
 

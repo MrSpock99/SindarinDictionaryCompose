@@ -10,5 +10,5 @@ interface DictionaryRepository {
     suspend fun getWordById(dictionaryMode: DictionaryMode, id: String): Word
     suspend fun updateWord(dictionaryMode: DictionaryMode, word: Word)
     fun getFavoriteWordsAsFlow(dictionaryMode: DictionaryMode): Flow<List<Word>>
-    fun getWordsSize(): Int
+    fun getWordsSize(dictionaryMode: DictionaryMode): Int
 }
