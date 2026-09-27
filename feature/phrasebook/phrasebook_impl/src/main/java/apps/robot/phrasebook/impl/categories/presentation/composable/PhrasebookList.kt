@@ -28,7 +28,7 @@ import apps.robot.phrasebook.impl.categories.presentation.PhrasebookCategoriesVi
 import apps.robot.phrasebook.impl.categories.presentation.PhrasebookCategoryUiModel
 import apps.robot.phrasebook.impl.category.presentation.PhrasebookCategoryItemUiModel
 import apps.robot.phrasebook.impl.category.presentation.composable.PhrasebookCategoriesItem
-import apps.robot.sindarin_dictionary_en.base_ui.ad.AdmobBanner
+import apps.robot.sindarin_dictionary_en.base_ui.ad.AppodealBanner
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.ProVersionPromotionDialog
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.openProVersionInMarket
@@ -95,7 +95,7 @@ internal fun PhrasebookCategoriesList(
             ) {
                 list.forEachIndexed { index, item ->
                     if (index == 0) {
-                        AdmobBanner(stringResource(id = R.string.admob_banner_id_phr_list_1))
+                        AppodealBanner()
                     }
                     if (item is PhrasebookCategoryUiModel) {
                         PhrasebookCategoryItem(item = item) {
@@ -115,8 +115,6 @@ internal fun PhrasebookCategoriesList(
 
                     if (index < list.lastIndex)
                         Divider(color = CustomTheme.colors.onBackground, thickness = 1.dp)
-                    else if (index == list.lastIndex)
-                        AdmobBanner(stringResource(id = R.string.admob_banner_id_phr_list_2))
                 }
             }
 

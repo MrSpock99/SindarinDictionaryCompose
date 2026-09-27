@@ -55,10 +55,6 @@ android {
         buildConfig true
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = Versions.composeCompiler
-    }
-
 /*    lintOptions {
         checkReleaseBuilds false
         abortOnError false

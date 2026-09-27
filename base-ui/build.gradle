@@ -16,6 +16,13 @@ apply from: "$rootDir/config/config-product-flavors.gradle"
 
 android {
     namespace 'apps.robot.sindarin_dictionary_en.base_ui'
+    productFlavors {
+        EngFree {
+            minSdkVersion 24
+            def appodealAppKey = providers.gradleProperty("appodealAppKey").getOrElse("")
+            buildConfigField "String", "APPODEAL_APP_KEY", "\"${appodealAppKey}\""
+        }
+    }
 }
 
 dependencies {
@@ -24,5 +31,6 @@ dependencies {
     navigationCompose()
     koin()
     kotlinLib()
-    admob()
+    EngFreeImplementation "com.appodeal.ads.sdk:core:4.4.0"
+    EngFreeImplementation "com.appodeal.ads.sdk.adapters:admob:25.2.0.0"
 }

@@ -21,6 +21,7 @@ android {
     productFlavors {
         EngFree {
             dimension "types"
+            minSdkVersion 24
             applicationId "apps.robot.sindarin_dictionary_en"
             buildConfigField "String", "FLAVOR", '"EngFree"'
         }
@@ -44,8 +45,7 @@ android {
         buildConfig = true
     }
     defaultConfig {
-
-        // ... (applicationId, miSdkVersion, etc)
+        versionName "1.0.0"
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -70,5 +70,4 @@ dependencies {
     support()
     composeCore()
     timber()
-    admob()
 }

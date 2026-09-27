@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import apps.robot.phrasebook.impl.R
 import apps.robot.phrasebook.impl.category.presentation.PhrasebookCategoryViewModel
-import apps.robot.sindarin_dictionary_en.base_ui.ad.AdmobBanner
+import apps.robot.sindarin_dictionary_en.base_ui.ad.AppodealBanner
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.SearchWidgetState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.UiState
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.theme.CustomTheme
@@ -112,7 +112,7 @@ fun PhrasebookCategory(
             ) {
                 list.forEachIndexed { index, item ->
                     if (index == 0) {
-                        AdmobBanner(stringResource(id = R.string.admob_banner_id_phr_category_list_1))
+                        AppodealBanner()
                     }
                     PhrasebookCategoriesItem(item = item) {
                         navigator.navigate(
@@ -125,8 +125,6 @@ fun PhrasebookCategory(
                     }
                     if (index < list.lastIndex)
                         Divider(color = CustomTheme.colors.onBackground, thickness = 1.dp)
-                    else if (index == list.lastIndex)
-                        AdmobBanner(stringResource(id = R.string.admob_banner_id_phr_category_list_2))
                 }
             }
         }
