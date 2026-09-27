@@ -1,13 +1,10 @@
 package apps.robot.sindarin_dictionary_en.dictionary.base.data
 
-import android.content.res.Resources
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.filter
 import androidx.paging.map
-import apps.robot.dictionary.impl.R
-import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.DictionaryDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.ElfToEngDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.EngToElfDao
@@ -20,21 +17,11 @@ import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordDomain
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordEngToElfEntityMapper
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordElfToEngEntityMapper
 import apps.robot.sindarin_dictionary_en.dictionary.list.data.paging.DictionaryPagingSource
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
-import timber.log.Timber
-import java.lang.reflect.Type
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
 
 internal class DictionaryRepositoryImpl(
-    private val db: FirebaseFirestore,
-    private val dispatchers: AppDispatchers,
+    private val dataSource: DictionaryDataSource,
     private val elfToEngDao: ElfToEngDao,
     private val engToElfDao: EngToElfDao,
     private val mapper: WordDomainMapper,
@@ -42,13 +29,12 @@ internal class DictionaryRepositoryImpl(
     private val elfToEngEntityMapper: WordElfToEngEntityMapper,
     private val elfToEngPagingSource: DictionaryPagingSource<ElfToEngWordEntity>,
     private val engToElfPagingSource: DictionaryPagingSource<EngToElfWordEntity>,
-    private val resources: Resources,
 ) : DictionaryRepository {
 
     override suspend fun loadWords(dictionaryMode: DictionaryMode) {
         if (getWordsSize(dictionaryMode) > 0) return
 
-        val words = loadWordsFromRemote(dictionaryMode) ?: loadWordsFromCache(dictionaryMode)
+        val words = dataSource.loadWords(dictionaryMode)
         val sortedWords = words.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.word })
 
         if (dictionaryMode == DictionaryMode.ELVISH_TO_ENGLISH) {
@@ -110,57 +96,6 @@ internal class DictionaryRepositoryImpl(
         }
     }
 
-    private suspend fun loadWordsFromRemote(dictionaryMode: DictionaryMode): List<Word>? {
-
-        return runCatching {
-            val dbName = if (dictionaryMode == DictionaryMode.ELVISH_TO_ENGLISH) {
-                ELF_TO_ENG_WORDS
-            } else {
-                ENG_TO_ELF_WORDS
-            }
-            withContext(dispatchers.network) {
-                suspendCoroutine { emitter ->
-                    db.collection(dbName)
-                        .get()
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                emitter.resume(
-                                    task.result?.documents?.mapNotNull {
-                                        if (dictionaryMode == DictionaryMode.ELVISH_TO_ENGLISH) {
-                                            it.toObject(ElfToEngWordEntity::class.java)
-                                                ?.apply { id = it.id }
-                                                ?.let(mapper::map)
-                                        } else {
-                                            it.toObject(EngToElfWordEntity::class.java)
-                                                ?.apply { id = it.id }
-                                                ?.let(mapper::map)
-                                        }
-                                    } ?: emptyList()
-                                )
-                            } else {
-                                emitter.resumeWithException(
-                                    task.exception ?: java.lang.Exception()
-                                )
-                            }
-                        }
-                }
-            }
-        }.onFailure {
-            Timber.d("Error while fetching data $it")
-        }.getOrNull()
-    }
-
-    private fun loadWordsFromCache(dictionaryMode: DictionaryMode): List<Word> {
-        val json = if (dictionaryMode == DictionaryMode.ELVISH_TO_ENGLISH) {
-            resources.openRawResource(R.raw.elf_to_eng)
-        } else {
-            resources.openRawResource(R.raw.eng_to_elf)
-        }.bufferedReader().use { it.readText() }
-
-        val listType: Type = object : TypeToken<ArrayList<Word>>() {}.type
-        return Gson().fromJson(json, listType)
-    }
-
     private fun getDao(dictionaryMode: DictionaryMode): DictionaryDao<out Any> {
         return if (dictionaryMode == DictionaryMode.ELVISH_TO_ENGLISH) {
             elfToEngDao
@@ -169,8 +104,4 @@ internal class DictionaryRepositoryImpl(
         }
     }
 
-    private companion object {
-        const val ELF_TO_ENG_WORDS = "elf_to_eng_words"
-        const val ENG_TO_ELF_WORDS = "eng_to_elf_words"
-    }
 }

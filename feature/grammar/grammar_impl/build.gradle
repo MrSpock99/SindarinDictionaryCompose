@@ -18,6 +18,16 @@ apply from: "$rootDir/config/config-product-flavors.gradle"
 
 android {
     namespace 'apps.robot.grammar.impl'
+    buildFeatures {
+        buildConfig = true
+    }
+    defaultConfig {
+        def useFirebasePronounceDataSource = providers.gradleProperty("useFirebasePronounceDataSource").getOrElse("false")
+        if (!(useFirebasePronounceDataSource in ["true", "false"])) {
+            throw new GradleException("useFirebasePronounceDataSource must be true or false")
+        }
+        buildConfigField "boolean", "USE_FIREBASE_PRONOUNCE_DATA_SOURCE", useFirebasePronounceDataSource
+    }
 }
 
 dependencies {

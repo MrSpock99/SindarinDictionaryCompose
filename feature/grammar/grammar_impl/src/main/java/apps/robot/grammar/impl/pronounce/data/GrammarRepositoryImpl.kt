@@ -4,51 +4,16 @@ import apps.robot.grammar.api.PronounceDao
 import apps.robot.grammar.api.PronounceItem
 import apps.robot.grammar.impl.plural.domain.PluralItem
 import apps.robot.grammar.impl.pronounce.domain.GrammarRepository
-import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.withContext
-import timber.log.Timber
 import java.util.UUID
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
 
-class GrammarRepositoryImpl(
-    private val db: FirebaseFirestore,
-    private val dispatchers: AppDispatchers,
+internal class GrammarRepositoryImpl(
+    private val dataSource: PronounceDataSource,
     private val dao: PronounceDao
 ) : GrammarRepository {
     override suspend fun loadPronounceItems() {
-        val pronounceItems = kotlin.runCatching {
-            withContext(dispatchers.network) {
-                suspendCoroutine<List<PronounceItem?>> { emitter ->
-                    db.collection("pronunciation")
-                        .get()
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                emitter.resume(
-                                    task.result?.documents?.map {
-                                        val word = it.toObject(PronounceItem::class.java)
-                                        word
-                                    } ?: emptyList()
-                                )
-                            } else {
-                                emitter.resumeWithException(
-                                    task.exception ?: Exception()
-                                )
-                            }
-                        }
-                }
-            }
-        }.onFailure {
-            Timber.d("Error while fetching data $it")
-        }.getOrNull()
-
-        pronounceItems?.filterNotNull()?.let {
-            dao.addItems(it)
-        }
+        dao.addItems(dataSource.loadItems())
     }
 
     override suspend fun getPronunciationAsFlow(): Flow<List<PronounceItem>> {

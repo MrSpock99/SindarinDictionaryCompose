@@ -18,6 +18,16 @@ apply from: "$rootDir/config/config-product-flavors.gradle"
 
 android {
     namespace 'apps.robot.dictionary.impl'
+    buildFeatures {
+        buildConfig = true
+    }
+    defaultConfig {
+        def useFirebaseDictionarySource = providers.gradleProperty("useFirebaseDictionarySource").getOrElse("false")
+        if (!(useFirebaseDictionarySource in ["true", "false"])) {
+            throw new GradleException("useFirebaseDictionarySource must be true or false")
+        }
+        buildConfigField "boolean", "USE_FIREBASE_DICTIONARY_SOURCE", useFirebaseDictionarySource
+    }
 }
 
 dependencies {

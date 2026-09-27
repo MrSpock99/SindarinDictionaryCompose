@@ -18,6 +18,16 @@ apply from: "$rootDir/config/config-product-flavors.gradle"
 
 android {
     namespace 'apps.robot.phrasebook.impl'
+    buildFeatures {
+        buildConfig = true
+    }
+    defaultConfig {
+        def useFirebasePhrasebookDataSource = providers.gradleProperty("useFirebasePhrasebookDataSource").getOrElse("false")
+        if (!(useFirebasePhrasebookDataSource in ["true", "false"])) {
+            throw new GradleException("useFirebasePhrasebookDataSource must be true or false")
+        }
+        buildConfigField "boolean", "USE_FIREBASE_PHRASEBOOK_DATA_SOURCE", useFirebasePhrasebookDataSource
+    }
 }
 
 dependencies {

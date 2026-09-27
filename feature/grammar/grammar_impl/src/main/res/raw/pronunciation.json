@@ -1,0 +1,224 @@
+[
+  {
+    "id": "077f7c87-2dda-43ce-84fc-4c52508864c3",
+    "sound": "ng",
+    "example": "1) in the end of a word - nasal 'n' and 'g'(long)\n2) in the middle of a word - God ",
+    "sindarinExample": "1) ang\n2) angband"
+  },
+  {
+    "id": "07b5caae-849b-4fce-8aae-7a1b37da34a5",
+    "sound": "v",
+    "example": "vine",
+    "sindarinExample": "govad"
+  },
+  {
+    "id": "1220effb-2dcc-4f96-99bf-07cadf5a111f",
+    "sound": "ai",
+    "example": "slide ",
+    "sindarinExample": "edain"
+  },
+  {
+    "id": "20290ced-95bf-4254-b9dd-cb773090b20d",
+    "sound": "p",
+    "example": "post",
+    "sindarinExample": "pân"
+  },
+  {
+    "id": "3645d0b5-e5cd-4225-9038-fa88f3936bd4",
+    "sound": "e",
+    "example": "alien",
+    "sindarinExample": "benn"
+  },
+  {
+    "id": "3d719e3d-7c2d-4a39-a730-3d4ef9ef73a1",
+    "sound": "a",
+    "example": "us",
+    "sindarinExample": "adan"
+  },
+  {
+    "id": "470ad6c6-1692-49c6-b279-797033a97d77",
+    "sound": "u",
+    "example": "cook",
+    "sindarinExample": "um"
+  },
+  {
+    "id": "533cc2dd-3f8c-49b6-8703-410b876ac508",
+    "sound": "hw",
+    "example": "where",
+    "sindarinExample": "hwand"
+  },
+  {
+    "id": "562f5a79-d2be-4fe7-814c-99d652bdef0a",
+    "sound": "w",
+    "example": "way",
+    "sindarinExample": "wend, iarwain"
+  },
+  {
+    "id": "5d1ec7c0-c3ed-4e9e-a749-a312d018a3fa",
+    "sound": "oe",
+    "example": "nowhere",
+    "sindarinExample": "noeg"
+  },
+  {
+    "id": "5ecb63dc-ced0-44f5-888b-4c17d1b00ad5",
+    "sound": "dh",
+    "example": "this",
+    "sindarinExample": "nedh"
+  },
+  {
+    "id": "62a60191-19a7-41b8-8b98-0313614014f9",
+    "sound": "d",
+    "example": "date",
+    "sindarinExample": "daw"
+  },
+  {
+    "id": "64a899a1-7e68-41d5-8dcc-f18038041e76",
+    "sound": "m",
+    "example": "my",
+    "sindarinExample": "amar"
+  },
+  {
+    "id": "6a4abe78-6a3c-472c-92c2-3445ba9a9c16",
+    "sound": "b",
+    "example": "bush",
+    "sindarinExample": "benn"
+  },
+  {
+    "id": "74a9100a-ecac-4aa6-9029-a43e6885ed49",
+    "sound": "ae",
+    "example": "Ally",
+    "sindarinExample": "aear"
+  },
+  {
+    "id": "8048af73-f6c2-4039-bef2-bcc8cb714ee7",
+    "sound": "f",
+    "example": "fly",
+    "sindarinExample": "faras"
+  },
+  {
+    "id": "85487e2c-5551-4ea8-8bca-eda47559457a",
+    "sound": "k",
+    "example": "kill",
+    "sindarinExample": "kalar"
+  },
+  {
+    "id": "857a09f1-9b5f-4dd3-a7c8-92602e88b826",
+    "sound": "r",
+    "example": "like russian 'р'",
+    "sindarinExample": "arad"
+  },
+  {
+    "id": "9b76dad6-300f-4fa4-b2cd-0de2152b3bcd",
+    "sound": "c",
+    "example": "class",
+    "sindarinExample": "calad"
+  },
+  {
+    "id": "ad0806df-ace5-43f2-8741-f10a0e8f1a0e",
+    "sound": "-f in the end of a word and before a consonant",
+    "example": "vine",
+    "sindarinExample": "lâf, uidafnen"
+  },
+  {
+    "id": "b2906880-ea56-4443-af2e-481b50c3021d",
+    "sound": "t",
+    "example": "тропа",
+    "sindarinExample": "tinc, mant"
+  },
+  {
+    "id": "ba342fbd-ddea-448c-a021-82911ea204d0",
+    "sound": "g",
+    "example": "goose",
+    "sindarinExample": "galad"
+  },
+  {
+    "id": "bb839ef3-b3a2-42f8-ada1-e9d3bc274c59",
+    "sound": "h",
+    "example": "like russian 'x'",
+    "sindarinExample": "hador"
+  },
+  {
+    "id": "c8886f52-3a2b-4526-88dc-b409db88d17c",
+    "sound": "n",
+    "example": "nose",
+    "sindarinExample": "nîn"
+  },
+  {
+    "id": "ca4d3482-5355-4f92-8224-aab37a9d1f65",
+    "sound": "ch",
+    "example": "like russian 'х', but more aggressive",
+    "sindarinExample": "chîr"
+  },
+  {
+    "id": "d302fcc5-235d-4dbe-9904-7a6e7df5b260",
+    "sound": "th",
+    "example": "think",
+    "sindarinExample": "maeth"
+  },
+  {
+    "id": "d5e765e9-1656-42e7-a22b-c8be84ffc9cd",
+    "sound": "s",
+    "example": "sleep",
+    "sindarinExample": "losto"
+  },
+  {
+    "id": "da8e03c3-260b-4a81-806b-7f42660880a2",
+    "sound": "lh",
+    "example": "hard 'l'",
+    "sindarinExample": "lhaw"
+  },
+  {
+    "id": "dd3494ad-48dc-4aaa-99b7-bab197ab958c",
+    "sound": "ph",
+    "example": "farm",
+    "sindarinExample": "alph"
+  },
+  {
+    "id": "e44d53b1-dd94-4f77-a5e0-9fc29b82bac5",
+    "sound": "au",
+    "example": "now",
+    "sindarinExample": "auth,maw"
+  },
+  {
+    "id": "e8be0cdd-64e9-49cb-a95a-ff41967b913b",
+    "sound": "o",
+    "example": "orbit",
+    "sindarinExample": "noss"
+  },
+  {
+    "id": "e92c12e3-a359-4670-b574-e924f7174770",
+    "sound": "rh",
+    "example": "like russian 'р' but thrill isn't accentuated",
+    "sindarinExample": "Rhovanion"
+  },
+  {
+    "id": "e97330a6-a85c-4c51-9a5b-8bd3bf8bff3b",
+    "sound": "l",
+    "example": "1) after 'e','i', in the end of words, before consonants — soft 'l' \n2)hard 'l'",
+    "sindarinExample": "lhaw"
+  },
+  {
+    "id": "ef51788e-1542-4861-a8b1-d08ad48d2fa5",
+    "sound": "ei",
+    "example": "sale ",
+    "sindarinExample": "einior"
+  },
+  {
+    "id": "f1f10cb4-698b-447d-9f27-46a11b309c9c",
+    "sound": "i",
+    "example": "illusion",
+    "sindarinExample": "lim"
+  },
+  {
+    "id": "fdc1758d-c8a8-4932-bfd8-a0d17c4728cb",
+    "sound": "ui",
+    "example": "queen",
+    "sindarinExample": "uilos"
+  },
+  {
+    "id": "fe0ada46-e3d1-4389-b3ef-efe8afc89237",
+    "sound": "y",
+    "example": "like german 'ü'",
+    "sindarinExample": "ylf"
+  }
+]

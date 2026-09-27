@@ -3,19 +3,34 @@ package apps.robot.grammar.impl
 import apps.robot.grammar.api.GrammarFeatureApi
 import apps.robot.grammar.impl.plural.presentation.PluralViewModel
 import apps.robot.grammar.impl.pronounce.data.GrammarRepositoryImpl
+import apps.robot.grammar.impl.pronounce.data.FirebasePronounceDataSource
+import apps.robot.grammar.impl.pronounce.data.LocalPronounceDataSource
+import apps.robot.grammar.impl.pronounce.data.PronounceDataSource
 import apps.robot.grammar.impl.pronounce.domain.GrammarRepository
 import apps.robot.grammar.impl.pronounce.domain.PronounceInitializer
 import apps.robot.grammar.impl.pronounce.presentation.PronounceViewModel
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.BaseAppInitializer
 import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.processLifecycleScope
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
 internal fun grammarFeatureModule() = module {
+    single<PronounceDataSource> {
+        if (BuildConfig.USE_FIREBASE_PRONOUNCE_DATA_SOURCE) {
+            FirebasePronounceDataSource(
+                db = get(),
+                dispatchers = get(),
+                fallback = LocalPronounceDataSource(androidApplication().resources)
+            )
+        } else {
+            LocalPronounceDataSource(androidApplication().resources)
+        }
+    }
     factory<GrammarFeatureApi> { GrammarFeatureApiImpl(get()) }
     factory { GrammarInternalFeature() }
-    factory<GrammarRepository> { GrammarRepositoryImpl(get(), get(), get()) }
+    factory<GrammarRepository> { GrammarRepositoryImpl(get(), get()) }
     factory {
         PronounceInitializer(
             coroutineScope = processLifecycleScope,

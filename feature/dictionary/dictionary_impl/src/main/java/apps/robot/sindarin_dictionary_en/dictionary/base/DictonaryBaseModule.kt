@@ -6,6 +6,9 @@ import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.ElfToEngDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.data.local.EngToElfDao
 import apps.robot.sindarin_dictionary_en.dictionary.api.domain.DictionaryRepository
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.DictionaryRepositoryImpl
+import apps.robot.sindarin_dictionary_en.dictionary.base.data.DictionaryDataSource
+import apps.robot.sindarin_dictionary_en.dictionary.base.data.FirebaseDictionaryDataSource
+import apps.robot.sindarin_dictionary_en.dictionary.base.data.LocalDictionaryDataSource
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordDomainMapper
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordDomainMapperImpl
 import apps.robot.sindarin_dictionary_en.dictionary.base.data.mappers.WordElfToEngEntityMapper
@@ -21,17 +24,27 @@ import org.koin.dsl.module
 
 internal fun dictionaryBaseModule() = module {
     single { FirebaseFirestore.getInstance() }
+    single<DictionaryDataSource> {
+        if (apps.robot.dictionary.impl.BuildConfig.USE_FIREBASE_DICTIONARY_SOURCE) {
+            FirebaseDictionaryDataSource(
+                db = get(),
+                dispatchers = get(),
+                mapper = get(),
+                fallback = LocalDictionaryDataSource(resources = androidApplication().resources)
+            )
+        } else {
+            LocalDictionaryDataSource(resources = androidApplication().resources)
+        }
+    }
     factory<DictionaryRepository> {
         DictionaryRepositoryImpl(
-            db = get(),
-            dispatchers = get(),
+            dataSource = get(),
             elfToEngDao = get(),
             engToElfDao = get(),
             mapper = get(),
             engToElfEntityMapper = get(),
             elfToEngEntityMapper = get(),
             elfToEngPagingSource = get(named("ElfToEng")),
-            resources = androidApplication().resources,
             engToElfPagingSource = get(named("EngToElf"))
         )
     }

@@ -5,19 +5,11 @@ import apps.robot.phrasebook.api.CategoryItem
 import apps.robot.phrasebook.api.PhrasebookDao
 import apps.robot.phrasebook.impl.R
 import apps.robot.phrasebook.impl.base.domain.PhrasebookRepository
-import apps.robot.sindarin_dictionary_en.base_ui.presentation.base.coroutines.AppDispatchers
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.withContext
-import timber.log.Timber
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
 
-class PhrasebookRepositoryImpl(
+internal class PhrasebookRepositoryImpl(
     private val resources: Resources,
-    private val db: FirebaseFirestore,
-    private val dispatchers: AppDispatchers,
+    private val dataSource: PhrasebookDataSource,
     private val dao: PhrasebookDao
 ) : PhrasebookRepository {
 
@@ -42,37 +34,7 @@ class PhrasebookRepositoryImpl(
     }
 
     override suspend fun loadPhrasebookCategoryItems() {
-        listOfCategories.forEach { categoryId ->
-            val list = runCatching {
-                withContext(dispatchers.ui) {
-                    suspendCoroutine<List<CategoryItem?>> { emitter ->
-                        db.collection(categoryId)
-                            .get()
-                            .addOnCompleteListener { task ->
-                                if (task.isSuccessful) {
-                                    emitter.resume(
-                                        task.result?.documents?.map {
-                                            val word = it.toObject(CategoryItem::class.java)
-                                            word
-                                        } ?: emptyList())
-                                } else {
-                                    emitter.resumeWithException(
-                                        task.exception ?: java.lang.Exception()
-                                    )
-                                }
-                            }
-                    }
-                }.filterNotNull().map {
-                    CategoryItem(it.id, it.word, it.translation, categoryId)
-                }
-            }.onFailure {
-                Timber.d("Error while fetching data $it")
-            }.getOrNull()
-
-            list?.let {
-                dao.insertAll(it)
-            }
-        }
+        dao.insertAll(dataSource.loadItems())
     }
 
     private fun getMappedId(categoryName: String): String {
@@ -107,32 +69,4 @@ class PhrasebookRepositoryImpl(
         return mappedId
     }
 
-    companion object {
-        private val listOfCategories = listOf(
-            "greetings",
-            "farewells",
-            "calls",
-            "talking",
-            "smallTalk",
-            "questionsAndAnswers",
-            "compliments",
-            "romance",
-            "tender",
-            "adventure",
-            "Exclamation",
-            "Pleas, Entreaties",
-            "trouble",
-            "insults",
-            "threats",
-            "battle_cries",
-            "battle_phrases",
-            "healing",
-            "professions",
-            "monthsOfTheYear",
-            "seasons",
-            "dayOfTheWeek",
-            "weather",
-            "colors",
-        )
-    }
 }

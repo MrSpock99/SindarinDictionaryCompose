@@ -1,0 +1,1958 @@
+[
+  {
+    "id": "83794664-91d4-4d96-a570-942053fc72c1",
+    "word": "Ah/Oh! ",
+    "translation": "Ae!",
+    "category": "Exclamation"
+  },
+  {
+    "id": "8e3c7812-65a1-4638-998b-dbd21c623675",
+    "word": "Alas! ",
+    "translation": "Nae!",
+    "category": "Exclamation"
+  },
+  {
+    "id": "3468804b-3d8e-44e9-a46b-8501a516a466",
+    "word": "At last! ",
+    "translation": "Na vedui!",
+    "category": "Exclamation"
+  },
+  {
+    "id": "42ed0d95-fb03-44d2-950b-d64620d95ff7",
+    "word": "Be gone! ",
+    "translation": "Ego!",
+    "category": "Exclamation"
+  },
+  {
+    "id": "82815fd2-d519-4734-bc6d-d85877c469cb",
+    "word": "Behold! ",
+    "translation": "Alae!",
+    "category": "Exclamation"
+  },
+  {
+    "id": "9f7d25dd-4016-424a-a305-de3f61977e51",
+    "word": "By the Sea and Stars! ",
+    "translation": "Nan Aear a Geil!",
+    "category": "Exclamation"
+  },
+  {
+    "id": "5ecb04b8-d2e3-4f9e-8662-5f955b69260f",
+    "word": "By the Valar! ",
+    "translation": "Nan Belain!",
+    "category": "Exclamation"
+  },
+  {
+    "id": "d5052cd0-6352-4f4d-a8b5-8d8283e141eb",
+    "word": "No/Don’t! ",
+    "translation": "Baw!",
+    "category": "Exclamation"
+  },
+  {
+    "id": "638ad7c2-50b9-495e-a0a1-bc8809e28f4f",
+    "word": "Stars! ",
+    "translation": "Elo! (an exclamation of wonder, similar to “wow!” but more poetic)",
+    "category": "Exclamation"
+  },
+  {
+    "id": "9757dd9e-1ba6-4706-96b4-2ea5632ff047",
+    "word": "(I wish you) a good New Year !",
+    "translation": "(Aníron gen) idhrinn vaer!",
+    "category": "Pleas, Entreaties"
+  },
+  {
+    "id": "a3b4dae0-6d50-4c56-95fc-c986edd74753",
+    "word": "Good afternoon! / I wish you good afternoon! ",
+    "translation": "Arad vaer! / Aníron arad vaer!",
+    "category": "Pleas, Entreaties"
+  },
+  {
+    "id": "3d45ae7b-9b2c-413e-be23-880c7512ca92",
+    "word": "Good evening! / I wish you good evening!",
+    "translation": "Aduial vaer! / Aníron aduial vaer!",
+    "category": "Pleas, Entreaties"
+  },
+  {
+    "id": "76a57601-8c85-442a-857d-ba0747855e47",
+    "word": "Good morning! / I wish you good morning!",
+    "translation": "Aur vaer! / Aníron aur vaer!",
+    "category": "Pleas, Entreaties"
+  },
+  {
+    "id": "15e3d80f-9831-48d1-96c5-bafa43e23df4",
+    "word": "Good night! / I wish you good night!",
+    "translation": "Daw vaer! / Aníron dhaw vaer!",
+    "category": "Pleas, Entreaties"
+  },
+  {
+    "id": "6ed8d494-0b63-4673-9b03-f33b2646cdb6",
+    "word": "Lord of the Wind, guide my arrow ",
+    "translation": "Hîr e-Hûl, togo bilinn nín",
+    "category": "Pleas, Entreaties"
+  },
+  {
+    "id": "9086d00f-4989-438e-9ead-cc50dfb89ba9",
+    "word": "May Eru protect me/us ",
+    "translation": "Berio nin/ven Eru",
+    "category": "Pleas, Entreaties"
+  },
+  {
+    "id": "d9bf5d63-dc84-4510-98e7-a7643b1205d5",
+    "word": "May Orome be with me/us ",
+    "translation": "No enni/ammen Araw",
+    "category": "Pleas, Entreaties"
+  },
+  {
+    "id": "b542d22c-b29d-43d7-b0c8-7f9cf11e4bb0",
+    "word": "May Tulkas give me/us strength/courage/victory ",
+    "translation": "Anno enni/ammen Enner vellas/gaun/dûr",
+    "category": "Pleas, Entreaties"
+  },
+  {
+    "id": "5b4d246c-fe52-46f7-94bc-dd9cd234d104",
+    "word": "May Varda watch over me/us ",
+    "translation": "Tiro nin/ven Elbereth",
+    "category": "Pleas, Entreaties"
+  },
+  {
+    "id": "fc43621c-1826-4f9d-a77d-39f561e6d4b7",
+    "word": "May the Valar lead me/us to safety ",
+    "translation": "Tego nin/ven i Melain am mand",
+    "category": "Pleas, Entreaties"
+  },
+  {
+    "id": "b0bf061a-03af-4935-bdb0-35bf8f3c5bbc",
+    "word": "Come in/Enter ",
+    "translation": "Minno",
+    "category": "adventure"
+  },
+  {
+    "id": "0f4a689a-d460-41ca-8762-b52aeedeb1fe",
+    "word": "Come! ",
+    "translation": "Tolo!",
+    "category": "adventure"
+  },
+  {
+    "id": "15156366-0d81-446c-92c5-91d587cf2994",
+    "word": "Flee! ",
+    "translation": "Drego!",
+    "category": "adventure"
+  },
+  {
+    "id": "5d873c1e-e9f2-4640-a008-1700e53ccb8d",
+    "word": "Follow me!",
+    "translation": "Aphado nin!",
+    "category": "adventure"
+  },
+  {
+    "id": "8baf1ef3-a653-4dd1-92b5-2020d2957765",
+    "word": "Halt! ",
+    "translation": "Daro!",
+    "category": "adventure"
+  },
+  {
+    "id": "c3f10c8e-3af4-4cbc-9420-5b85b50997fb",
+    "word": "Listen! ",
+    "translation": "Lasto!",
+    "category": "adventure"
+  },
+  {
+    "id": "6fb26b0b-a6e0-4de7-bc89-16d84a984897",
+    "word": "Look! ",
+    "translation": "Tiro!",
+    "category": "adventure"
+  },
+  {
+    "id": "232c926d-5501-4dd8-b3b6-1155bf19ffb3",
+    "word": "Rest! ",
+    "translation": "Hodo",
+    "category": "adventure"
+  },
+  {
+    "id": "fbb9ab8c-56ea-4388-94aa-b496e8e80ffc",
+    "word": "Run! ",
+    "translation": "Noro!",
+    "category": "adventure"
+  },
+  {
+    "id": "56d58b98-18d5-4801-9c14-03818554487d",
+    "word": "Silence! ",
+    "translation": "Dîn!",
+    "category": "adventure"
+  },
+  {
+    "id": "1f08e3d6-63f2-4401-9104-5a0a90ae6800",
+    "word": "Sit down ",
+    "translation": "Havo dad",
+    "category": "adventure"
+  },
+  {
+    "id": "5c33a3e9-abd9-44f4-90de-ab97be651d4e",
+    "word": "Stand ",
+    "translation": "Erio (rise)",
+    "category": "adventure"
+  },
+  {
+    "id": "76e16b60-5780-4d66-9d62-44ac3fa0d6fd",
+    "word": "Wait! ",
+    "translation": "Dartho",
+    "category": "adventure"
+  },
+  {
+    "id": "d94f89dc-3a5f-4e44-8b88-9009376b1eb8",
+    "word": "any above can be followed with",
+    "translation": "hí 'here', ennas 'there', hi 'now'",
+    "category": "adventure"
+  },
+  {
+    "id": "1d3393d5-8547-49ff-aa7c-0d749dee9a08",
+    "word": "Death to the enemy! ",
+    "translation": "Gurth enin goth!",
+    "category": "battle_cries"
+  },
+  {
+    "id": "a4325d1c-1f2f-43f7-b6a0-2ce93bdcf2be",
+    "word": "Death to the orcs! ",
+    "translation": "Gurth an Glamhoth!",
+    "category": "battle_cries"
+  },
+  {
+    "id": "48b940f6-f8d1-4433-aed6-db17a7fa76fa",
+    "word": "Die, hideous creature! ",
+    "translation": "Firo, ulunn!",
+    "category": "battle_cries"
+  },
+  {
+    "id": "8b0cf540-40ee-454f-81ab-14afc113efe0",
+    "word": "Now to victory! ",
+    "translation": "Si ath thûr!",
+    "category": "battle_cries"
+  },
+  {
+    "id": "bf1eefab-52ee-485f-b281-a9ec37443d67",
+    "word": "Fight! ",
+    "translation": "Maetho! ",
+    "category": "battle_phrases"
+  },
+  {
+    "id": "a6d0de2f-1b2e-4798-b86e-c15ee5c18c11",
+    "word": "Fire the arrows! ",
+    "translation": "Hado i philinn! ",
+    "category": "battle_phrases"
+  },
+  {
+    "id": "41b5def1-961b-4b96-b6d4-df8761513709",
+    "word": "Kill him/it! ",
+    "translation": "Dago hon/han!",
+    "category": "battle_phrases"
+  },
+  {
+    "id": "44d7db4c-d20b-4b9a-a683-a89213069dfc",
+    "word": "Look out! ",
+    "translation": "Tiro!",
+    "category": "battle_phrases"
+  },
+  {
+    "id": "8a10a129-a2bf-440f-b621-84e058d01d73",
+    "word": "My bow shall sing with your sword ",
+    "translation": "Cû/Peng nín linnatha go vagol lín",
+    "category": "battle_phrases"
+  },
+  {
+    "id": "fa144aea-2281-42fd-9e50-955a63625a9a",
+    "word": "Prepare the bows! ",
+    "translation": "Tangado i chui!",
+    "category": "battle_phrases"
+  },
+  {
+    "id": "55359bc2-ba24-46a8-9771-e4b5159f5e22",
+    "word": "Protect the horses! ",
+    "translation": "Berio idh rych!",
+    "category": "battle_phrases"
+  },
+  {
+    "id": "4194f57c-d9b6-41b1-966d-09211577673e",
+    "word": "Protect the tower/city! ",
+    "translation": "Berio i varad/vinas!",
+    "category": "battle_phrases"
+  },
+  {
+    "id": "727c61cc-afc3-42cf-a494-7a19978322c2",
+    "word": "Release the arrows! ",
+    "translation": "Leithio i philinn!",
+    "category": "battle_phrases"
+  },
+  {
+    "id": "c1d384a4-c780-4744-87e1-3c2d909cc1cd",
+    "word": "Swords! ",
+    "translation": "Meigol!",
+    "category": "battle_phrases"
+  },
+  {
+    "id": "06c7db2c-c89b-4bdd-b47d-c1804ca5db03",
+    "word": "They're coming ",
+    "translation": "Sy telir",
+    "category": "battle_phrases"
+  },
+  {
+    "id": "9fbf61d5-8977-44c4-bcd4-ab0f65cda408",
+    "word": "To the tower/wall! ",
+    "translation": "Nan barad/ram!",
+    "category": "battle_phrases"
+  },
+  {
+    "id": "5ba8cb8e-39ca-4b24-9a25-d277c372c3fc",
+    "word": "Ancient one ",
+    "translation": "iaron/iaril (m/f)",
+    "category": "calls"
+  },
+  {
+    "id": "a04942cc-4106-4031-9d57-24c5c1c9bdee",
+    "word": "Bearded one (dwarf) ",
+    "translation": "fangon",
+    "category": "calls"
+  },
+  {
+    "id": "2edd9455-d299-411d-98da-0d3d73ba556b",
+    "word": "Foe of my foe ",
+    "translation": "coth o chothen",
+    "category": "calls"
+  },
+  {
+    "id": "472d9679-031b-4e8d-9f61-2dc7c81b114a",
+    "word": "Friend of my friend ",
+    "translation": "mellon o mellonen",
+    "category": "calls"
+  },
+  {
+    "id": "ac24b37b-0503-4f68-8d7c-05dc7831868e",
+    "word": "Little father (dwarf) ",
+    "translation": "adar dithen",
+    "category": "calls"
+  },
+  {
+    "id": "1e960996-6898-49e9-85cb-2ff7e590313f",
+    "word": "Loyal one ",
+    "translation": "sadron/sadril (m/f)",
+    "category": "calls"
+  },
+  {
+    "id": "6bbce795-7c37-4e30-90f3-ac4a8d3c0c62",
+    "word": "Mighty one ",
+    "translation": "belegron/belegril (m/f)",
+    "category": "calls"
+  },
+  {
+    "id": "f9231a05-30ac-4f7a-a6ec-1f2f9f1987bd",
+    "word": "My Lord/Lady ",
+    "translation": "hîr/hiril nín or brannon/brennil nín",
+    "category": "calls"
+  },
+  {
+    "id": "00f21126-5922-41e9-8f0a-3ab2c06b4a40",
+    "word": "My brother/sister ",
+    "translation": "muindor/muinthel nín",
+    "category": "calls"
+  },
+  {
+    "id": "6c143e9d-49d1-47e1-9878-ee3b9c4bcf4c",
+    "word": "My champion/hero ",
+    "translation": "thalionen/thalielen (m/f)",
+    "category": "calls"
+  },
+  {
+    "id": "77f8e461-cefa-42d0-8833-12f7719f819b",
+    "word": "My dad/mom ",
+    "translation": "ada/nana nín",
+    "category": "calls"
+  },
+  {
+    "id": "3b4c510b-cae1-4fd4-9245-af786cb0a64c",
+    "word": "My father/mother ",
+    "translation": "adar/naneth nín",
+    "category": "calls"
+  },
+  {
+    "id": "d26602c0-50b9-479a-84ef-ec571db3eb04",
+    "word": "My friend/friends ",
+    "translation": "mellon/mellyn nín",
+    "category": "calls"
+  },
+  {
+    "id": "85253061-c66a-4eab-8b41-c2c65c7c50bc",
+    "word": "My husband/wife ",
+    "translation": "hervenn/hervess nín",
+    "category": "calls"
+  },
+  {
+    "id": "4bffb759-7a33-47b5-8808-78d6f7bf7f14",
+    "word": "My son/daughter ",
+    "translation": "ion/iell nín",
+    "category": "calls"
+  },
+  {
+    "id": "35090f37-00cf-4c7a-9192-8529dfad8b3c",
+    "word": "My sworn brother/sister ",
+    "translation": "gwador/gwathel nín",
+    "category": "calls"
+  },
+  {
+    "id": "be2b2cca-9ec2-4073-96e1-2ceaf0f0cdff",
+    "word": "Valiant one ",
+    "translation": "gornon/gornil (m/f)",
+    "category": "calls"
+  },
+  {
+    "id": "cda88029-c766-425e-ab65-d6e40a114dfa",
+    "word": "Wise one ",
+    "translation": "saelon/saelil (m/f)",
+    "category": "calls"
+  },
+  {
+    "id": "2071e023-0447-4065-976e-28148bdf9083",
+    "word": "Black",
+    "translation": "Morn",
+    "category": "colors"
+  },
+  {
+    "id": "b1f6ebed-e584-4627-a61d-2f46d2b6c93a",
+    "word": "Black",
+    "translation": "Morn",
+    "category": "colors"
+  },
+  {
+    "id": "bb99cc01-762f-4432-b57c-50c66385289a",
+    "word": "Blue",
+    "translation": "Elu",
+    "category": "colors"
+  },
+  {
+    "id": "ded3f6e7-f5e6-49bf-a1d4-9bfaa937cab5",
+    "word": "Blue",
+    "translation": "Elu",
+    "category": "colors"
+  },
+  {
+    "id": "d409e226-6267-4a29-8623-b848bffefa70",
+    "word": "Brown",
+    "translation": "Rhosg",
+    "category": "colors"
+  },
+  {
+    "id": "ea3d1929-1735-4b52-8748-e2ef66bb1936",
+    "word": "Brown",
+    "translation": "Rhosg",
+    "category": "colors"
+  },
+  {
+    "id": "32b20bf0-1a9b-403a-8d4e-c7da16ea0e17",
+    "word": "Dark blue",
+    "translation": "Luin",
+    "category": "colors"
+  },
+  {
+    "id": "5d3af725-faeb-4eb0-8505-1156058db0c9",
+    "word": "Dark blue",
+    "translation": "Luin",
+    "category": "colors"
+  },
+  {
+    "id": "5a66b2da-3839-4d83-9d1e-c979283423f0",
+    "word": "Dark brown",
+    "translation": "Baran",
+    "category": "colors"
+  },
+  {
+    "id": "fe4bbbe8-1d7a-4717-a9e7-7986f5925c42",
+    "word": "Dark brown",
+    "translation": "Baran",
+    "category": "colors"
+  },
+  {
+    "id": "1d7780af-8b65-47ae-81c1-917757ecff45",
+    "word": "Green",
+    "translation": "Calen, Laeg",
+    "category": "colors"
+  },
+  {
+    "id": "c6082f14-d284-4f1f-a2c5-975a90696503",
+    "word": "Green",
+    "translation": "Calen, Laeg",
+    "category": "colors"
+  },
+  {
+    "id": "341856f7-a219-4b62-9172-925c7ae6f650",
+    "word": "Grey",
+    "translation": "Mith",
+    "category": "colors"
+  },
+  {
+    "id": "60a89a7e-b304-4e0e-954b-fb9f71ef8dc6",
+    "word": "Grey",
+    "translation": "Mith",
+    "category": "colors"
+  },
+  {
+    "id": "3f335367-d41e-47b8-bfed-a9dba0941ca5",
+    "word": "Orange",
+    "translation": "Cull",
+    "category": "colors"
+  },
+  {
+    "id": "49dfe8ff-0c4d-4120-a7ff-d800cc5f0eed",
+    "word": "Orange",
+    "translation": "Cull",
+    "category": "colors"
+  },
+  {
+    "id": "8df1eac0-a63c-49e6-8e9d-cf37b3f15350",
+    "word": "Pale",
+    "translation": "Nimp",
+    "category": "colors"
+  },
+  {
+    "id": "e284b6a2-bb9f-4046-916c-ef06e1d52fe4",
+    "word": "Pale",
+    "translation": "Nimp",
+    "category": "colors"
+  },
+  {
+    "id": "3802ba56-6216-431d-88a8-c53764d5a3c8",
+    "word": "Pink",
+    "translation": "Crinth",
+    "category": "colors"
+  },
+  {
+    "id": "899fa9a7-0bfe-4c7c-8055-1a1085d3b601",
+    "word": "Pink",
+    "translation": "Crinth",
+    "category": "colors"
+  },
+  {
+    "id": "9ea6c758-318d-4187-916e-a6a80d997da8",
+    "word": "Red",
+    "translation": "Caran",
+    "category": "colors"
+  },
+  {
+    "id": "d2a5d248-f500-48e3-99af-aeb68950f0ad",
+    "word": "Red",
+    "translation": "Caran",
+    "category": "colors"
+  },
+  {
+    "id": "c674232f-389b-4a61-97bc-982ed4fc17ff",
+    "word": "Scarlet",
+    "translation": "Carnin",
+    "category": "colors"
+  },
+  {
+    "id": "d7a0e85d-dfbf-434c-a8a4-9919d2f05abb",
+    "word": "Scarlet",
+    "translation": "Carnin",
+    "category": "colors"
+  },
+  {
+    "id": "498378e9-3ec3-43c3-8632-cf917007d0e6",
+    "word": "Show-white",
+    "translation": "Glos",
+    "category": "colors"
+  },
+  {
+    "id": "a919d2b1-98bb-4d09-89f0-c127c3db7d17",
+    "word": "Show-white",
+    "translation": "Glos",
+    "category": "colors"
+  },
+  {
+    "id": "71b0fead-7a79-4371-9205-e5dcc6959879",
+    "word": "Violet",
+    "translation": "Ling",
+    "category": "colors"
+  },
+  {
+    "id": "f0d50f33-6d44-4221-baac-acefdcdb6afc",
+    "word": "Violet",
+    "translation": "Ling",
+    "category": "colors"
+  },
+  {
+    "id": "bb53115c-c11f-47f0-8252-b68401ebe884",
+    "word": "White",
+    "translation": "Faen, fain",
+    "category": "colors"
+  },
+  {
+    "id": "d69e03ff-f913-496d-902b-f6aaec3d11f5",
+    "word": "White",
+    "translation": "Faen, fain",
+    "category": "colors"
+  },
+  {
+    "id": "3551e5b2-3d5d-4d0b-bc2c-b211f3da21d0",
+    "word": "Yellow",
+    "translation": "Malen",
+    "category": "colors"
+  },
+  {
+    "id": "75404cec-a12b-4b27-8882-5078ca17462d",
+    "word": "Yellow",
+    "translation": "Malen",
+    "category": "colors"
+  },
+  {
+    "id": "428011cb-f16b-4f92-bc17-9b5f9317f3d9",
+    "word": "Love sparkles in your eyes ",
+    "translation": "Meleth thilia min hin lín",
+    "category": "compliments"
+  },
+  {
+    "id": "319d500b-80db-4d5f-a3d2-f5ead2e4347f",
+    "word": "You are a mighty and brave warrior ",
+    "translation": "Le maethor veleg a gornui",
+    "category": "compliments"
+  },
+  {
+    "id": "cba35cca-051e-41f1-9d5b-57e2dad15c44",
+    "word": "You are a skilled and sharp-eyed archer ",
+    "translation": "Le pengron vaen a maecheneb",
+    "category": "compliments"
+  },
+  {
+    "id": "4d9a3ffe-7505-4bd0-9f43-ed434910aad1",
+    "word": "You are beautiful like a rainbow ",
+    "translation": "Le bain sui ninniach",
+    "category": "compliments"
+  },
+  {
+    "id": "dc0c9d07-01d3-4c8b-bd84-a69e6dabe8c2",
+    "word": "You are beautiful/so beautiful ",
+    "translation": "Le bain/bainon",
+    "category": "compliments"
+  },
+  {
+    "id": "54e5b949-b0d0-4d8e-92c0-2b7cfc85022d",
+    "word": "You have a heart like a lion. ",
+    "translation": "Gerich ‘ûn sui raw",
+    "category": "compliments"
+  },
+  {
+    "id": "c7a66ebb-0684-4977-bc0b-717da15c97af",
+    "word": "You look good/joyous/beautiful ",
+    "translation": "Thiach maer/meren/main",
+    "category": "compliments"
+  },
+  {
+    "id": "1b38bd95-7fd4-4118-b210-29522f365851",
+    "word": "Your beautiful face took my breath away ",
+    "translation": "Thîr vain lín darn thûl nín",
+    "category": "compliments"
+  },
+  {
+    "id": "7af23a69-87fa-4ec0-9570-d6586e96a9a3",
+    "word": "Your beauty shines brightly ",
+    "translation": "Baneth lín síla celair",
+    "category": "compliments"
+  },
+  {
+    "id": "9c9036b0-4734-43b9-add9-99bf5fde4c9c",
+    "word": "Your eyes are as beautiful as moonlight on the Sea ",
+    "translation": "Hin lín bain sui Ithilgalad buin Aear",
+    "category": "compliments"
+  },
+  {
+    "id": "24d223b3-ecb0-4b6c-be9f-2e9725e456ed",
+    "word": "Your eyes are blue like the summer sky ",
+    "translation": "Hin lín luin sui venel laer",
+    "category": "compliments"
+  },
+  {
+    "id": "7da1cac0-1724-4f0c-8c99-7476c0a944bb",
+    "word": "Your radiance shines like the moon",
+    "translation": "‘Law lîn síla sui Ithil",
+    "category": "compliments"
+  },
+  {
+    "id": "37f413fa-f5a0-4d9d-a172-612db65ccadf",
+    "word": "Your radiant eyes conquered my heart ",
+    "translation": "Hin gelair lín orthernir 'uren",
+    "category": "compliments"
+  },
+  {
+    "id": "8825666d-fea9-4ed7-8e85-0ba7d043babf",
+    "word": "Heavens-day",
+    "translation": "Ormenel",
+    "category": "dayOfTheWeek"
+  },
+  {
+    "id": "dfe4f7e0-d3bc-492c-b4ff-245f2f35ddc9",
+    "word": "Moon-day",
+    "translation": "Orithil",
+    "category": "dayOfTheWeek"
+  },
+  {
+    "id": "1347fa91-202b-4c56-8630-a81d8e6d15b1",
+    "word": "Powers-day(a'HighDay'ofcelebration/ceremony,like our Sunday)",
+    "translation": "Orbelain",
+    "category": "dayOfTheWeek"
+  },
+  {
+    "id": "67a0068f-fa94-4e7e-ba09-165539a97ee0",
+    "word": "Sea-day (in Gondor only)",
+    "translation": "Oraearon",
+    "category": "dayOfTheWeek"
+  },
+  {
+    "id": "4793de11-3f5e-429d-bc44-9d1d2758578f",
+    "word": "Stars-day",
+    "translation": "Orgilion",
+    "category": "dayOfTheWeek"
+  },
+  {
+    "id": "d1be5c2b-5e11-4755-91a5-3d7fdbeb9661",
+    "word": "Sun-day",
+    "translation": "Oranor ",
+    "category": "dayOfTheWeek"
+  },
+  {
+    "id": "15bfa83e-d142-428f-ae82-ba6c9228f284",
+    "word": "Two-Trees-day(inGondor:Orgaladh)",
+    "translation": "Orgaladhad",
+    "category": "dayOfTheWeek"
+  },
+  {
+    "id": "fb1b2c7a-6458-4722-b133-eed009ba070b",
+    "word": "Fair winds ",
+    "translation": "Suil vain",
+    "category": "farewells"
+  },
+  {
+    "id": "98922495-ee2c-4697-b75d-104c405bfe87",
+    "word": "Farewell ",
+    "translation": "Navaer",
+    "category": "farewells"
+  },
+  {
+    "id": "35cc29cc-a774-4826-8317-1d9edb813f9f",
+    "word": "Good day/evening/night ",
+    "translation": "Aur/aduial/fuin vaer",
+    "category": "farewells"
+  },
+  {
+    "id": "428e4bb4-123c-4eda-b66b-b1f3d6f6b1be",
+    "word": "Good hunting ",
+    "translation": "Rui/farad vaer",
+    "category": "farewells"
+  },
+  {
+    "id": "cc59210c-e23c-4270-84ea-a0bfa27f1e14",
+    "word": "Have a good day/evening/night ",
+    "translation": "Garo aur/aduial/fuin vaer",
+    "category": "farewells"
+  },
+  {
+    "id": "33483327-d751-4641-b821-dfcf5c2ec89e",
+    "word": "Have a good journey ",
+    "translation": "Garo lend vaer",
+    "category": "farewells"
+  },
+  {
+    "id": "53036aba-52dd-4e37-b53d-bacd450ec370",
+    "word": "I hope to see you at this time ",
+    "translation": "Harthon cened le nan lu hen",
+    "category": "farewells"
+  },
+  {
+    "id": "07493761-ac4b-441b-833e-43c61ffc421e",
+    "word": "I hope to see you there ",
+    "translation": "Harthon cened le ennas",
+    "category": "farewells"
+  },
+  {
+    "id": "322254c9-2262-4f7b-8927-ebacc85d9b61",
+    "word": "I hope you will have a good journey ",
+    "translation": "Harthon gerithach lend vaer",
+    "category": "farewells"
+  },
+  {
+    "id": "3aa4660c-bf0a-4817-b290-811bcb0715d9",
+    "word": "I hope you will have green and golden paths ",
+    "translation": "Harthon gerithach raid gelin a melthin",
+    "category": "farewells"
+  },
+  {
+    "id": "64fc8c58-7c73-4611-8656-595cc5b83645",
+    "word": "I hope you will have green paths and a breeze behind you ",
+    "translation": " Harthon gerithach raid gelin a chwest adel thraw lín",
+    "category": "farewells"
+  },
+  {
+    "id": "8d0c526a-16ea-4636-a314-ea22dbcecda3",
+    "word": "I hope you will have kind seas ",
+    "translation": "Harthon gerithach aeair vilui",
+    "category": "farewells"
+  },
+  {
+    "id": "5b2142b1-091e-4ff7-acbe-56c3068f4461",
+    "word": "May the leaves of your life tree never wither ",
+    "translation": "Pelo nalú i laiss en-Galadh Guil lín",
+    "category": "farewells"
+  },
+  {
+    "id": "0de13c03-fdac-4d1b-8c44-4764af7f838b",
+    "word": "May useful winds speed you on ",
+    "translation": "Hortho le huil vaer",
+    "category": "farewells"
+  },
+  {
+    "id": "961da69f-e1f7-4f0d-9802-be1f63d7bbe4",
+    "word": "May you dream well tonight ",
+    "translation": "Oltho vae ne fuin hen",
+    "category": "farewells"
+  },
+  {
+    "id": "c351d8a3-11f9-43a7-9ec5-38b29bd301d8",
+    "word": "My heart shall weep until I see thee again ",
+    "translation": "Guren nallatha nalú achenin le",
+    "category": "farewells"
+  },
+  {
+    "id": "2f56f390-48dc-4766-8803-08f87cc1643f",
+    "word": "Nothing will stop the weeping of my heart until our reunion ",
+    "translation": "Unad nuithatha i nîr e-guren nalú aderthad vín",
+    "category": "farewells"
+  },
+  {
+    "id": "337d54c6-46c7-4829-a95c-545e52651c78",
+    "word": "Rest well ",
+    "translation": "Hodo vae",
+    "category": "farewells"
+  },
+  {
+    "id": "84f477aa-b44a-403d-9e31-b5dcf3cb06ae",
+    "word": "Sleep well ",
+    "translation": "Losto vae",
+    "category": "farewells"
+  },
+  {
+    "id": "4143ccc7-703c-4926-acab-16ebc367e8b6",
+    "word": "Sweet dreams ",
+    "translation": "Elei velui",
+    "category": "farewells"
+  },
+  {
+    "id": "05ab1117-8ba6-4264-a78b-34902e02c6f7",
+    "word": "Sweet waters and light laughter until next we meet ",
+    "translation": "Nîn velui a lalaith veren nalú en-agovaded vín",
+    "category": "farewells"
+  },
+  {
+    "id": "2dae9f64-96be-4a9e-861d-8a230428efcf",
+    "word": "A star shines on the occasion of our meeting ",
+    "translation": "Glass nín le/gen achened",
+    "category": "greetings"
+  },
+  {
+    "id": "a5b7194f-9e21-47ab-81dc-c897d64074fa",
+    "word": "Hello",
+    "translation": "Le suilon",
+    "category": "greetings"
+  },
+  {
+    "id": "97023b5b-5064-4a79-b386-4c083eae06db",
+    "word": "Hi!",
+    "translation": "Ai!",
+    "category": "greetings"
+  },
+  {
+    "id": "2bb2d6c5-c05a-464e-b5d2-67c4240649af",
+    "word": "I haven't seen you for a long time ",
+    "translation": "Anann le/gen ú-gennin",
+    "category": "greetings"
+  },
+  {
+    "id": "ed17b11b-4e55-4957-a85e-93a3ec60bc58",
+    "word": "It is my joy to meet you ",
+    "translation": "Glass nín le/gen govaded",
+    "category": "greetings"
+  },
+  {
+    "id": "cd0a3ef2-5852-4013-9c95-165362bbd08a",
+    "word": "It is my joy to see you ",
+    "translation": "Glass nín le/gen cened",
+    "category": "greetings"
+  },
+  {
+    "id": "da2a121d-62d3-4137-ba65-fe88574d8482",
+    "word": "It is my joy to see you again ",
+    "translation": "Glass nín le/gen achened",
+    "category": "greetings"
+  },
+  {
+    "id": "cd61d4e8-0053-4f98-8907-93c7ca9e6341",
+    "word": "My heart sings to see you ",
+    "translation": "Guren linna le/gen cened",
+    "category": "greetings"
+  },
+  {
+    "id": "e65a98b6-da2f-48cd-934e-5cf25b857aa3",
+    "word": "Welcome ",
+    "translation": "Mae tollen",
+    "category": "greetings"
+  },
+  {
+    "id": "ec88b2ab-e817-4665-9745-95d411401238",
+    "word": "Welcome back ",
+    "translation": "Mae athollen",
+    "category": "greetings"
+  },
+  {
+    "id": "79180552-982f-47b8-bcec-e3ee95d9c5c7",
+    "word": "Welcome home ",
+    "translation": "Mae tollen na mar",
+    "category": "greetings"
+  },
+  {
+    "id": "99a2a678-ff54-4a61-a121-a3fea62f7f62",
+    "word": "Well met ",
+    "translation": "Mae govannen",
+    "category": "greetings"
+  },
+  {
+    "id": "73809e0c-c0ad-4029-ad4d-74e57dc760a7",
+    "word": "Golden Sun, may your warmth bring healing to this heart ",
+    "translation": "Anor valthen, togo laugas lín nestad enin gûr hen",
+    "category": "healing"
+  },
+  {
+    "id": "f987bffa-e8eb-4e22-ade0-ef9318d10faf",
+    "word": "Great earth, may you give your strength to this body ",
+    "translation": "Ceven dhaer, anno vellas lín enin 'raw hen",
+    "category": "healing"
+  },
+  {
+    "id": "aae01b57-0715-4421-b56b-0d2335d31197",
+    "word": "Western Winds, may your breath lift this spirit ",
+    "translation": "Suil Annui, erio thûl lín i faer hen",
+    "category": "healing"
+  },
+  {
+    "id": "9718a6f2-7a15-4d00-91a4-2b313edcaa54",
+    "word": "A big wind pours from your mouth ",
+    "translation": "Súlon gwanna nîf gín",
+    "category": "insults"
+  },
+  {
+    "id": "ca92be76-4f60-4397-b6c6-f1c44b3ae768",
+    "word": "Cowardly dog! ",
+    "translation": "Hû úgaun!",
+    "category": "insults"
+  },
+  {
+    "id": "52792d98-6791-41d2-8546-c9b466bd6407",
+    "word": "Go kiss an orc! ",
+    "translation": "Mítho orch!",
+    "category": "insults"
+  },
+  {
+    "id": "85deb4dd-c1b9-4ddd-a081-2552d52a8b36",
+    "word": "I hate you! ",
+    "translation": "Gen ú-velin!",
+    "category": "insults"
+  },
+  {
+    "id": "0bceb255-dc8c-4198-90ed-5416e165637b",
+    "word": "Listen to my laughter! ",
+    "translation": "Lasto al lalaith nín!",
+    "category": "insults"
+  },
+  {
+    "id": "2eb80ae8-7dc4-4576-9c80-4edc772f44ec",
+    "word": "Orc lover! ",
+    "translation": "Orvelethron/orvelethril! (m/f)",
+    "category": "insults"
+  },
+  {
+    "id": "43f73f66-aa5a-423d-8f35-83681e515b58",
+    "word": "Son of snakes! ",
+    "translation": "Lýgion! or Ion lýg!",
+    "category": "insults"
+  },
+  {
+    "id": "ff229e11-69c7-43df-8c0a-be82243cb18b",
+    "word": "You are stupid ",
+    "translation": "Ce uchand",
+    "category": "insults"
+  },
+  {
+    "id": "c5dfc9eb-113d-4664-88e9-07f2dd0bad16",
+    "word": "You disgust me! ",
+    "translation": "Gen fuion! ",
+    "category": "insults"
+  },
+  {
+    "id": "75e26093-1150-482a-b545-db3a3860d4b3",
+    "word": "You look hideous! ",
+    "translation": "Thiach uanui!",
+    "category": "insults"
+  },
+  {
+    "id": "a3f356ff-133f-41ae-ae03-9b18587891b9",
+    "word": "You smell like an orc! ",
+    "translation": "Gerich thû sui orch!",
+    "category": "insults"
+  },
+  {
+    "id": "4a76e23a-4528-46cc-bce5-6922b020311b",
+    "word": "Your head is empty ",
+    "translation": "Dôl gín cofn or Dôl gín lost",
+    "category": "insults"
+  },
+  {
+    "id": "fbd2d261-a890-4194-b360-f7ca083e8406",
+    "word": "You’re ugly and your mother dresses you ",
+    "translation": "Thiach uanui a naneth gín gen hamma",
+    "category": "insults"
+  },
+  {
+    "id": "6447515f-f2c6-4a5d-a332-6a671adeeec9",
+    "word": "April",
+    "translation": "Gwirith",
+    "category": "monthsOfTheYear"
+  },
+  {
+    "id": "40e8ea1e-74a7-48b6-919d-9548343d6285",
+    "word": "August",
+    "translation": "Urui(Hot)",
+    "category": "monthsOfTheYear"
+  },
+  {
+    "id": "792cb254-a6c7-4f2e-9656-5e9c5fdf62d0",
+    "word": "December",
+    "translation": "Girithron(Shuddering)",
+    "category": "monthsOfTheYear"
+  },
+  {
+    "id": "6f95e1df-422a-4e43-9aa2-5b04a6218d81",
+    "word": "February",
+    "translation": "Nínui(Watery)",
+    "category": "monthsOfTheYear"
+  },
+  {
+    "id": "d1f99eb1-8cb1-42f9-b01f-76364d799a7d",
+    "word": "January",
+    "translation": "Narwain(New-Sun)",
+    "category": "monthsOfTheYear"
+  },
+  {
+    "id": "a9949fcb-a0d3-4657-970d-51ce2b9f743f",
+    "word": "July",
+    "translation": "Cerveth",
+    "category": "monthsOfTheYear"
+  },
+  {
+    "id": "ff39cc33-1375-46dc-ba05-e0196f995c71",
+    "word": "June",
+    "translation": "Nórui(Sunny/Fiery)",
+    "category": "monthsOfTheYear"
+  },
+  {
+    "id": "d7b404fd-1ce7-4a30-8860-27f0ad6901f2",
+    "word": "March",
+    "translation": "Gwaeron(Windy)",
+    "category": "monthsOfTheYear"
+  },
+  {
+    "id": "74252f62-31ad-42cc-ba5b-190e0228a943",
+    "word": "May",
+    "translation": "Lothron(Flowering)",
+    "category": "monthsOfTheYear"
+  },
+  {
+    "id": "3731df8c-20a2-4637-b360-e0482b5e8eff",
+    "word": "November",
+    "translation": "Hithui(Misty/Foggy)",
+    "category": "monthsOfTheYear"
+  },
+  {
+    "id": "6365232d-1bd9-43e2-ace6-ba8c17714cfd",
+    "word": "October",
+    "translation": "Narbeleth(Leaf-falling)",
+    "category": "monthsOfTheYear"
+  },
+  {
+    "id": "b8001192-a1ee-48f0-9e6d-254277b16dac",
+    "word": "September",
+    "translation": "Ivanneth(Fruit-giving)",
+    "category": "monthsOfTheYear"
+  },
+  {
+    "id": "4b43e080-4661-4b56-b091-565fae2343f5",
+    "word": "Apprentice",
+    "translation": "aphadon/aphadil(m/f),aphador",
+    "category": "professions"
+  },
+  {
+    "id": "b944d575-5afd-4200-958f-e20826bb8457",
+    "word": "Archer",
+    "translation": "pengron/pengril(m/f),pengor",
+    "category": "professions"
+  },
+  {
+    "id": "8935df1a-eaab-4132-bcc5-4e7ca1a7daa4",
+    "word": "Armorer",
+    "translation": "barvdan",
+    "category": "professions"
+  },
+  {
+    "id": "f560e12d-4194-4deb-a3e0-ccb1376047b3",
+    "word": "Assistant",
+    "translation": "tuluron/tuluril(m/f),tuluror",
+    "category": "professions"
+  },
+  {
+    "id": "d405ebc0-0a59-446a-a3e1-9ecf98234096",
+    "word": "Astronomer",
+    "translation": "meneldir/meneldis(m/f)",
+    "category": "professions"
+  },
+  {
+    "id": "1815e77e-8cdb-41f0-ab77-93cf910adaef",
+    "word": "Bard",
+    "translation": "glirdan",
+    "category": "professions"
+  },
+  {
+    "id": "ab42a286-3520-4ec1-a29d-6bf7a1d6a19f",
+    "word": "Blacksmith",
+    "translation": "angdan",
+    "category": "professions"
+  },
+  {
+    "id": "1f5c689e-7fec-43c5-bffb-a481373afe47",
+    "word": "Calligrapher/Secretary",
+    "translation": "tegilbor",
+    "category": "professions"
+  },
+  {
+    "id": "4bff9168-3873-4de8-b7b8-83f0d7913031",
+    "word": "Carpenter/woodwright",
+    "translation": "thavron/thavril(m/f)",
+    "category": "professions"
+  },
+  {
+    "id": "9f55bb82-b4d7-49d2-a47f-4e40b312310e",
+    "word": "Commander",
+    "translation": "caun",
+    "category": "professions"
+  },
+  {
+    "id": "ad28db2d-3843-460e-b037-27c4e46fe7a0",
+    "word": "Cook",
+    "translation": "aesdan",
+    "category": "professions"
+  },
+  {
+    "id": "e8584c04-137d-43f9-a873-f0bc94dc7de1",
+    "word": "Forester",
+    "translation": "toron/toril(m/f),tauror",
+    "category": "professions"
+  },
+  {
+    "id": "d6f2a1ad-d6f0-47ed-b7b8-97223baf873b",
+    "word": "Gardener",
+    "translation": "sannan",
+    "category": "professions"
+  },
+  {
+    "id": "e046eeb4-adcf-4fa0-bf82-0d91536720b2",
+    "word": "Harper",
+    "translation": "talagan",
+    "category": "professions"
+  },
+  {
+    "id": "25afeab2-2545-4ec5-aa72-49938d8cb232",
+    "word": "Healer",
+    "translation": "nestron/nestril(m/f),nestor",
+    "category": "professions"
+  },
+  {
+    "id": "eb4b6bae-c7ff-45d3-a8d4-cf720b691db8",
+    "word": "Herald",
+    "translation": "singyll",
+    "category": "professions"
+  },
+  {
+    "id": "536e4847-990e-4565-9256-525ccfd67d84",
+    "word": "Herbmaster",
+    "translation": "salabir/salabis(m/f),salabor",
+    "category": "professions"
+  },
+  {
+    "id": "787f39bf-96eb-43a0-ad8b-99a1214db629",
+    "word": "Historian",
+    "translation": "pennathron/pennathril(m/f),pennathor",
+    "category": "professions"
+  },
+  {
+    "id": "1cc6a9b1-26e3-46db-8013-689635e759ee",
+    "word": "Hunter",
+    "translation": "faron/faril(m/f),faror",
+    "category": "professions"
+  },
+  {
+    "id": "c7464f1e-f99d-4c82-9dd7-7ed99392ff9e",
+    "word": "Jewelsmith",
+    "translation": "mírdan(pl.mírdain)",
+    "category": "professions"
+  },
+  {
+    "id": "550642e2-2fd9-4806-861f-1c84ad0fcb61",
+    "word": "Journeyman",
+    "translation": "nathron/nathril(m/f),nathor",
+    "category": "professions"
+  },
+  {
+    "id": "2cd5715a-f4ba-42c8-8f6e-a378eaa22f95",
+    "word": "Judge",
+    "translation": "badhron/badhril(m/f),badhor",
+    "category": "professions"
+  },
+  {
+    "id": "e4ac4a1a-a917-48fe-b005-ec7fb28f64b0",
+    "word": "Knight",
+    "translation": "rochir/rochiril(m/f)",
+    "category": "professions"
+  },
+  {
+    "id": "247f0565-b37a-4f35-89d8-06d06ea83470",
+    "word": "Lampwright",
+    "translation": "calardan(pl.calardain)",
+    "category": "professions"
+  },
+  {
+    "id": "4e52d282-f5b6-4c95-b2ae-290043c27650",
+    "word": "Librarian",
+    "translation": "parvon/parvil(m/f),parvor",
+    "category": "professions"
+  },
+  {
+    "id": "24d76e0e-ce19-41c4-9512-9e18e298736d",
+    "word": "Magician",
+    "translation": "gollor",
+    "category": "professions"
+  },
+  {
+    "id": "ac41c96e-f00d-4f3b-8b47-95ca7361abfd",
+    "word": "Mayor,Ruler",
+    "translation": "condir/condis(m/f)",
+    "category": "professions"
+  },
+  {
+    "id": "35650268-975f-40f8-ac78-af099c49e1ae",
+    "word": "Metalsmith",
+    "translation": "tingdan",
+    "category": "professions"
+  },
+  {
+    "id": "03e0738e-e965-48aa-8e65-68ac7da7b2c7",
+    "word": "Mountaineer",
+    "translation": "orodben",
+    "category": "professions"
+  },
+  {
+    "id": "0829c73f-bf3a-428a-97e8-e09aedd2a753",
+    "word": "Narrator",
+    "translation": "pethron/pethril(m/f),pethor",
+    "category": "professions"
+  },
+  {
+    "id": "700fe72c-75d2-4fc4-9dbe-2e6c91f2d1c1",
+    "word": "Painter",
+    "translation": "eleidan",
+    "category": "professions"
+  },
+  {
+    "id": "343c6b8c-fecf-46e3-971c-e4c08165f244",
+    "word": "Peddler",
+    "translation": "bachron/bachril(m/f),bachor",
+    "category": "professions"
+  },
+  {
+    "id": "51d8ac87-e94e-4f2b-9f83-0c60d6d8d23d",
+    "word": "Pilgrim,Wanderer",
+    "translation": "randír/randís(m/f)",
+    "category": "professions"
+  },
+  {
+    "id": "2dc0df49-3653-46c5-bc35-8d630062cbfa",
+    "word": "Potter",
+    "translation": "cennan",
+    "category": "professions"
+  },
+  {
+    "id": "e49e2b7b-e017-4213-9f7d-f460aa284c9f",
+    "word": "Rider",
+    "translation": "rochon/rochil(m/f),rochor",
+    "category": "professions"
+  },
+  {
+    "id": "c69f902c-a424-4763-9034-8417434b0ab2",
+    "word": "Sailor",
+    "translation": "cirion/ciriel(m/f)",
+    "category": "professions"
+  },
+  {
+    "id": "d1496c91-47e3-458e-ba90-7c562151a336",
+    "word": "Second-in-Command",
+    "translation": "taidron/taidril(m/f),taidor",
+    "category": "professions"
+  },
+  {
+    "id": "e863ab25-c29f-455f-b7c0-41dbf538bd60",
+    "word": "Servant",
+    "translation": "buiron/buiril(m/f)",
+    "category": "professions"
+  },
+  {
+    "id": "9d021691-9522-49b1-b5c6-148470020b25",
+    "word": "Shipbuilder",
+    "translation": "círdan(pl.círdain)",
+    "category": "professions"
+  },
+  {
+    "id": "94f2463e-4c27-4716-9a33-03c82b25ab67",
+    "word": "Singer",
+    "translation": "linnon/linnil(m/f),linnor",
+    "category": "professions"
+  },
+  {
+    "id": "13183ac1-b3a7-42e8-9faf-b0df6a7c02c2",
+    "word": "Slayer/Assassin",
+    "translation": "dagnír/dagnis(m/f)",
+    "category": "professions"
+  },
+  {
+    "id": "8ed5731a-7ea1-410f-a48b-6984c746be48",
+    "word": "Soldier",
+    "translation": "othon/othil(m/f),othor",
+    "category": "professions"
+  },
+  {
+    "id": "17944728-2d77-4a2a-981d-635585386729",
+    "word": "Spearthrower",
+    "translation": "hadron/hadril(m/f),hador",
+    "category": "professions"
+  },
+  {
+    "id": "fd8ceba5-587a-4bd7-89a3-1cf3a53c252f",
+    "word": "Swordsman",
+    "translation": "magron/magril(m/f),magor",
+    "category": "professions"
+  },
+  {
+    "id": "782755bd-7b2e-4d91-87a2-b834bbaf5482",
+    "word": "Teacher",
+    "translation": "istonon/istoneth(m/f),istonor",
+    "category": "professions"
+  },
+  {
+    "id": "468ba2c0-325e-486c-8374-da8bcc456795",
+    "word": "Thief",
+    "translation": "celegam",
+    "category": "professions"
+  },
+  {
+    "id": "04563dfd-1e7c-4977-9fa8-583b42e552db",
+    "word": "Warrior",
+    "translation": "maethron,maethril(m/f),maethor",
+    "category": "professions"
+  },
+  {
+    "id": "f309df73-5220-456f-8cd7-f624d86d6658",
+    "word": "Watcher/Guardian",
+    "translation": "tirn",
+    "category": "professions"
+  },
+  {
+    "id": "1513ed3d-bf22-4810-bf60-f0928520422b",
+    "word": "Weaponsmith",
+    "translation": "hatholdan",
+    "category": "professions"
+  },
+  {
+    "id": "686bc945-46af-43ce-86ff-e2c90b3d9400",
+    "word": "Weaver",
+    "translation": "nathron/nathril(m/f),nathor",
+    "category": "professions"
+  },
+  {
+    "id": "73db489b-c0ad-44fe-a922-cb18faedcbed",
+    "word": "Wizard",
+    "translation": "curunír/curunís,ithron/ithril(m/f),ithor",
+    "category": "professions"
+  },
+  {
+    "id": "ed517cc9-c2d0-489c-8580-d4cef0dff0a2",
+    "word": "Writer",
+    "translation": "teithron/teithril(m/f),teithor",
+    "category": "professions"
+  },
+  {
+    "id": "02b5656c-a4ad-4522-9ea2-61063c6707e3",
+    "word": "Do we know each other?",
+    "translation": "Gen iston?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "e1022fcc-8672-4302-ba4b-ff84d9a5c71b",
+    "word": "How are you? ",
+    "translation": "Manen le?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "a80e04c2-920a-4b4d-b3aa-bd59a9d04f51",
+    "word": "How is he/she? ",
+    "translation": "Manen so/se? ",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "155510ff-e47a-4346-a5eb-0171dfb7e58c",
+    "word": "How? ",
+    "translation": "Manen?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "f5de4903-6f9c-4884-aee4-2c156a38c662",
+    "word": "What did he/she say?",
+    "translation": "Man so/se pent?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "84230db8-499e-419e-9f8e-bfdf9e847731",
+    "word": "What did he/she see? ",
+    "translation": "Man so/se cenn? ",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "c4110c6b-5cfb-45aa-a4be-0dfd82089da2",
+    "word": "What did you say? ",
+    "translation": "Man pennich?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "392040c5-bbf8-4558-b156-dce4d1928a0f",
+    "word": "What did you see? ",
+    "translation": "Man cennich?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "bf269a32-40cc-484c-911a-cc63bd399ce2",
+    "word": "What do you see? ",
+    "translation": "Man cenich?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "d6d7e244-d47a-41f3-908e-ff356ee6a249",
+    "word": "What do you want?",
+    "translation": "Man anírol?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "face1214-0d87-4611-a89e-05ccc99cf7ac",
+    "word": "What does he/she see?",
+    "translation": "Man so/se cên?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "bad1d0ad-7573-4fbf-b957-3456130bdaf5",
+    "word": "What is his/her name? ",
+    "translation": "Man i eneth hún/hín?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "d2e99707-40fe-4371-920e-dee21545df53",
+    "word": "What is it?",
+    "translation": "Man te? / Man sa?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "bebddb79-4844-4852-87e8-cc91c104584a",
+    "word": "What is your name? ",
+    "translation": "Man i eneth lín?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "ef532581-d5f1-4602-b01a-5e56f8ea6255",
+    "word": "What time is it?",
+    "translation": "Man i lû?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "c98a8524-4ce1-40b0-94e9-40c1f433b0c6",
+    "word": "What? ",
+    "translation": "Man?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "6b705956-cd26-481a-87a0-62ad4cad5c77",
+    "word": "When? ",
+    "translation": "Mar?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "8489c19f-8d85-4a94-b879-4fb3fe71ef0a",
+    "word": "Where are they going?",
+    "translation": "Mas sy ledhiar?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "7c8a2858-5f97-4483-b1d4-75bbd7600c4d",
+    "word": "Where are we going?",
+    "translation": "Mas ledhiam?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "7eb772af-4427-4ff6-941b-0ea0f0c555c6",
+    "word": "Where are you [coming] from? ",
+    "translation": "Ledhiach o man sad?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "b3d71e02-b279-4827-bab3-ee35e1aa5104",
+    "word": "Where are you going?",
+    "translation": "Mas ledhiach?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "134682cf-c818-4ac9-9624-b35a3e1c122c",
+    "word": "Where do you live?",
+    "translation": "Mas dorthog?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "f58f5fbf-48a0-4c05-954e-cd35c2aa0e6e",
+    "word": "Where is he/she [coming] from?",
+    "translation": "Ledhia o man sad? ",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "d47c49a0-423d-435b-97df-4d0941cfb2e0",
+    "word": "Where is he/she going?",
+    "translation": "Mas ledhia?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "6537b58d-e463-4d26-b75f-bab3217daff5",
+    "word": "Where is your house?",
+    "translation": "Mas i adab gín?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "0e7357c3-a263-45b8-81f1-c3bff06e345f",
+    "word": "Where were you born?",
+    "translation": "Mas onnenog?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "7e70dd48-429d-49bc-9864-f6dd29df7a7a",
+    "word": "Where? ",
+    "translation": "Mas?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "8f83280e-f78c-47c2-9e14-23e2f881e738",
+    "word": "Who are you?",
+    "translation": "Man le?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "45e8adff-3bf2-4489-8fc7-001bf1195dd5",
+    "word": "Who? ",
+    "translation": "Ma?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "06b871bd-07b5-4610-849a-662812fd6cbe",
+    "word": "Why do you go? ",
+    "translation": "Amman ledhiach?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "05b2462c-5cbb-4682-ad9a-15033768fd43",
+    "word": "Why? ",
+    "translation": "Amman?",
+    "category": "questionsAndAnswers"
+  },
+  {
+    "id": "d6818005-0a64-4f2b-96bd-4870c8075e48",
+    "word": "I believe/trust in you ",
+    "translation": "Estelion allen",
+    "category": "romance"
+  },
+  {
+    "id": "39d6d9ab-636c-4ac3-9138-a2357a4de9df",
+    "word": "I love you ",
+    "translation": "Le melin",
+    "category": "romance"
+  },
+  {
+    "id": "5f4c9e5a-33d8-44bd-936a-60db9a0d9e57",
+    "word": "I will always love you ",
+    "translation": "Le uivelin",
+    "category": "romance"
+  },
+  {
+    "id": "a5709ab0-d900-4b6e-b0c5-8c6e25c783ea",
+    "word": "I will love you forever ",
+    "translation": "Le melithon anuir",
+    "category": "romance"
+  },
+  {
+    "id": "a51750e9-d80f-4e3d-89f2-38656777d639",
+    "word": "My heart is in your hands ",
+    "translation": "Guren min gaim lín",
+    "category": "romance"
+  },
+  {
+    "id": "9ba6f342-81cd-449d-8506-de91b31057a3",
+    "word": "Trust in me ",
+    "translation": "Estelio enni",
+    "category": "romance"
+  },
+  {
+    "id": "45dfd1dd-8667-438d-b6d2-83b48fa624e5",
+    "word": "You enchant me ",
+    "translation": "Nin lithiach",
+    "category": "romance"
+  },
+  {
+    "id": "e62b7043-86a0-4d05-bb55-f29b1ad26b21",
+    "word": "You lift up my heart when you look at me ",
+    "translation": "Orthach 'uren ir tirach enni",
+    "category": "romance"
+  },
+  {
+    "id": "c29e040e-ed72-498d-b2a0-a2ce7629aeee",
+    "word": "Your song touches my spirit/my heart ",
+    "translation": "Laer lín matha faeren/'uren",
+    "category": "romance"
+  },
+  {
+    "id": "70be55fd-58e0-42b3-bcf5-7903e0a76c72",
+    "word": "Fading (Sep 28 - Nov 20)",
+    "translation": "Firith",
+    "category": "seasons"
+  },
+  {
+    "id": "03d74e84-6038-4f3a-881a-e6fa90b1bde0",
+    "word": "Harvest (Aug 2 - Sep 24)",
+    "translation": "Iavas",
+    "category": "seasons"
+  },
+  {
+    "id": "e2dc81b2-9e8e-4a38-9191-c8d78b4869ad",
+    "word": "Spring/Budding(Mar29–May21)",
+    "translation": "Ethuil",
+    "category": "seasons"
+  },
+  {
+    "id": "f609ac1d-a63c-4b23-93fa-f46b7154c051",
+    "word": "Stirring/Awakening(Feb1-Mar26)",
+    "translation": "Echuir",
+    "category": "seasons"
+  },
+  {
+    "id": "60f8d378-2a3b-49af-a251-561eb6271a3b",
+    "word": "Summer/Song(May22-Aug1)",
+    "translation": "Laer",
+    "category": "seasons"
+  },
+  {
+    "id": "16e2a18d-08fa-43fa-9caf-4009faeecbf3",
+    "word": "Winter (Nov 21 - Jan 31)",
+    "translation": "Rhîw",
+    "category": "seasons"
+  },
+  {
+    "id": "174b3e38-c6b7-4885-b088-e8a9b85a46c0",
+    "word": "How are you? ",
+    "translation": "Manen le?",
+    "category": "smallTalk"
+  },
+  {
+    "id": "eee54c5c-a756-4522-99ec-949655d83759",
+    "word": "I’m cold ",
+    "translation": "Im ring",
+    "category": "smallTalk"
+  },
+  {
+    "id": "ab0a53c6-ab64-4a11-822b-e891f9357379",
+    "word": "I’m fine/good/well ",
+    "translation": "Im maer",
+    "category": "smallTalk"
+  },
+  {
+    "id": "7fe5a4ba-c09a-4473-a363-331c34bbaf98",
+    "word": "I’m happy ",
+    "translation": "Im meren",
+    "category": "smallTalk"
+  },
+  {
+    "id": "9be10a52-f909-4503-98fd-bc822ff876d8",
+    "word": "I’m hot ",
+    "translation": "Im urui",
+    "category": "smallTalk"
+  },
+  {
+    "id": "115badab-d6b0-4bc8-ab7f-8c601411c0ae",
+    "word": "I’m not fine/good/well ",
+    "translation": "Im úvaer",
+    "category": "smallTalk"
+  },
+  {
+    "id": "f2dd11eb-9cd8-49c0-98c5-fe3415111592",
+    "word": "I’m sad/gloomy ",
+    "translation": "Im dem",
+    "category": "smallTalk"
+  },
+  {
+    "id": "d57d83d2-e472-4857-a42a-76a368350ee3",
+    "word": "I’m sick/ill ",
+    "translation": "Im caeleb",
+    "category": "smallTalk"
+  },
+  {
+    "id": "c2b0ef62-5d41-456b-a2de-9bd83c0010c2",
+    "word": "I’m tired ",
+    "translation": "Im penorven",
+    "category": "smallTalk"
+  },
+  {
+    "id": "ab9774ab-55d5-4777-9df3-816c47490d93",
+    "word": "OMG [“Oh My God!”]",
+    "translation": "AIN [A Iluvatar nín!]",
+    "category": "smallTalk"
+  },
+  {
+    "id": "9be12559-22ef-4597-b15d-e7afa09319b1",
+    "word": "As you wish ",
+    "translation": "Be iest lín",
+    "category": "talking"
+  },
+  {
+    "id": "98ed6d37-11eb-4821-ac45-946c6e10f630",
+    "word": "Don’t worry ",
+    "translation": "Avaro naeth (Don’t have woe)",
+    "category": "talking"
+  },
+  {
+    "id": "3fc856ea-9f6c-4bee-8908-a32221874555",
+    "word": "Forgive me ",
+    "translation": "Goheno nin",
+    "category": "talking"
+  },
+  {
+    "id": "281d3baa-438e-4d24-9f23-2438e7684333",
+    "word": "I don’t understand ",
+    "translation": "Ú-chenion",
+    "category": "talking"
+  },
+  {
+    "id": "4b1de1bd-8a2d-4a59-9bd8-933f8957a934",
+    "word": "I understand ",
+    "translation": "Henion",
+    "category": "talking"
+  },
+  {
+    "id": "942af24d-b969-4ef4-a1f1-1a63feeca679",
+    "word": "I was born …",
+    "translation": "Onnen mi …",
+    "category": "talking"
+  },
+  {
+    "id": "719a1aa6-1d45-4644-a99f-45b4e53ec5bf",
+    "word": "I'm ___ ",
+    "translation": "im ___",
+    "category": "talking"
+  },
+  {
+    "id": "6eca75cd-570b-4127-94e1-be8fe18408eb",
+    "word": "I'm sorry ",
+    "translation": "Naethen (My sorrow)",
+    "category": "talking"
+  },
+  {
+    "id": "09d71b8c-bcb3-4d13-99e6-548a9abe8971",
+    "word": "My name is",
+    "translation": "i eneth nín ___ ",
+    "category": "talking"
+  },
+  {
+    "id": "93217963-2d9d-4ecb-afeb-f7e36170ad57",
+    "word": "No! ",
+    "translation": "Baw!",
+    "category": "talking"
+  },
+  {
+    "id": "e2ef9622-e03d-4968-b4cd-00cef0b8e686",
+    "word": "Please ",
+    "translation": "iesten (My wish)",
+    "category": "talking"
+  },
+  {
+    "id": "8374f572-09c3-450f-8d7c-fb5dc38a0b8d",
+    "word": "Thanks ",
+    "translation": "Le hannon",
+    "category": "talking"
+  },
+  {
+    "id": "6cd365c3-a637-4439-ba48-de38e2dce121",
+    "word": "Well done ",
+    "translation": "Mae carnen",
+    "category": "talking"
+  },
+  {
+    "id": "d0f61a6d-bb01-4f62-ab53-015d6a1311e1",
+    "word": "What is your name? ",
+    "translation": "Man i eneth lín?",
+    "category": "talking"
+  },
+  {
+    "id": "5a732806-8042-4420-bb20-7d97d396459f",
+    "word": "What news? ",
+    "translation": "Man siniath?",
+    "category": "talking"
+  },
+  {
+    "id": "67a4b481-2b6c-4340-b864-dc55f58924f5",
+    "word": "Where were you born?",
+    "translation": "Mas dorthog?",
+    "category": "talking"
+  },
+  {
+    "id": "07171ac7-af8e-4855-addd-980d58c0a281",
+    "word": "Yes ",
+    "translation": "Maer (good)",
+    "category": "talking"
+  },
+  {
+    "id": "d0823a6a-785d-48bf-a322-b90190732a16",
+    "word": "You're welcome ",
+    "translation": "Glassen (My joy)",
+    "category": "talking"
+  },
+  {
+    "id": "80181a27-6df5-4799-86fd-96bc1a108f51",
+    "word": "Love of my life ",
+    "translation": "Meleth e-guilen",
+    "category": "tender"
+  },
+  {
+    "id": "7fe154e7-e9b0-4e60-bc82-9d54a3ad2c28",
+    "word": "My beloved/dear ",
+    "translation": "Mell nín, Muin nín",
+    "category": "tender"
+  },
+  {
+    "id": "c2ea1e5e-007e-48c0-8148-01c4022274f4",
+    "word": "My love ",
+    "translation": "Meleth nín",
+    "category": "tender"
+  },
+  {
+    "id": "a62fe14f-dde4-4310-a0f5-12b939ba784e",
+    "word": "I hope the Ents eat you! ",
+    "translation": "Harthon in enyd gen medir!",
+    "category": "threats"
+  },
+  {
+    "id": "947e36e9-812c-4af5-b8c4-f76d143154af",
+    "word": "I want to hurl you into the fires of Mt. Doom! ",
+    "translation": "Aníron gen haded min noer Orodruin!",
+    "category": "threats"
+  },
+  {
+    "id": "f25ad13d-65a2-45cd-844c-8c0f63fbc404",
+    "word": "I'm going to hurl you into the fires of Mt. Doom! ",
+    "translation": "Gen hedithon min noer Orodruin!",
+    "category": "threats"
+  },
+  {
+    "id": "b79a1768-b984-471a-b8f5-f491a9916931",
+    "word": "Help me! ",
+    "translation": "Anno dulu enni!",
+    "category": "trouble"
+  },
+  {
+    "id": "d9dced32-d4ae-42c9-9d02-7ab6d00de111",
+    "word": "I need a healer! ",
+    "translation": "Boe enni nestron!",
+    "category": "trouble"
+  },
+  {
+    "id": "b201b141-d195-45f4-ba00-7d92ebeadf46",
+    "word": "I need help! ",
+    "translation": "Boe enni dulu!",
+    "category": "trouble"
+  },
+  {
+    "id": "3e7f2215-dee9-4b6c-9a79-c5923b8457a9",
+    "word": "How's the weather?",
+    "translation": "Man tolthant i ‘waew?",
+    "category": "weather"
+  },
+  {
+    "id": "dbb060e8-2ff1-4c37-9b16-cb633db1a314",
+    "word": "It was raining",
+    "translation": "Eliant",
+    "category": "weather"
+  },
+  {
+    "id": "35ebf8bf-d224-4934-889c-b111421a0735",
+    "word": "It's cold",
+    "translation": "Ring",
+    "category": "weather"
+  },
+  {
+    "id": "65dbdf81-5dd5-4ea0-b97a-39fd2a8e40e9",
+    "word": "It's misty",
+    "translation": "Hithu",
+    "category": "weather"
+  },
+  {
+    "id": "61d5be1b-d0c0-4315-aa05-ccb6664656d2",
+    "word": "It's raining",
+    "translation": "Ail",
+    "category": "weather"
+  },
+  {
+    "id": "9c82c318-a405-404e-897b-49e6e57a9e7e",
+    "word": "It's snowing",
+    "translation": "Danna loss",
+    "category": "weather"
+  },
+  {
+    "id": "950860dc-6db7-439e-b7ef-69a22790d363",
+    "word": "It's warm",
+    "translation": "Laug",
+    "category": "weather"
+  },
+  {
+    "id": "8980eaa3-4e37-4d9d-bc91-6f7c4a39a252",
+    "word": "Summer will come!",
+    "translation": "Tolo i laer!",
+    "category": "weather"
+  },
+  {
+    "id": "0e127baf-fbb0-4ace-a6a4-fe1c3ae0829c",
+    "word": "The sky is grey",
+    "translation": "I venel vith",
+    "category": "weather"
+  },
+  {
+    "id": "c372f742-9547-4839-b0d4-122cb4e03cfb",
+    "word": "The sun is shining",
+    "translation": "Anor síla",
+    "category": "weather"
+  }
+]
